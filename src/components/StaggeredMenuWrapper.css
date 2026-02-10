@@ -1,0 +1,48 @@
+/* Staggered Menu Container */
+.staggered-menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    pointer-events: none;
+    /* Default to none so clicks pass through */
+}
+
+/* Only enable pointer events when the container has a class or when we specific elements */
+.staggered-menu-container.menu-open {
+    pointer-events: auto;
+}
+
+/* Hide the logo in StaggeredMenu since we're showing it in the main header */
+.staggered-menu-container .sm-logo {
+    display: none !important;
+}
+
+/* Hide the menu toggle button in StaggeredMenu since we use our own */
+.staggered-menu-container .sm-toggle {
+    display: none !important;
+}
+
+/* Adjust the header positioning within StaggeredMenu */
+.staggered-menu-container .staggered-menu-header {
+    display: none !important;
+}
+
+/* Make sure the menu panel is properly positioned */
+.staggered-menu-container .staggered-menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 90;
+    pointer-events: none;
+    /* Wrapper itself shouldn't block */
+}
+
+/* Re-enable pointer events for the panel itself */
+.staggered-menu-container .staggered-menu-panel {
+    pointer-events: auto;
+}

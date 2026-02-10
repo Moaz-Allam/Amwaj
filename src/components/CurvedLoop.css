@@ -1,0 +1,29 @@
+.curved-loop-jacket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Adjust vertical padding as needed */
+    padding: 2rem 0;
+}
+
+.curved-loop-svg {
+    user-select: none;
+    width: 100%;
+    /* Adjust aspect ratio to fit the curve properly */
+    height: auto;
+    min-height: 200px;
+    overflow: visible;
+    display: block;
+}
+
+.curved-text {
+    font-size: 4rem;
+    /* Default size, can be overridden by className prop */
+    font-weight: 700;
+    text-transform: uppercase;
+    fill: currentColor;
+    user-select: none;
+}

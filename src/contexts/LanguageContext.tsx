@@ -7,30 +7,36 @@ interface Translations {
 }
 
 const translations: Translations = {
-  // Header
-  'nav.contact': { en: 'Contact', ar: 'تواصل معنا' },
-  
+  // Header / Navigation
+  'nav.home': { en: 'Home', ar: 'الرئيسية' },
+  'nav.about': { en: 'About', ar: 'عنا' },
+  'nav.services': { en: 'Services', ar: 'الخدمات' },
+  'nav.projects': { en: 'Projects', ar: 'الأعمال' },
+  'nav.contact': { en: 'Contact us', ar: 'تواصل معنا' },
+
   // Hero
   'hero.title': { en: 'A brand that keeps up with your ambition.', ar: 'علامة تجارية تواكب طموحك.' },
-  'hero.subtitle': { en: 'We craft digital experiences that elevate brands and drive meaningful growth through strategy, design, and technology.', ar: 'نصنع تجارب رقمية ترتقي بالعلامات التجارية وتحقق نمواً حقيقياً من خلال الاستراتيجية والتصميم والتكنولوجيا.' },
+  'hero.subtitle': { en: 'Branding & web agency based in Brussels. We create visual identities and websites that truly reflect who you are.', ar: 'وكالة العلامات التجارية والويب مقرها في بروكسل. نصنع هويات بصرية ومواقع ويب تعكس حقيقتكم بصدق.' },
   'hero.scroll': { en: 'Scroll to explore', ar: 'مرر للاستكشاف' },
 
   // About
   'about.label': { en: 'About', ar: 'عن الاستوديو' },
   'about.title': { en: 'An approach built on one belief.', ar: 'منهج مبني على قناعة واحدة.' },
-  'about.desc': { en: 'Every brand deserves a digital presence that reflects its true potential. We combine strategic thinking with meticulous design to create experiences that resonate deeply with your audience.', ar: 'كل علامة تجارية تستحق حضوراً رقمياً يعكس إمكاناتها الحقيقية. نجمع بين التفكير الاستراتيجي والتصميم الدقيق لخلق تجارب تتواصل بعمق مع جمهورك.' },
+  'about.desc': { en: 'AKIS.STUDIO was founded on a simple idea: your image should reflect who you actually are. That\'s been our driving force since day one, and it shapes every project we take on.', ar: 'تأسست AKIS.STUDIO على فكرة بسيطة: يجب أن تعكس صورتك حقيقتك. كان هذا دافعنا منذ اليوم الأول، وهو يشكل كل مشروع نقوم به.' },
+  'about.link': { en: 'Discover the studio', ar: 'اكتشف الاستوديو' },
 
   // Services
   'services.label': { en: 'Services', ar: 'خدماتنا' },
   'services.title': { en: 'From strategy to launch.', ar: 'من الاستراتيجية حتى الإطلاق.' },
-  'service.1.title': { en: 'Branding', ar: 'الهوية البصرية' },
-  'service.1.desc': { en: 'Building distinctive brand identities that stand out and create lasting impressions.', ar: 'بناء هويات بصرية مميزة تبرز وتترك انطباعاً دائماً.' },
+  'services.link': { en: 'View all services', ar: 'عرض جميع الخدمات' },
+  'service.1.title': { en: 'Branding', ar: 'العلامة التجارية' },
+  'service.1.desc': { en: 'Brand strategy, logo, guidelines. The fundamentals of your image.', ar: 'استراتيجية العلامة التجارية، الشعار، الدليل. أساسيات صورتك.' },
   'service.2.title': { en: 'Web Design', ar: 'تصميم المواقع' },
-  'service.2.desc': { en: 'Crafting beautiful, intuitive interfaces that engage users and drive conversions.', ar: 'تصميم واجهات جميلة وبديهية تجذب المستخدمين وتحقق النتائج.' },
-  'service.3.title': { en: 'Web Development', ar: 'تطوير المواقع' },
-  'service.3.desc': { en: 'Building fast, scalable, and modern web applications with cutting-edge technology.', ar: 'بناء تطبيقات ويب سريعة وقابلة للتوسع بأحدث التقنيات.' },
+  'service.2.desc': { en: 'UX, UI, prototypes. Interfaces designed around real user needs.', ar: 'تجربة المستخدم، واجهة المستخدم، النماذج. واجهات مصممة حول احتياجات المستخدم الحقيقية.' },
+  'service.3.title': { en: 'Web development', ar: 'تطوير المواقع' },
+  'service.3.desc': { en: 'Performance, security, scalability. A website built to last.', ar: 'الأداء، الأمان، القابلية للتوسع. موقع ويب مصمم ليدوم.' },
   'service.4.title': { en: 'E-commerce', ar: 'التجارة الإلكترونية' },
-  'service.4.desc': { en: 'Creating seamless online shopping experiences that maximize revenue and customer satisfaction.', ar: 'إنشاء تجارب تسوق إلكتروني سلسة تعزز الإيرادات ورضا العملاء.' },
+  'service.4.desc': { en: 'Catalog, payments, shipping. Everything you need to sell online.', ar: 'الكتالوج، المدفوعات، الشحن. كل ما تحتاجه للبيع عبر الإنترنت.' },
 
   // Projects
   'projects.label': { en: 'Projects', ar: 'أعمالنا' },
