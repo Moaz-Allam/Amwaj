@@ -5,23 +5,24 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    /* Adjust vertical padding as needed */
-    padding: 2rem 0;
+    padding: 0;
+    /* ✅ remove 2rem padding */
 }
 
 .curved-loop-svg {
     user-select: none;
     width: 100%;
-    /* Adjust aspect ratio to fit the curve properly */
-    height: auto;
-    min-height: 200px;
+    height: 48px;
+    /* ✅ tiny svg */
+    min-height: 0;
+    /* ✅ remove 200px */
     overflow: visible;
     display: block;
 }
 
 .curved-text {
-    font-size: 4rem;
-    /* Default size, can be overridden by className prop */
+    font-size: 48px;
+    /* ✅ tiny text size requirement */
     font-weight: 700;
     text-transform: uppercase;
     fill: currentColor;

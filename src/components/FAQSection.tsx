@@ -20,9 +20,8 @@ const FAQSection = () => {
       <div className="container-main">
         <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-20">
           <div data-gsap="reveal">
-            <span className="accent-label">{t('faq.label')}</span>
-            <div className="accent-divider" />
-            <h2 className="text-3xl font-semibold text-foreground">{t('faq.title')}</h2>
+            <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">{t('faq.label')}</span>
+            <h2 className="text-[32px] font-bold leading-tight tracking-tight mt-4 text-foreground">{t('faq.title')}</h2>
           </div>
 
           <div className="space-y-3">
@@ -33,17 +32,17 @@ const FAQSection = () => {
                   key={i}
                   data-gsap="reveal"
                   className={`rounded-xl border transition-all duration-200 ${isOpen
-                      ? 'bg-primary/[0.06] border-primary/20 border-l-2 border-l-primary'
-                      : 'border-border hover:border-muted-foreground/20'
+                    ? 'bg-primary/[0.06] border-primary/20 border-l-2 border-l-primary'
+                    : 'border-border hover:border-muted-foreground/20'
                     }`}
                 >
                   <button onClick={() => setOpenIndex(isOpen ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
-                    <span className="text-sm font-medium text-foreground pr-4">{faq.q}</span>
+                    <span className="text-[14px] font-medium text-foreground pr-4">{faq.q}</span>
                     {isOpen ? <Minus size={16} className="text-primary shrink-0" /> : <Plus size={16} className="text-muted-foreground shrink-0" />}
                   </button>
                   {isOpen && (
                     <div className="px-5 pb-5 animate-fade-in">
-                      <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                      <p className="text-gray-400 text-[14px] leading-relaxed font-light">{faq.a}</p>
                     </div>
                   )}
                 </div>

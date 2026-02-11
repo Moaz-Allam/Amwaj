@@ -19,15 +19,14 @@ const Projects = () => {
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { y: 60, stagger: 0.15 });
 
   return (
-    <section ref={ref} className="section-padding">
+    <section ref={ref} className="section-padding bg-black relative z-10">
       <div className="container-main">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-16" data-gsap="reveal">
           <div>
-            <span className="accent-label">{t('projects.label')}</span>
-            <div className="accent-divider" />
-            <h2 className="text-3xl sm:text-4xl font-semibold text-foreground">{t('projects.title')}</h2>
+            <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">{t('projects.label')}</span>
+            <h2 className="text-[32px] font-bold leading-tight tracking-tight mt-4 text-foreground">{t('projects.title')}</h2>
           </div>
-          <p className="text-muted-foreground max-w-xs text-sm">{t('projects.desc')}</p>
+          <p className="text-gray-400 text-[14px] leading-relaxed font-light max-w-xs">{t('projects.desc')}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">

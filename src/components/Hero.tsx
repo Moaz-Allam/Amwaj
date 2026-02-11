@@ -23,7 +23,7 @@ const Hero = () => {
     <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
       <GradientBlinds
         className="absolute inset-0 w-full h-full"
-        gradientColors={['#19193dff', '#5dc2fdff']}
+        gradientColors={['#5dc2fdff']}
         angle={9}
         noise={0.52}
         blindCount={100}

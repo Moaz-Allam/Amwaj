@@ -10,29 +10,29 @@ import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
 const PageContent = () => {
-  const { isRTL, lang } = useLanguage();
+    const { isRTL, lang } = useLanguage();
 
-  return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={isRTL ? 'font-cairo' : 'font-sans'}>
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Projects />
-        <Testimonials />
-        <FAQSection />
-        <CTASection />
-      </main>
-      <Footer />
-    </div>
-  );
+    return (
+        <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} overflow-x-hidden`}>
+            <Header />
+            <main>
+                <Hero />
+                <About />
+                <Services />
+                <Projects />
+                <Testimonials />
+                <FAQSection />
+                <CTASection />
+            </main>
+            <Footer />
+        </div>
+    );
 };
 
 const Index = () => (
-  <LanguageProvider>
-    <PageContent />
-  </LanguageProvider>
+    <LanguageProvider>
+        <PageContent />
+    </LanguageProvider>
 );
 
 export default Index;

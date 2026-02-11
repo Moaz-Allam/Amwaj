@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useGsapReveal } from '@/hooks/useGsapReveal';
 import { ChevronRight } from 'lucide-react';
-import CurvedLoop from './CurvedLoop';
 
 const About = () => {
   const { t } = useLanguage();
@@ -12,13 +11,17 @@ const About = () => {
       <div className="container-main relative z-20">
         <div className="flex flex-col gap-12" data-gsap="reveal">
 
-          {/* Top Container: Title & Description aligned horizontally */}
+          {/* Container 1: Section Name */}
+          <div>
+            <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">
+              {t('about.label')}
+            </span>
+          </div>
+
+          {/* Container 2: Title & Description aligned horizontally */}
           <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
             {/* Title Side */}
-            <div className="flex flex-col gap-6 max-w-2xl">
-              <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">
-                {t('about.label')}
-              </span>
+            <div className="max-w-2xl">
               <h2 className="text-[32px] font-bold leading-tight tracking-tight">
                 {t('about.title')}
               </h2>
@@ -32,7 +35,7 @@ const About = () => {
             </div>
           </div>
 
-          {/* Bottom: Button */}
+          {/* Container 3: Button */}
           <div>
             <a
               href="#studio"
@@ -43,17 +46,6 @@ const About = () => {
           </div>
 
         </div>
-      </div>
-
-      {/* Curved Loop Marquee at the bottom */}
-      <div className="mt-20 w-full opacity-30 select-none pointer-events-none relative z-10">
-        <CurvedLoop
-          marqueeText="AMWAJ STUDIO ✦ CREATIVE AGENCY ✦ DIGITAL EXPERIENCE ✦ "
-          speed={3}
-          curveAmount={80}
-          className="text-6xl lg:text-8xl font-black text-white/10"
-          interactive={false}
-        />
       </div>
     </section>
   );
