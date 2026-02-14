@@ -10,33 +10,33 @@ import project5 from '@/assets/project-5.jpg';
 const projects = [
   {
     img: project1,
-    name: 'VEGA',
-    tags: ['Branding', 'UX/UI Design', 'Web development'],
-    desc: 'VEGA is a Brussels based SaaS firm. Their branding together with logo and one site was aligned to reflect innovation and simplify the way users interact with the product.',
+    titleKey: 'projects.card.1.title',
+    descKey: 'projects.card.1.desc',
+    tagKeys: ['projects.card.1.tag.1', 'projects.card.1.tag.2'],
   },
   {
     img: project2,
-    name: 'Le Cenacle',
-    tags: ['UX/UI Design', 'Web development', 'Photography', 'Drone Photography'],
-    desc: 'Le Cenacle needed a new digital profile that reflected their premium architecture identity. We redesigned their presence end-to-end while preserving a strong local character.',
+    titleKey: 'projects.card.2.title',
+    descKey: 'projects.card.2.desc',
+    tagKeys: ['projects.card.2.tag.1', 'projects.card.2.tag.2', 'projects.card.2.tag.3'],
   },
   {
     img: project3,
-    name: 'C-Carré',
-    tags: ['Branding', 'Print', 'UX/UI Design', 'Web development', 'Ads'],
-    desc: 'C-Carré ERP needed rebranding with a strong professional and B2B position. Based in Brussels and Wavre, they support installers and homeowners in electric, solar and energy performance.',
+    titleKey: 'projects.card.3.title',
+    descKey: 'projects.card.3.desc',
+    tagKeys: ['projects.card.3.tag.1', 'projects.card.3.tag.2', 'projects.card.3.tag.3'],
   },
   {
     img: project4,
-    name: 'Varroa Diagnostic',
-    tags: ['Branding', 'UX/UI Design', 'Web development'],
-    desc: 'Varroa Diagnostic had no visual identity and no clear site experience. A simple visual language, icon system and animation DNA gave the team a clear and modern footprint across touchpoints.',
+    titleKey: 'projects.card.4.title',
+    descKey: 'projects.card.4.desc',
+    tagKeys: ['projects.card.4.tag.1', 'projects.card.4.tag.2', 'projects.card.4.tag.3'],
   },
   {
     img: project5,
-    name: 'Holea',
-    tags: ['Branding', 'UX/UI Design', 'Web development', 'Photography', 'Print'],
-    desc: 'Holea is a hair salon with premium values. Their logo and visual identity were refreshed for social media and communications to amplify the customer experience.',
+    titleKey: 'projects.card.5.title',
+    descKey: 'projects.card.5.desc',
+    tagKeys: ['projects.card.5.tag.1', 'projects.card.5.tag.2', 'projects.card.5.tag.3'],
   },
 ];
 
@@ -57,20 +57,20 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-y-20">
           {projects.map((project, i) => (
-            <div key={project.name} className="group" data-gsap="reveal">
+            <div key={project.titleKey} className="group" data-gsap="reveal">
               <div className="relative overflow-hidden rounded-sm mb-5 border border-white/10 bg-black/40">
-                <img src={project.img} alt={project.name} className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
+                <img src={project.img} alt={t(project.titleKey)} className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                 <div className="absolute left-3 right-3 bottom-3 flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="inline-flex items-center bg-black/78 border border-white/20 text-white px-2 py-1 text-[11px] leading-none">
-                      {tag}
+                  {project.tagKeys.map((tagKey) => (
+                    <span key={tagKey} className="inline-flex items-center bg-black/78 border border-white/20 text-white px-2 py-1 text-[11px] leading-none">
+                      {t(tagKey)}
                     </span>
                   ))}
                 </div>
               </div>
-              <h3 className="text-[36px] font-semibold leading-none tracking-[-0.02em] text-foreground">{project.name}</h3>
-              <p className="text-[16px] leading-[1.45] text-white/78 mt-3">{project.desc}</p>
+              <h3 className="text-[36px] font-semibold leading-none tracking-[-0.02em] text-foreground">{t(project.titleKey)}</h3>
+              <p className="text-[16px] leading-[1.45] text-white/78 mt-3">{t(project.descKey)}</p>
             </div>
           ))}
 

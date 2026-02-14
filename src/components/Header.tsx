@@ -34,7 +34,7 @@ const Header = () => {
           <nav className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <AkisLogo />
+              <AkisLogo className="scale-[1.08] md:scale-[1.2] origin-left" />
             </div>
 
             {/* Right Side: Menu Button, Language, Contact */}

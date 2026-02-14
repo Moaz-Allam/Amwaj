@@ -37,14 +37,12 @@ const Footer = () => {
 
         <div className="relative pt-10" data-gsap="reveal">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-px bg-white/10" />
-          <div className="flex items-center justify-center gap-3 sm:gap-5">
-            <span className="text-[58px] sm:text-[92px] md:text-[122px] lg:text-[150px] font-bold leading-none tracking-[-0.04em] text-foreground select-none">AKIS</span>
-            <AkisLogo iconOnly className="scale-[1.2] sm:scale-[1.7] md:scale-[2.1]" />
-            <span className="text-[58px] sm:text-[92px] md:text-[122px] lg:text-[150px] font-bold leading-none tracking-[-0.04em] text-foreground select-none">STUDIO</span>
+          <div className="flex items-center justify-center">
+            <AkisLogo className="scale-[1.45] sm:scale-[1.9] md:scale-[2.25] origin-center" />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-8 text-[13px] text-white/55">
-            <span>2026 © All rights reserved</span>
+            <span>2026 © Amwaj Al-Raeda. All rights reserved.</span>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
               <a href="#" className="hover:text-primary transition-colors">Instagram</a>

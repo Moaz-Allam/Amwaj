@@ -4,23 +4,23 @@ import LogoLoop from './LogoLoop';
 
 const testimonials = [
   {
-    quote: { en: 'AKIS Studio transformed our brand completely. The attention to detail and strategic approach exceeded all expectations.', ar: 'حوّل استوديو AKIS علامتنا التجارية بالكامل. الاهتمام بالتفاصيل والنهج الاستراتيجي فاق كل التوقعات.' },
-    name: 'Sarah Mitchell',
-    role: { en: 'CEO, VEGA Tech', ar: 'الرئيس التنفيذي، VEGA Tech' },
+    quote: { en: 'We think like a partner, not just a service provider. Every solution is tailored to your brand identity and business goals.', ar: 'نفكر كشريك حقيقي لا كمزود خدمة فقط. كل حل نصممه بما يتناسب مع هوية علامتك وأهداف عملك.' },
+    name: 'Strategic Partnership',
+    role: { en: 'Client-Centered Approach', ar: 'نهج يركز على العميل' },
   },
   {
-    quote: { en: 'Working with AKIS was a game-changer. They delivered a website that truly represents who we are and drives real results.', ar: 'العمل مع AKIS كان نقطة تحول. قدموا موقعاً يمثلنا حقاً ويحقق نتائج ملموسة.' },
-    name: 'Marc Dubois',
-    role: { en: 'Founder, Le Cenacle', ar: 'المؤسس، Le Cenacle' },
+    quote: { en: 'Our workflow relies on continuous analysis, performance measurement, and optimization to ensure sustainable growth.', ar: 'يرتكز أسلوب عملنا على التحليل المستمر وقياس الأداء والتحسين لضمان نمو مستدام.' },
+    name: 'Performance Focus',
+    role: { en: 'Data-Driven Optimization', ar: 'تحسين قائم على البيانات' },
   },
   {
-    quote: { en: 'Their design sensibility is unmatched. Every pixel has a purpose and the final product speaks for itself.', ar: 'حسهم التصميمي لا يُضاهى. كل بكسل له غرض والمنتج النهائي يتحدث عن نفسه.' },
-    name: 'Léa Bernard',
-    role: { en: 'CMO, Holea', ar: 'مديرة التسويق، Holea' },
+    quote: { en: 'We focus on quality delivery and long-term impact, helping brands stand out and scale confidently in the Saudi market.', ar: 'نركز على جودة التنفيذ والأثر طويل المدى لمساعدة العلامات على التميز والتوسع بثقة في السوق السعودي.' },
+    name: 'Quality Execution',
+    role: { en: 'Long-Term Impact', ar: 'أثر طويل المدى' },
   },
 ];
 
-const clientNames = ['GLOBAL CORNER', 'SELWA', 'SYMETRIQX', 'FLOWLI', 'OXDOS', 'LE CENACLE', 'VARROA', 'HOLEA'];
+const clientNames = ['SEO', 'SOCIAL MEDIA', 'E-COMMERCE', 'CONTENT CREATION', 'CONSULTING', 'APP DEVELOPMENT', 'ADS', 'BRANDING'];
 
 const clientLogos = clientNames.map((name) => ({
   node: <span className="text-white/70 text-[14px] sm:text-[15px] tracking-[0.08em] font-medium hover:text-primary transition-colors">{name}</span>,
@@ -57,7 +57,7 @@ const Testimonials = () => {
           <LogoLoop
             logos={clientLogos}
             speed={58}
-            direction="left"
+            direction={lang === 'ar' ? 'right' : 'left'}
             width="100vw"
             logoHeight={18}
             gap={62}
