@@ -106,11 +106,16 @@ const Services = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="group relative overflow-hidden rounded-xl border border-white/10 h-[230px] sm:h-[260px] lg:h-[288px] px-5 sm:px-7 py-6 sm:py-7 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
+                            className="group relative overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-5 sm:px-7 py-6 sm:py-7 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
                         >
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_52%,rgba(56,189,248,0.28)_0%,rgba(56,189,248,0.05)_34%,transparent_62%)] opacity-90" />
+                            <div
+                                className="absolute right-[-19%] top-[56%] -translate-y-1/2 w-[70%] h-[80%] blur-[44px] opacity-95"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.64) 0%, hsl(var(--primary) / 0.2) 48%, transparent 82%)',
+                                }}
+                            />
 
-                            <div className="absolute right-[-9%] bottom-[-12%] w-[58%] h-[68%] min-w-[190px] opacity-95 group-hover:scale-[1.03] transition-transform duration-300">
+                            <div className="absolute right-[-11%] top-1/2 -translate-y-1/2 w-[56%] h-[66%] min-w-[184px] opacity-95 group-hover:scale-[1.03] transition-all duration-300 group-hover:[filter:drop-shadow(0_0_18px_rgba(56,189,248,0.95))_drop-shadow(0_0_38px_rgba(14,165,233,0.7))]">
                                 <ServiceArtwork index={i} />
                             </div>
 

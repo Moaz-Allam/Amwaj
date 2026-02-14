@@ -5,7 +5,7 @@ import GradientBlinds from './GradientBlinds';
 import gsap from 'gsap';
 
 const Hero = () => {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -20,26 +20,22 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
       <GradientBlinds
-        className="absolute inset-0 w-full h-full"
-        gradientColors={['#5dc2fdff']}
-        angle={9}
-        noise={0.52}
+        className="absolute inset-0 w-full h-full opacity-85"
+        gradientColors={['#5dc2fdff',]}
+        angle={8}
+        noise={0.45}
         blindCount={100}
-        blindMinWidth={100}
-        spotlightRadius={0.28}
-        spotlightSoftness={1.2}
-        spotlightOpacity={0.5}
-        mouseDampening={0.55}
-        distortAmount={30}
+        blindMinWidth={90}
+        spotlightRadius={0.25}
+        spotlightSoftness={1.15}
+        spotlightOpacity={0.42}
+        mouseDampening={0.6}
+        distortAmount={22}
         shineDirection="left"
-        mixBlendMode="screen"
+        mixBlendMode="normal"
       />
-
-      {/* Glow accents */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/10 blur-[100px]" />
 
       <div className="container-main relative z-40 pt-24 h-screen flex flex-col justify-center pointer-events-none">
         <div className="flex flex-col gap-12 lg:gap-24 w-full">
@@ -64,7 +60,7 @@ const Hero = () => {
       </div>
 
       {/* Fade transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none z-20" />
 
       {/* Scroll hint */}
       <div data-gsap="hero" className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-30">

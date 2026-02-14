@@ -18,24 +18,30 @@ const PageContent = () => {
             <main>
                 <Hero />
                 <section className="relative bg-black overflow-visible">
-                    <div className="pointer-events-none absolute left-1/2 top-[66%] -translate-x-1/2 -translate-y-1/2 z-0">
-                        <div className="relative w-[76vw] h-[76vw] min-w-[560px] min-h-[560px] max-w-[980px] max-h-[980px] rotate-45">
+                    <div className="pointer-events-none absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 z-0">
+                        <div className="relative w-[66vw] h-[66vw] min-w-[560px] min-h-[560px] max-w-[860px] max-h-[860px]">
                             <div
-                                className="absolute inset-0 blur-[84px] opacity-90"
+                                className="absolute inset-[8%] rounded-full blur-[74px] opacity-85 mix-blend-screen"
                                 style={{
-                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.36) 0%, hsl(var(--primary) / 0.14) 44%, transparent 72%)',
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.74) 0%, hsl(var(--primary) / 0.22) 58%, transparent 86%)',
                                 }}
                             />
                             <div
-                                className="absolute inset-[16%] blur-[62px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-95 mix-blend-screen"
+                                className="absolute inset-[22%] rounded-full blur-[58px] opacity-96 mix-blend-screen"
                                 style={{
-                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.72) 0%, hsl(var(--primary) / 0.2) 58%, transparent 82%)',
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.84) 0%, hsl(var(--primary) / 0.3) 58%, transparent 88%)',
                                 }}
                             />
                             <div
-                                className="absolute inset-[34%] blur-[46px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-70 mix-blend-screen"
+                                className="absolute inset-[18%] blur-[92px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-100 mix-blend-screen"
                                 style={{
-                                    background: 'radial-gradient(circle at center, hsl(194 100% 88% / 0.85) 0%, hsl(var(--primary) / 0.24) 58%, transparent 86%)',
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.88) 0%, hsl(var(--primary) / 0.34) 58%, transparent 86%)',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-[35%] blur-[62px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-88 mix-blend-screen"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(194 100% 88% / 0.9) 0%, hsl(var(--primary) / 0.34) 58%, transparent 88%)',
                                 }}
                             />
                         </div>
@@ -46,10 +52,14 @@ const PageContent = () => {
                         <Services />
                     </div>
                 </section>
-                <Projects />
-                <Testimonials />
-                <FAQSection />
-                <CTASection />
+                <section className="relative bg-black overflow-visible">
+                    <div className="relative z-10">
+                        <Projects />
+                        <Testimonials />
+                        <FAQSection />
+                        <CTASection />
+                    </div>
+                </section>
             </main>
             <Footer />
         </div>

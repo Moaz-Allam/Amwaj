@@ -41,9 +41,10 @@ const translations: Translations = {
   // Projects
   'projects.label': { en: 'Projects', ar: 'أعمالنا' },
   'projects.title': { en: 'Selected work', ar: 'أعمال مختارة' },
-  'projects.desc': { en: 'A selection of our recent projects that showcase our expertise.', ar: 'مجموعة من أحدث مشاريعنا التي تعكس خبراتنا.' },
+  'projects.desc': { en: 'We create brands that are living systems and measurable experiences. Every project is tailored to context and impact.', ar: 'نصمم علامات تجارية حيّة وتجارب قابلة للقياس. كل مشروع لدينا مصمم خصيصاً للسياق والأثر.' },
   'projects.cta.title': { en: 'Got a project in mind?', ar: 'لديك مشروع في بالك؟' },
-  'projects.cta.button': { en: "Let's talk", ar: 'لنتحدث' },
+  'projects.cta.button': { en: 'Book now', ar: 'احجز الآن' },
+  'projects.link': { en: 'All projects', ar: 'كل المشاريع' },
 
   // Testimonials
   'testimonials.label': { en: 'Testimonials', ar: 'آراء العملاء' },
@@ -52,7 +53,8 @@ const translations: Translations = {
 
   // FAQ
   'faq.label': { en: 'FAQ', ar: 'الأسئلة الشائعة' },
-  'faq.title': { en: 'Common questions', ar: 'أسئلة متكررة' },
+  'faq.title': { en: 'Frequently asked questions', ar: 'الأسئلة المتكررة' },
+  'faq.desc': { en: 'Can’t find what you are looking for? Contact us.', ar: 'لم تجد ما تبحث عنه؟ تواصل معنا.' },
   'faq.1.q': { en: 'What is your typical project timeline?', ar: 'ما هي المدة المعتادة للمشروع؟' },
   'faq.1.a': { en: 'Most projects take 4–8 weeks depending on scope and complexity. We provide a detailed timeline during our initial consultation.', ar: 'تستغرق معظم المشاريع من 4 إلى 8 أسابيع حسب النطاق والتعقيد. نقدم جدولاً زمنياً مفصلاً خلال الاستشارة الأولى.' },
   'faq.2.q': { en: 'Do you work with startups or established companies?', ar: 'هل تعملون مع الشركات الناشئة أم الراسخة؟' },
@@ -61,6 +63,14 @@ const translations: Translations = {
   'faq.3.a': { en: 'We follow a structured process: Discovery → Strategy → Design → Development → Launch. Each phase includes client feedback loops.', ar: 'نتبع عملية منظمة: الاكتشاف ← الاستراتيجية ← التصميم ← التطوير ← الإطلاق. تتضمن كل مرحلة حلقات تغذية راجعة.' },
   'faq.4.q': { en: 'Do you offer ongoing support?', ar: 'هل تقدمون دعماً مستمراً؟' },
   'faq.4.a': { en: 'Yes, we offer maintenance packages and ongoing support to ensure your brand continues to grow and evolve.', ar: 'نعم، نقدم حزم صيانة ودعم مستمر لضمان استمرار نمو وتطور علامتك التجارية.' },
+  'faq.5.q': { en: 'How much does it cost to build a website with AKIS.STUDIO?', ar: 'ما تكلفة بناء موقع إلكتروني مع AKIS.STUDIO؟' },
+  'faq.5.a': { en: 'It depends on your scope, integrations and timeline. After discovery, we send a transparent estimate broken down by phase.', ar: 'يعتمد ذلك على نطاق العمل والتكاملات والمدة الزمنية. بعد مرحلة الاكتشاف نرسل تقديراً واضحاً مفصلاً حسب المراحل.' },
+  'faq.6.q': { en: 'Can you package design + development + content?', ar: 'هل يمكنكم جمع التصميم والتطوير والمحتوى في باقة واحدة؟' },
+  'faq.6.a': { en: 'Yes. We can handle strategy, brand system, UI design, copy support, development and post-launch optimization in one workflow.', ar: 'نعم. يمكننا إدارة الاستراتيجية وهوية العلامة والتصميم وكتابة المحتوى والتطوير والتحسين بعد الإطلاق ضمن مسار واحد.' },
+  'faq.7.q': { en: 'Do you offer support after launch?', ar: 'هل توفرون دعماً بعد الإطلاق؟' },
+  'faq.7.a': { en: 'Absolutely. We provide ongoing care plans for updates, performance monitoring and technical support.', ar: 'بالتأكيد. نوفر خطط متابعة مستمرة للتحديثات ومراقبة الأداء والدعم التقني.' },
+  'faq.8.q': { en: 'Where are your clients from?', ar: 'من أين عملاؤكم؟' },
+  'faq.8.a': { en: 'Most clients are in Belgium and Europe, and we also collaborate with remote teams globally.', ar: 'معظم عملائنا في بلجيكا وأوروبا، كما نتعاون مع فرق عن بُعد حول العالم.' },
 
   // CTA
   'cta.title': { en: 'Ready to have an image that matches your ambition?', ar: 'جاهز لصورة تعكس طموحك؟' },

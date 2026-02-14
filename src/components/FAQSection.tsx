@@ -13,36 +13,38 @@ const FAQSection = () => {
     { q: t('faq.2.q'), a: t('faq.2.a') },
     { q: t('faq.3.q'), a: t('faq.3.a') },
     { q: t('faq.4.q'), a: t('faq.4.a') },
+    { q: t('faq.5.q'), a: t('faq.5.a') },
+    { q: t('faq.6.q'), a: t('faq.6.a') },
+    { q: t('faq.7.q'), a: t('faq.7.a') },
+    { q: t('faq.8.q'), a: t('faq.8.a') },
   ];
 
   return (
-    <section ref={ref} className="section-padding">
+    <section ref={ref} className="relative bg-transparent py-24 sm:py-28">
       <div className="container-main">
         <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-20">
           <div data-gsap="reveal">
-            <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">{t('faq.label')}</span>
-            <h2 className="text-[32px] font-bold leading-tight tracking-tight mt-4 text-foreground">{t('faq.title')}</h2>
+            <span className="text-primary font-medium tracking-wide text-[16px]">{t('faq.label')}</span>
+            <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('faq.title')}</h2>
+            <p className="text-[16px] text-white/78 leading-[1.45] mt-3">{t('faq.desc')}</p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {faqs.map((faq, i) => {
               const isOpen = openIndex === i;
               return (
                 <div
                   key={i}
                   data-gsap="reveal"
-                  className={`rounded-xl border transition-all duration-200 ${isOpen
-                    ? 'bg-primary/[0.06] border-primary/20 border-l-2 border-l-primary'
-                    : 'border-border hover:border-muted-foreground/20'
-                    }`}
+                  className={`border-b border-white/20 transition-colors duration-200 ${isOpen ? 'border-primary/60' : 'hover:border-white/35'}`}
                 >
-                  <button onClick={() => setOpenIndex(isOpen ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
-                    <span className="text-[14px] font-medium text-foreground pr-4">{faq.q}</span>
-                    {isOpen ? <Minus size={16} className="text-primary shrink-0" /> : <Plus size={16} className="text-muted-foreground shrink-0" />}
+                  <button onClick={() => setOpenIndex(isOpen ? null : i)} className="w-full flex items-center justify-between py-4 text-left gap-5">
+                    <span className="text-[16px] font-normal text-foreground pr-4">{faq.q}</span>
+                    {isOpen ? <Minus size={16} className="text-primary shrink-0" /> : <Plus size={16} className="text-white/60 shrink-0" />}
                   </button>
                   {isOpen && (
-                    <div className="px-5 pb-5 animate-fade-in">
-                      <p className="text-gray-400 text-[14px] leading-relaxed font-light">{faq.a}</p>
+                    <div className="pb-4 animate-fade-in">
+                      <p className="text-white/75 text-[16px] leading-[1.5]">{faq.a}</p>
                     </div>
                   )}
                 </div>

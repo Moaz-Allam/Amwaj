@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <>
       {/* Main Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-white/5">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
         <div className="container-main">
           <nav className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -66,7 +66,7 @@ const Header = () => {
               {/* Contact Button */}
               <a
                 href="#contact"
-                className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-background bg-white rounded-md hover:bg-white/90 transition-colors"
+                className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors"
               >
                 {t('nav.contact')}
               </a>
