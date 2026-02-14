@@ -7,44 +7,37 @@ const About = () => {
   const ref = useGsapReveal<HTMLElement>();
 
   return (
-    <section ref={ref} className="bg-black text-white py-24 sm:py-32 relative z-10 overflow-hidden">
+    <section id="about" ref={ref} className="bg-transparent text-white pt-24 sm:pt-32 pb-8 sm:pb-14 relative z-20 overflow-visible">
       <div className="container-main relative z-20">
-        <div className="flex flex-col gap-12" data-gsap="reveal">
-
-          {/* Container 1: Section Name */}
+        <div className="flex flex-col gap-10 sm:gap-14" data-gsap="reveal">
           <div>
-            <span className="text-[#3b82f6] font-medium tracking-wide uppercase text-[20px]">
+            <span className="text-primary font-medium tracking-wide text-[16px]">
               {t('about.label')}
             </span>
           </div>
 
-          {/* Container 2: Title & Description aligned horizontally */}
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
-            {/* Title Side */}
-            <div className="max-w-2xl">
-              <h2 className="text-[32px] font-bold leading-tight tracking-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
+            <div className="max-w-4xl">
+              <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em]">
                 {t('about.title')}
               </h2>
             </div>
 
-            {/* Description Side */}
-            <div className="lg:max-w-xl xl:max-w-2xl pt-2">
-              <p className="text-gray-400 text-[14px] leading-relaxed font-light">
+            <div className="max-w-xl lg:justify-self-end pt-1 sm:pt-2">
+              <p className="text-white/85 text-[16px] leading-[1.45] font-normal">
                 {t('about.desc')}
               </p>
             </div>
           </div>
 
-          {/* Container 3: Button */}
           <div>
             <a
               href="#studio"
-              className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-[#3b82f6] transition-colors"
+              className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-primary transition-colors"
             >
               {t('about.link')} <ChevronRight size={18} />
             </a>
           </div>
-
         </div>
       </div>
     </section>
