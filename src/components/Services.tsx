@@ -90,10 +90,10 @@ const Services = () => {
     ];
 
     return (
-        <section id="services" ref={ref} className="bg-transparent text-white pt-16 sm:pt-20 pb-28 sm:pb-36 relative z-20 overflow-visible">
+        <section id="services" ref={ref} className="bg-transparent text-white pt-14 sm:pt-16 pb-20 sm:pb-24 relative z-20 overflow-visible">
 
             <div className="container-main relative z-10">
-                <div className="flex flex-col items-center text-center gap-4 mb-14 sm:mb-20" data-gsap="reveal">
+                <div className="flex flex-col items-center text-center gap-4 mb-12 sm:mb-16" data-gsap="reveal">
                     <span className="text-primary font-medium tracking-wide text-[16px]">
                         {t('services.label')}
                     </span>
@@ -102,11 +102,11 @@ const Services = () => {
                     </h2>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6 lg:gap-7 relative max-w-[1160px] mx-auto" data-gsap="reveal">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-5 lg:gap-6 relative max-w-[1160px] mx-auto" data-gsap="reveal">
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="group relative overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-5 sm:px-7 py-6 sm:py-7 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
+                            className="group relative overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-4 sm:px-6 py-5 sm:py-6 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
                         >
                             <div
                                 className="absolute right-[-19%] top-[56%] -translate-y-1/2 w-[70%] h-[80%] blur-[44px] opacity-95"
@@ -131,7 +131,7 @@ const Services = () => {
                     ))}
                 </div>
 
-                <div className="mt-16 sm:mt-20 text-center" data-gsap="reveal">
+                <div className="mt-12 sm:mt-16 text-center" data-gsap="reveal">
                     <a href="#" className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-primary transition-colors">
                         {t('services.link')} <ChevronRight size={18} />
                     </a>

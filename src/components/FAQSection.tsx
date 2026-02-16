@@ -20,9 +20,9 @@ const FAQSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative bg-transparent py-24 sm:py-28">
+    <section ref={ref} className="relative bg-transparent py-20 sm:py-24">
       <div className="container-main">
-        <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-20">
+        <div className="grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
           <div data-gsap="reveal">
             <span className="text-primary font-medium tracking-wide text-[16px]">{t('faq.label')}</span>
             <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('faq.title')}</h2>

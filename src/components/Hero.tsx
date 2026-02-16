@@ -37,7 +37,7 @@ const Hero = () => {
         mixBlendMode="normal"
       />
 
-      <div className="container-main relative z-40 pt-24 h-screen flex flex-col justify-center pointer-events-none">
+      <div className="container-main relative z-40 pt-20 h-screen flex flex-col justify-center pointer-events-none">
         <div className="flex flex-col gap-12 lg:gap-24 w-full">
           {/* Title Area - Left aligned, 70% width */}
           <h1

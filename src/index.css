@@ -74,11 +74,11 @@
 
 @layer components {
   .section-padding {
-    @apply py-24 md:py-20 lg:py-24;
+    @apply py-16 md:py-16 lg:py-20;
   }
 
   .container-main {
-    @apply mx-auto max-w-[1280px] px-4 md:px-6;
+    @apply mx-auto max-w-[1280px] px-5;
   }
 
   .accent-label {

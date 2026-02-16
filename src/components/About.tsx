@@ -7,9 +7,9 @@ const About = () => {
   const ref = useGsapReveal<HTMLElement>();
 
   return (
-    <section id="about" ref={ref} className="bg-transparent text-white pt-24 sm:pt-32 pb-8 sm:pb-14 relative z-20 overflow-visible">
+    <section id="about" ref={ref} className="bg-transparent text-white pt-20 sm:pt-24 pb-6 sm:pb-10 relative z-20 overflow-visible">
       <div className="container-main relative z-20">
-        <div className="flex flex-col gap-10 sm:gap-14" data-gsap="reveal">
+        <div className="flex flex-col gap-8 sm:gap-12" data-gsap="reveal">
           <div>
             <span className="text-primary font-medium tracking-wide text-[16px]">
               {t('about.label')}

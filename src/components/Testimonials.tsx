@@ -32,17 +32,17 @@ const Testimonials = () => {
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { stagger: 0.12 });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-transparent py-24 sm:py-28">
+    <section ref={ref} className="relative overflow-hidden bg-transparent py-20 sm:py-24">
       <div className="container-main relative z-10">
-        <div className="text-center mb-14 sm:mb-16" data-gsap="reveal">
+        <div className="text-center mb-12 sm:mb-14" data-gsap="reveal">
           <span className="text-primary font-medium tracking-wide text-[16px]">{t('testimonials.label')}</span>
           <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('testimonials.title')}</h2>
           <p className="text-white/78 text-[16px] leading-[1.45] mt-3">{t('testimonials.subtitle')}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 mb-16 sm:mb-20">
+        <div className="grid md:grid-cols-3 gap-4 mb-12 sm:mb-16">
           {testimonials.map((item, i) => (
-            <div key={item.name} className="rounded-sm border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,22,0.72)_0%,rgba(5,8,14,0.92)_100%)] p-7 flex flex-col min-h-[240px]" data-gsap="reveal">
+            <div key={item.name} className="rounded-sm border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,22,0.72)_0%,rgba(5,8,14,0.92)_100%)] p-6 flex flex-col min-h-[240px]" data-gsap="reveal">
               <p className="text-white/86 text-[16px] leading-[1.5] flex-1 mb-8">{item.quote[lang]}</p>
               <div>
                 <p className="text-[16px] font-medium text-foreground">{item.name}</p>
@@ -52,7 +52,7 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="relative left-1/2 -translate-x-1/2 w-screen pt-8 sm:pt-10" data-gsap="reveal">
+        <div className="relative left-1/2 -translate-x-1/2 w-screen pt-6 sm:pt-8" data-gsap="reveal">
           <div className="absolute top-0 left-0 w-full h-px bg-white/10" />
           <LogoLoop
             logos={clientLogos}

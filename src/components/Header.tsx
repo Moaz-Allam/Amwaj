@@ -31,10 +31,10 @@ const Header = () => {
       {/* Main Navigation Bar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
         <div className="container-main">
-          <nav className="flex items-center justify-between h-16 md:h-20">
+          <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <AkisLogo className="scale-[1.08] md:scale-[1.2] origin-left" />
+              <AkisLogo iconOnly={false} className="scale-[1.32] md:scale-[1.58] origin-left" />
             </div>
 
             {/* Right Side: Menu Button, Language, Contact */}

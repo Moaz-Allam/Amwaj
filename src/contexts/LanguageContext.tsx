@@ -107,6 +107,9 @@ const translations: Translations = {
 
   // Footer
   'footer.tagline': { en: 'You have a project idea? Let’s talk about it!', ar: 'هل لديك فكرة مشروع؟ لنتحدث عنها!' },
+  'footer.pages': { en: 'Pages', ar: 'الصفحات' },
+  'footer.email': { en: 'Email', ar: 'البريد الإلكتروني' },
+  'footer.address': { en: 'Address', ar: 'العنوان' },
   'footer.services': { en: 'Services', ar: 'الخدمات' },
   'footer.company': { en: 'Company', ar: 'الشركة' },
   'footer.legal': { en: 'Legal', ar: 'قانوني' },
