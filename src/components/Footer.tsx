@@ -3,7 +3,7 @@ import { useGsapReveal } from '@/hooks/useGsapReveal';
 import { ChevronRight } from 'lucide-react';
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { y: 30, stagger: 0.08 });
 
   const pageLinks = [
@@ -22,10 +22,10 @@ const Footer = () => {
               {t('footer.tagline')}
             </p>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 mt-7 bg-white text-black px-5 py-2.5 text-[16px] font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
             >
-              {t('cta.button')} <ChevronRight size={14} />
+              {t('cta.button')} <ChevronRight size={14} className={isRTL ? 'rotate-180' : ''} />
             </a>
           </div>
 

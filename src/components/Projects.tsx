@@ -41,7 +41,7 @@ const projects = [
 ];
 
 const Projects = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { y: 60, stagger: 0.15 });
 
   return (
@@ -77,16 +77,16 @@ const Projects = () => {
           <div className="relative min-h-[320px] sm:min-h-[380px] rounded-sm border border-white/10 bg-[linear-gradient(180deg,rgba(7,20,34,0.78)_0%,rgba(2,8,18,0.95)_100%)] overflow-hidden flex flex-col items-center justify-center text-center px-5" data-gsap="reveal">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.14)_0%,transparent_65%)]" />
             <h3 className="relative z-10 text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground mb-6">{t('projects.cta.title')}</h3>
-            <a href="#contact" className="relative z-10 inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[16px] font-medium hover:bg-primary hover:text-primary-foreground transition-colors">
+            <a href="/contact" className="relative z-10 inline-flex items-center gap-2 bg-white text-black px-4 py-2 text-[16px] font-medium hover:bg-primary hover:text-primary-foreground transition-colors">
               {t('projects.cta.button')}
-              <ChevronRight size={14} />
+              <ChevronRight size={14} className={isRTL ? 'rotate-180' : ''} />
             </a>
           </div>
         </div>
 
         <div className="mt-12 sm:mt-16 text-center" data-gsap="reveal">
           <a href="#" className="inline-flex items-center gap-2 text-[16px] font-medium text-foreground hover:text-primary transition-colors">
-            {t('projects.link')} <ChevronRight size={18} />
+            {t('projects.link')} <ChevronRight size={18} className={isRTL ? 'rotate-180' : ''} />
           </a>
         </div>
       </div>

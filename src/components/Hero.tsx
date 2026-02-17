@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
+    <section id="hero" ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
       <GradientBlinds
         className="absolute inset-0 w-full h-full opacity-85"
         gradientColors={['#5dc2fdff',]}

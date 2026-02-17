@@ -16,7 +16,7 @@ const CTASection = () => {
           </h2>
           <a
             data-gsap="reveal"
-            href="#contact"
+            href="/contact"
             className="relative z-10 inline-flex bg-white text-black px-4 py-2 text-[16px] font-medium transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             {t('cta.button')}

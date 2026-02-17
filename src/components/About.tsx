@@ -3,7 +3,7 @@ import { useGsapReveal } from '@/hooks/useGsapReveal';
 import { ChevronRight } from 'lucide-react';
 
 const About = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const ref = useGsapReveal<HTMLElement>();
 
   return (
@@ -35,7 +35,7 @@ const About = () => {
               href="#studio"
               className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-primary transition-colors"
             >
-              {t('about.link')} <ChevronRight size={18} />
+              {t('about.link')} <ChevronRight size={18} className={isRTL ? 'rotate-180' : ''} />
             </a>
           </div>
         </div>

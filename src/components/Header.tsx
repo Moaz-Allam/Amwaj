@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
 import AkisLogo from './AkisLogo';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,11 +10,11 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: t('nav.home') || 'Home', ariaLabel: 'Go to home page', link: '#hero' },
-    { label: t('nav.about') || 'About', ariaLabel: 'Learn about us', link: '#about' },
-    { label: t('nav.services') || 'Services', ariaLabel: 'View our services', link: '#services' },
-    { label: t('nav.projects') || 'Projects', ariaLabel: 'See our work', link: '#projects' },
-    { label: t('nav.contact') || 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
+    { label: t('nav.home') || 'Home', ariaLabel: 'Go to home page', link: '/#hero' },
+    { label: t('nav.about') || 'About', ariaLabel: 'Learn about us', link: '/#about' },
+    { label: t('nav.services') || 'Services', ariaLabel: 'View our services', link: '/#services' },
+    { label: t('nav.projects') || 'Projects', ariaLabel: 'See our work', link: '/#projects' },
+    { label: t('nav.contact') || 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
   ];
 
   const socialItems = [
@@ -33,9 +34,9 @@ const Header = () => {
         <div className="container-main">
           <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <Link to="/" aria-label="Go to homepage" className="flex-shrink-0">
               <AkisLogo iconOnly={false} className="scale-[1.32] md:scale-[1.58] origin-left" />
-            </div>
+            </Link>
 
             {/* Right Side: Menu Button, Language, Contact */}
             <div className="flex items-center gap-3 md:gap-6">
@@ -65,7 +66,7 @@ const Header = () => {
 
               {/* Contact Button */}
               <a
-                href="#contact"
+                href="/contact"
                 className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors"
               >
                 {t('nav.contact')}
