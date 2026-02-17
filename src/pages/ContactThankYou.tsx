@@ -17,7 +17,7 @@ const ContactThankYouContent = () => {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white`}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white [&_.container-main]:px-0`}>
       <Header />
       <main className="pt-[112px] md:pt-[132px] pb-16">
         <section className="container-main">

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 type Lang = 'en' | 'ar';
 
@@ -122,6 +122,7 @@ const translations: Translations = {
 
 interface LanguageContextType {
   lang: Lang;
+  setLanguage: (nextLang: Lang) => void;
   toggleLang: () => void;
   t: (key: string) => string;
   isRTL: boolean;
@@ -130,7 +131,18 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Lang>('en');
+  const [lang, setLang] = useState<Lang>(() => {
+    if (typeof window === 'undefined') {
+      return 'en';
+    }
+
+    const savedLang = window.localStorage.getItem('amwaj_lang');
+    return savedLang === 'ar' ? 'ar' : 'en';
+  });
+
+  const setLanguage = useCallback((nextLang: Lang) => {
+    setLang(nextLang);
+  }, []);
 
   const toggleLang = useCallback(() => {
     setLang((prev) => (prev === 'en' ? 'ar' : 'en'));
@@ -142,8 +154,14 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const isRTL = lang === 'ar';
 
+  useEffect(() => {
+    window.localStorage.setItem('amwaj_lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  }, [isRTL, lang]);
+
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang, t, isRTL }}>
+    <LanguageContext.Provider value={{ lang, setLanguage, toggleLang, t, isRTL }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import './StaggeredMenuWrapper.css';
 
 const Header = () => {
-  const { lang, toggleLang, t } = useLanguage();
+  const { lang, setLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
@@ -53,16 +53,37 @@ const Header = () => {
               </button>
 
               {/* Language Selector */}
-              <button
-                onClick={toggleLang}
-                className="flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/70 transition-colors"
-                aria-label="Change language"
-              >
-                <span>{lang === 'en' ? 'EN' : 'AR'}</span>
-                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+              <div className="relative group">
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/70 transition-colors"
+                  aria-label="Change language"
+                >
+                  <span>{lang === 'en' ? 'EN' : 'AR'}</span>
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <div className="pointer-events-none absolute top-full right-0 pt-2 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                  <div className="min-w-[72px] bg-black border border-white/15 shadow-[0_8px_28px_rgba(0,0,0,0.5)]">
+                    <button
+                      type="button"
+                      onClick={() => setLanguage('en')}
+                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'en' ? 'text-primary bg-white/5' : 'text-white hover:bg-white/10'}`}
+                    >
+                      EN
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setLanguage('ar')}
+                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'ar' ? 'text-primary bg-white/5' : 'text-white hover:bg-white/10'}`}
+                    >
+                      AR
+                    </button>
+                  </div>
+                </div>
+              </div>
 
               {/* Contact Button */}
               <a

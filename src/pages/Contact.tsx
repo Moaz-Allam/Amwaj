@@ -3,7 +3,7 @@ import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const needOptionKeys = ['branding', 'socialMedia', 'seo', 'webDevelopment', 'other'] as const;
 type NeedOption = (typeof needOptionKeys)[number];
@@ -155,7 +155,7 @@ const ContactPageContent = () => {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white`}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white [&_.container-main]:px-0`}>
       <Header />
 
       <main>
@@ -371,10 +371,6 @@ const ContactPageContent = () => {
   );
 };
 
-const Contact = () => (
-  <LanguageProvider>
-    <ContactPageContent />
-  </LanguageProvider>
-);
+const Contact = () => <ContactPageContent />;
 
 export default Contact;

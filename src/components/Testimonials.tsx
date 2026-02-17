@@ -20,16 +20,27 @@ const testimonials = [
   },
 ];
 
-const clientNames = ['SEO', 'SOCIAL MEDIA', 'E-COMMERCE', 'CONTENT CREATION', 'CONSULTING', 'APP DEVELOPMENT', 'ADS', 'BRANDING'];
-
-const clientLogos = clientNames.map((name) => ({
-  node: <span className="text-white/70 text-[14px] sm:text-[15px] tracking-[0.08em] font-medium hover:text-primary transition-colors">{name}</span>,
-  title: name,
-}));
+const clientNames = [
+  { en: 'SEO', ar: 'تهيئة محركات البحث' },
+  { en: 'SOCIAL MEDIA', ar: 'وسائل التواصل الاجتماعي' },
+  { en: 'E-COMMERCE', ar: 'التجارة الإلكترونية' },
+  { en: 'CONTENT CREATION', ar: 'صناعة المحتوى' },
+  { en: 'CONSULTING', ar: 'الاستشارات' },
+  { en: 'APP DEVELOPMENT', ar: 'تطوير التطبيقات' },
+  { en: 'ADS', ar: 'الإعلانات' },
+  { en: 'BRANDING', ar: 'الهوية التجارية' },
+];
 
 const Testimonials = () => {
   const { t, lang } = useLanguage();
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { stagger: 0.12 });
+  const clientLogos = clientNames.map((item) => {
+    const label = item[lang];
+    return {
+      node: <span className="text-white/70 text-[14px] sm:text-[15px] tracking-[0.08em] font-medium hover:text-primary transition-colors">{label}</span>,
+      title: label,
+    };
+  });
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-transparent py-20 sm:py-24">
