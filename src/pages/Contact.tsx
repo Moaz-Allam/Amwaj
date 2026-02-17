@@ -155,7 +155,7 @@ const ContactPageContent = () => {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white [&_.container-main]:px-0`}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white [&_.container-main]:px-4 sm:[&_.container-main]:px-0`}>
       <Header />
 
       <main>

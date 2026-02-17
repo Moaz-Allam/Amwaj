@@ -12,7 +12,7 @@ const translations: Translations = {
   'nav.about': { en: 'About', ar: 'من نحن' },
   'nav.services': { en: 'Services', ar: 'الخدمات' },
   'nav.projects': { en: 'Strategy', ar: 'الاستراتيجية' },
-  'nav.contact': { en: 'Let’s Work Together', ar: 'لنعمل معاً' },
+  'nav.contact': { en: 'Let’s Talk', ar: 'لنتحدث' },
 
   // Hero
   'hero.title': { en: 'Premium digital marketing for ambitious brands.', ar: 'تسويق رقمي احترافي للعلامات الطموحة.' },

@@ -12,7 +12,7 @@ const PageContent = () => {
     const { isRTL, lang } = useLanguage();
 
     return (
-        <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} overflow-x-hidden [&_.container-main]:px-0`}>
+        <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} overflow-x-hidden [&_.container-main]:px-4 sm:[&_.container-main]:px-0`}>
             <Header />
             <main>
                 <Hero />

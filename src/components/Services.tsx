@@ -5,7 +5,6 @@ import serviceOneImage from '@/assets/service-one.png';
 import serviceTwoImage from '@/assets/service-two.png';
 import serviceThreeImage from '@/assets/service-three.png';
 import serviceFourImage from '@/assets/service-four.png';
-import diamantImage from '@/assets/diamant.png';
 
 const serviceImages = [serviceOneImage, serviceTwoImage, serviceThreeImage, serviceFourImage] as const;
 
@@ -39,15 +38,7 @@ const Services = () => {
                             key={i}
                             className="group relative overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-4 sm:px-6 py-5 sm:py-6 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
                         >
-                            <img
-                                src={diamantImage}
-                                alt=""
-                                aria-hidden="true"
-                                className={`pointer-events-none absolute top-[56%] -translate-y-1/2 w-[56%] h-[66%] object-contain opacity-60 ${isRTL ? 'left-[-16%]' : 'right-[-16%]'}`}
-                                loading="lazy"
-                            />
-
-                            <div className={`absolute top-1/2 -translate-y-1/2 w-[58%] h-[70%] min-w-[184px] opacity-95 group-hover:scale-[1.03] transition-all duration-300 group-hover:[filter:drop-shadow(0_0_18px_rgba(56,189,248,0.95))_drop-shadow(0_0_38px_rgba(14,165,233,0.7))] ${isRTL ? 'left-[-11%]' : 'right-[-11%]'}`}>
+                            <div className={`absolute top-1/2 -translate-y-1/2 w-[58%] h-[70%] min-w-[184px] opacity-95 group-hover:scale-[1.03] transition-all duration-300 ${isRTL ? 'left-[-11%]' : 'right-[-11%]'}`}>
                                 <img
                                     src={serviceImages[i]}
                                     alt={t(service.titleKey)}

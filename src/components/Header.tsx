@@ -39,7 +39,7 @@ const Header = () => {
             </Link>
 
             {/* Right Side: Menu Button, Language, Contact */}
-            <div className="flex items-center gap-3 md:gap-6">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
               {/* Hamburger Menu Button */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -88,7 +88,7 @@ const Header = () => {
               {/* Contact Button */}
               <a
                 href="/contact"
-                className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors"
+                className="inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors whitespace-nowrap"
               >
                 {t('nav.contact')}
               </a>
