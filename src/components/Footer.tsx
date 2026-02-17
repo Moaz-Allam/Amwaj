@@ -41,8 +41,8 @@ const Footer = () => {
 
             <div data-gsap="reveal">
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.email')}</h4>
-              <a href="mailto:hello@amwaj.sa" className="text-[16px] leading-[1.25] text-white hover:text-primary transition-colors break-words">
-                hello@amwaj.sa
+              <a href="mailto:info@amwajalraeda.com" className="text-[16px] leading-[1.25] text-white hover:text-primary transition-colors break-words">
+                info@amwajalraeda.com
               </a>
             </div>
 

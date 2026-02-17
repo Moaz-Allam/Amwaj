@@ -58,7 +58,7 @@ const ContactPageContent = () => {
       submitError: lang === 'ar' ? 'حدث خطأ أثناء الإرسال. حاول مرة أخرى أو راسلنا عبر البريد.' : 'Could not send your request. Please try again or email us directly.',
       submitValidation: lang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح بصيغة دولية.' : 'Please enter a valid phone number in international format.',
       submitSpam: lang === 'ar' ? 'تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.' : 'Could not submit this request. Please try again.',
-      email: 'hello@amwaj.sa',
+      email: 'info@amwajalraeda.com',
       phone: '+966 55 000 0000',
       address: ['Amwaj Al-Raeda', 'Riyadh', 'Saudi Arabia'],
       needsOptions: {
