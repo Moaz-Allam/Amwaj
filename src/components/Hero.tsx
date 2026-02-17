@@ -5,7 +5,7 @@ import GradientBlinds from './GradientBlinds';
 import gsap from 'gsap';
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Hero = () => {
     <section id="hero" ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
       <GradientBlinds
         className="absolute inset-0 w-full h-full opacity-85"
-        gradientColors={['#5dc2fdff',]}
+        gradientColors={['#5DC2FDCF',]}
         angle={8}
         noise={0.45}
         blindCount={100}
@@ -31,31 +31,38 @@ const Hero = () => {
         spotlightRadius={0.25}
         spotlightSoftness={1.15}
         spotlightOpacity={0.42}
-        mouseDampening={0.6}
+        mouseDampening={0.9}
         distortAmount={22}
         shineDirection="left"
         mixBlendMode="normal"
       />
 
       <div className="container-main relative z-40 pt-20 h-screen flex flex-col justify-center pointer-events-none">
-        <div className="flex flex-col gap-12 lg:gap-24 w-full">
-          {/* Title Area - Left aligned, 70% width */}
+        <div
+          dir={isRTL ? 'rtl' : 'ltr'}
+          className={`flex flex-col gap-5 w-full lg:w-[82%] ${isRTL ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}
+        >
           <h1
             data-gsap="hero"
-            className="self-start text-left w-full lg:w-[70%] text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tighter text-white"
+            className={`w-full text-4xl sm:text-6xl lg:text-8xl font-bold leading-[1.15] tracking-tighter text-white ${isRTL ? 'text-right' : 'text-left'}`}
           >
             {t('hero.title')}
           </h1>
 
-          {/* Subtitle Area - Right aligned, 70% width */}
-          <div className="self-end w-full lg:w-[70%] flex justify-end">
-            <p
-              data-gsap="hero"
-              className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-md text-right"
-            >
-              {t('hero.subtitle')}
-            </p>
-          </div>
+          <p
+            data-gsap="hero"
+            className={`w-full text-sm sm:text-base lg:text-lg text-white/75 leading-relaxed max-w-xl ${isRTL ? 'ml-auto text-right' : 'mr-auto text-left'}`}
+          >
+            {t('hero.subtitle')}
+          </p>
+
+          <a
+            data-gsap="hero"
+            href="/contact"
+            className={`pointer-events-auto inline-flex bg-white text-black px-6 py-3 text-[17px] font-medium transition-colors hover:bg-white/90 ${isRTL ? 'ml-auto' : 'mr-auto'}`}
+          >
+            {t('cta.button')}
+          </a>
         </div>
       </div>
 

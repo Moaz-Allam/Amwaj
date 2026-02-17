@@ -70,6 +70,10 @@
     font-family: 'Cairo', sans-serif;
     letter-spacing: 0 !important;
   }
+
+  body[dir="rtl"] :is(h1, h2, h3, h4, h5, h6, p, span, a, li, label, button, input, textarea) {
+    line-height: 1.9;
+  }
 }
 
 @layer components {

@@ -15,7 +15,7 @@ const translations: Translations = {
   'nav.contact': { en: 'Let’s Talk', ar: 'لنتحدث' },
 
   // Hero
-  'hero.title': { en: 'Premium digital marketing for ambitious brands.', ar: 'تسويق رقمي احترافي للعلامات الطموحة.' },
+  'hero.title': { en: 'Premium marketing for modern brands.', ar: 'تسويق رقمي احترافي للعلامات الطموحة.' },
   'hero.subtitle': { en: 'We help brands grow with clear strategy, smart execution, and measurable results in the Saudi market.', ar: 'نساعد العلامات على النمو عبر استراتيجية واضحة، وتنفيذ ذكي، ونتائج قابلة للقياس في السوق السعودي.' },
   'hero.scroll': { en: 'Scroll to explore', ar: 'مرر للاستكشاف' },
 
@@ -31,7 +31,7 @@ const translations: Translations = {
   'services.link': { en: 'View all services', ar: 'عرض جميع الخدمات' },
   'service.1.title': { en: 'Visual Identity Design', ar: 'تصميم الهوية البصرية' },
   'service.1.desc': { en: 'A clear visual identity that elevates your brand.', ar: 'هوية بصرية واضحة ترتقي بعلامتك.' },
-  'service.2.title': { en: 'Social Media Management', ar: 'إدارة وسائل التواصل الاجتماعي' },
+  'service.2.title': { en: 'Social Media Management', ar: 'إدارة التواصل الاجتماعي' },
   'service.2.desc': { en: 'Professional content, publishing, and audience growth.', ar: 'محتوى احترافي ونشر منظم ونمو للجمهور.' },
   'service.3.title': { en: 'Website & E-commerce Development', ar: 'تطوير المواقع والتجارة الإلكترونية' },
   'service.3.desc': { en: 'Fast, modern platforms built for conversion and scale.', ar: 'منصات سريعة وحديثة مصممة للتحويل والتوسع.' },

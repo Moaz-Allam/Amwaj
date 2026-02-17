@@ -35,7 +35,7 @@ const Header = () => {
           <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
             <Link to="/" aria-label="Go to homepage" className="flex-shrink-0">
-              <AkisLogo iconOnly={false} className="scale-[1.32] md:scale-[1.58] origin-left" />
+              <AkisLogo iconOnly={false} className="scale-[1.05] md:scale-[1.58] origin-left" />
             </Link>
 
             {/* Right Side: Menu Button, Language, Contact */}
@@ -43,7 +43,7 @@ const Header = () => {
               {/* Hamburger Menu Button */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="flex flex-col items-center justify-center w-10 h-10 gap-1.5 hover:opacity-70 transition-opacity relative z-[100]"
+                className="hidden md:flex flex-col items-center justify-center w-10 h-10 gap-1.5 hover:opacity-70 transition-opacity relative z-[100]"
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={menuOpen}
               >
