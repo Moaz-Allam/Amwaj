@@ -40,18 +40,18 @@ const Hero = () => {
       <div className="container-main relative z-40 pt-20 h-screen flex flex-col justify-center pointer-events-none">
         <div
           dir={isRTL ? 'rtl' : 'ltr'}
-          className={`flex flex-col gap-5 w-full lg:w-[82%] ${isRTL ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}
+          className="flex flex-col items-center text-center gap-5 w-full max-w-4xl mx-auto"
         >
           <h1
             data-gsap="hero"
-            className={`w-full text-4xl sm:text-6xl lg:text-8xl font-bold leading-[1.15] tracking-tighter text-white ${isRTL ? 'text-right' : 'text-left'}`}
+            className="w-full text-4xl sm:text-6xl lg:text-8xl font-bold leading-[1.15] tracking-tighter text-white"
           >
             {t('hero.title')}
           </h1>
 
           <p
             data-gsap="hero"
-            className={`w-full text-sm sm:text-base lg:text-lg text-white/75 leading-relaxed max-w-xl ${isRTL ? 'ml-auto text-right' : 'mr-auto text-left'}`}
+            className="w-full text-sm sm:text-base lg:text-lg text-white/75 leading-relaxed max-w-2xl"
           >
             {t('hero.subtitle')}
           </p>
@@ -59,7 +59,7 @@ const Hero = () => {
           <a
             data-gsap="hero"
             href="/contact"
-            className={`pointer-events-auto inline-flex bg-white text-black px-6 py-3 text-[17px] font-medium transition-colors hover:bg-white/90 ${isRTL ? 'ml-auto' : 'mr-auto'}`}
+            className="pointer-events-auto inline-flex bg-white text-black px-6 py-3 text-[17px] font-medium transition-colors hover:bg-white/90"
           >
             {t('hero.cta.primary')}
           </a>

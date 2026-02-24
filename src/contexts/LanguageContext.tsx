@@ -15,9 +15,9 @@ const translations: Translations = {
   'nav.contact': { en: 'Contact', ar: 'تواصل معنا' },
 
   // Hero
-  'hero.title': { en: 'Driving Measurable Growth for Ambitious Brands in Saudi Arabia', ar: 'نقود النمو الرقمي للعلامات الطموحة في المملكة' },
-  'hero.subtitle': { en: 'Amwaj Alraeda builds performance-focused marketing systems that transform visibility into revenue and brand presence into long-term market leadership.', ar: 'تبني امواج الرائدة منظومات تسويق متكاملة قائمة على الأداء، تحوّل الظهور الرقمي إلى نتائج ملموسة، وتعزز حضور العلامات التجارية لتحقيق ريادة مستدامة في السوق السعودي.' },
-  'hero.cta.primary': { en: 'Request a Strategy Session', ar: 'اطلب استشارة استراتيجية' },
+  'hero.title': { en: 'Drive Growth', ar: 'قُد النمو' },
+  'hero.subtitle': { en: 'Strategy, media, and tracking built for real outcomes.', ar: 'استراتيجية، إعلام، وتتبع مبنية على نتائج حقيقية.' },
+  'hero.cta.primary': { en: 'Request Session', ar: 'اطلب جلسة' },
   'hero.cta.secondary': { en: 'Explore Our Services', ar: 'استكشف خدماتنا' },
   'hero.scroll': { en: 'Scroll to explore', ar: 'مرر للاستكشاف' },
 
