@@ -18,9 +18,9 @@ const Header = () => {
   ];
 
   const socialItems = [
-    { label: 'Instagram', link: 'https://instagram.com' },
-    { label: 'LinkedIn', link: 'https://linkedin.com' },
-    { label: 'Facebook', link: 'https://facebook.com' }
+    { label: 'Instagram', link: 'https://www.instagram.com/amwajraeda.ksa?igsh=MXBlaml1Y3oxcGFxaw==' },
+    { label: 'X', link: 'https://x.com/AmwajRaeda' },
+    { label: 'TikTok', link: 'https://www.tiktok.com/@amwaj.raeda.digit?_r=1&_t=ZS-944xDmnFVTu' }
   ];
 
   const handleMenuClose = () => {

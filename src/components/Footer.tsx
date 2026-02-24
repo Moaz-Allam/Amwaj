@@ -64,20 +64,15 @@ const Footer = () => {
             <span>2026 © Amwaj Al-Raeda. All rights reserved.</span>
 
             <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <a href="#" className="hover:text-primary transition-colors">
-                LinkedIn
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <span className="text-white/70">{t('footer.followUs')}</span>
+              <a href="https://www.instagram.com/amwajraeda.ksa?igsh=MXBlaml1Y3oxcGFxaw==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 Instagram
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                Terms and conditions
+              <a href="https://x.com/AmwajRaeda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                X
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                Privacy policy
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                Cookies Policy
+              <a href="https://www.tiktok.com/@amwaj.raeda.digit?_r=1&_t=ZS-944xDmnFVTu" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                TikTok
               </a>
             </div>
           </div>

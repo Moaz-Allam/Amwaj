@@ -4,19 +4,19 @@ import LogoLoop from './LogoLoop';
 
 const testimonials = [
   {
-    quote: { en: 'We think like a partner, not just a service provider. Every solution is tailored to your brand identity and business goals.', ar: 'نفكر كشريك حقيقي لا كمزود خدمة فقط. كل حل نصممه بما يتناسب مع هوية علامتك وأهداف عملك.' },
-    name: 'Strategic Partnership',
-    role: { en: 'Client-Centered Approach', ar: 'نهج يركز على العميل' },
+    quote: { en: 'Strategic market positioning and performance-driven campaigns that transform your brand\'s visibility into measurable market impact.', ar: 'تموضع استراتيجي قوي في السوق وحملات تسويقية قائمة على الأداء تحوّل ظهور علامتك إلى تأثير ملموس.' },
+    name: { en: 'Strategic Positioning', ar: 'التموضع الاستراتيجي' },
+    role: { en: 'Market Impact', ar: 'التأثير في السوق' },
   },
   {
-    quote: { en: 'Our workflow relies on continuous analysis, performance measurement, and optimization to ensure sustainable growth.', ar: 'يرتكز أسلوب عملنا على التحليل المستمر وقياس الأداء والتحسين لضمان نمو مستدام.' },
-    name: 'Performance Focus',
-    role: { en: 'Data-Driven Optimization', ar: 'تحسين قائم على البيانات' },
+    quote: { en: 'Data-backed decision making and brand systems built for expansion, ensuring every move is informed and scalable.', ar: 'قرارات مبنية على تحليل البيانات وبناء أنظمة علامة تجارية قابلة للنمو والتوسع.' },
+    name: { en: 'Data-Driven Growth', ar: 'نمو قائم على البيانات' },
+    role: { en: 'Scalable Systems', ar: 'أنظمة قابلة للتوسع' },
   },
   {
-    quote: { en: 'We focus on quality delivery and long-term impact, helping brands stand out and scale confidently in the Saudi market.', ar: 'نركز على جودة التنفيذ والأثر طويل المدى لمساعدة العلامات على التميز والتوسع بثقة في السوق السعودي.' },
-    name: 'Quality Execution',
-    role: { en: 'Long-Term Impact', ar: 'أثر طويل المدى' },
+    quote: { en: 'Continuous optimization and measurable ROI — we build structured marketing systems designed to generate consistent, trackable progress.', ar: 'تحسين مستمر ورفع العائد على الاستثمار — نبني أنظمة تسويقية منظمة تضمن تقدمًا مستمرًا يمكن قياسه.' },
+    name: { en: 'Continuous Optimization', ar: 'التحسين المستمر' },
+    role: { en: 'Measurable ROI', ar: 'عائد قابل للقياس' },
   },
 ];
 
@@ -53,10 +53,10 @@ const Testimonials = () => {
 
         <div className="grid md:grid-cols-3 gap-4 mb-12 sm:mb-16">
           {testimonials.map((item, i) => (
-            <div key={item.name} className="rounded-sm border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,22,0.72)_0%,rgba(5,8,14,0.92)_100%)] p-6 flex flex-col min-h-[240px]" data-gsap="reveal">
+            <div key={item.name[lang]} className="rounded-sm border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,22,0.72)_0%,rgba(5,8,14,0.92)_100%)] p-6 flex flex-col min-h-[240px]" data-gsap="reveal">
               <p className="text-white/86 text-[16px] leading-[1.5] flex-1 mb-8">{item.quote[lang]}</p>
               <div>
-                <p className="text-[16px] font-medium text-foreground">{item.name}</p>
+                <p className="text-[16px] font-medium text-foreground">{item.name[lang]}</p>
                 <p className="text-[13px] text-white/60 mt-1">{item.role[lang]}</p>
               </div>
             </div>

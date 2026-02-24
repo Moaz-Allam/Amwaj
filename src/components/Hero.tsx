@@ -61,7 +61,7 @@ const Hero = () => {
             href="/contact"
             className={`pointer-events-auto inline-flex bg-white text-black px-6 py-3 text-[17px] font-medium transition-colors hover:bg-white/90 ${isRTL ? 'ml-auto' : 'mr-auto'}`}
           >
-            {t('cta.button')}
+            {t('hero.cta.primary')}
           </a>
         </div>
       </div>

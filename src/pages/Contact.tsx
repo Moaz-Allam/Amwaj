@@ -27,12 +27,12 @@ const ContactPageContent = () => {
 
   const labels = useMemo(
     () => ({
-      title: lang === 'ar' ? 'لنصنع فصل النمو القادم لعلامتك.' : 'Let us build your next growth chapter.',
+      title: lang === 'ar' ? 'ابدأ رحلة نمو علامتك التجارية اليوم.' : 'Start Your Growth Journey with Amwaj Alraeda.',
       sectionTitle: lang === 'ar' ? 'شاركنا تفاصيلك' : 'Tell us more',
       sectionBody:
         lang === 'ar'
-          ? 'املأ النموذج وسيتواصل معك فريق أمواج الرائدة لمناقشة الأهداف، القنوات، وخطة التنفيذ المناسبة لنشاطك.'
-          : 'Share your goals and our team at Amwaj Al-Raeda will get back with a clear digital plan tailored to your business.',
+          ? 'املأ النموذج وسيتواصل معك فريق الاستراتيجية خلال 24 ساعة.'
+          : 'Fill in your details and our strategy team will contact you within 24 hours.',
       newProject: lang === 'ar' ? 'مشروع جديد' : 'New Project',
       other: lang === 'ar' ? 'أخرى' : 'Other',
       iNeed: lang === 'ar' ? 'أحتاج إلى:' : 'I need:',
@@ -185,82 +185,82 @@ const ContactPageContent = () => {
                 </div>
               </aside>
 
-            <form onSubmit={handleSubmit} className="max-w-[880px]">
-              <h2 className="text-[72px] md:text-[84px] tracking-[-0.03em] leading-none font-semibold">{labels.sectionTitle}</h2>
-              <p className="text-white/65 text-[20px] md:text-[24px] leading-[1.4] mt-6 max-w-[820px]">{labels.sectionBody}</p>
+              <form onSubmit={handleSubmit} className="max-w-[880px]">
+                <h2 className="text-[72px] md:text-[84px] tracking-[-0.03em] leading-none font-semibold">{labels.sectionTitle}</h2>
+                <p className="text-white/65 text-[20px] md:text-[24px] leading-[1.4] mt-6 max-w-[820px]">{labels.sectionBody}</p>
 
-              <input
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-                value={website}
-                onChange={(event) => setWebsite(event.target.value)}
-                className="hidden"
-                aria-hidden="true"
-              />
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(event) => setWebsite(event.target.value)}
+                  className="hidden"
+                  aria-hidden="true"
+                />
 
-              <div className="grid sm:grid-cols-2 gap-4 mt-10">
-                <div className="space-y-2">
-                  <label className="text-[16px] text-primary">{labels.fullName}</label>
-                  <input
-                    type="text"
-                    value={fullName}
-                    onChange={(event) => setFullName(event.target.value)}
-                    placeholder={labels.yourNamePlaceholder}
-                    required
-                    className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
-                  />
+                <div className="grid sm:grid-cols-2 gap-4 mt-10">
+                  <div className="space-y-2">
+                    <label className="text-[16px] text-primary">{labels.fullName}</label>
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(event) => setFullName(event.target.value)}
+                      placeholder={labels.yourNamePlaceholder}
+                      required
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[16px] text-primary">{labels.emailAddress}</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder={labels.yourEmailPlaceholder}
+                      required
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[16px] text-primary">{labels.phoneNumber}</label>
+                    <input
+                      type="tel"
+                      value={clientPhone}
+                      onChange={(event) => setClientPhone(event.target.value)}
+                      placeholder={labels.yourPhonePlaceholder}
+                      required
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                    />
+                  </div>
+
+                  <div className="space-y-2 sm:col-span-2 lg:col-span-1">
+                    <label className="text-[16px] text-primary">{labels.companyName}</label>
+                    <input
+                      type="text"
+                      value={company}
+                      onChange={(event) => setCompany(event.target.value)}
+                      placeholder={labels.yourCompanyPlaceholder}
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                    />
+                  </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-[16px] text-primary">{labels.emailAddress}</label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder={labels.yourEmailPlaceholder}
-                    required
-                    className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[16px] text-primary">{labels.phoneNumber}</label>
-                  <input
-                    type="tel"
-                    value={clientPhone}
-                    onChange={(event) => setClientPhone(event.target.value)}
-                    placeholder={labels.yourPhonePlaceholder}
-                    required
-                    className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div className="space-y-2 sm:col-span-2 lg:col-span-1">
-                  <label className="text-[16px] text-primary">{labels.companyName}</label>
-                  <input
-                    type="text"
-                    value={company}
-                    onChange={(event) => setCompany(event.target.value)}
-                    placeholder={labels.yourCompanyPlaceholder}
-                    className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-10 inline-flex border border-white/20 rounded-sm overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setProjectType('new')}
-                  className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'new' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
-                >
+                <div className="mt-10 inline-flex border border-white/20 rounded-sm overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setProjectType('new')}
+                    className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'new' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
+                  >
                     {labels.newProject}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setProjectType('other')}
-                  className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'other' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
-                >
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setProjectType('other')}
+                    className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'other' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
+                  >
                     {labels.other}
                   </button>
                 </div>
@@ -279,11 +279,11 @@ const ContactPageContent = () => {
                     {needOptionKeys.map((option) => {
                       const active = selectedNeeds.includes(option);
                       return (
-                      <button
-                        type="button"
-                        key={option}
-                        onClick={() => toggleNeed(option)}
-                        className={`px-5 py-3 border text-[20px] md:text-[24px] leading-none transition-colors ${active ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
+                        <button
+                          type="button"
+                          key={option}
+                          onClick={() => toggleNeed(option)}
+                          className={`px-5 py-3 border text-[20px] md:text-[24px] leading-none transition-colors ${active ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
                         >
                           {labels.needsOptions[option]}
                         </button>
@@ -295,18 +295,18 @@ const ContactPageContent = () => {
                 <div className="mt-10">
                   <p className="text-[30px] mb-4">{labels.budget}</p>
                   <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setBudget('yes')}
-                    className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'yes' ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
-                  >
+                    <button
+                      type="button"
+                      onClick={() => setBudget('yes')}
+                      className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'yes' ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
+                    >
                       {labels.yes}
                     </button>
-                  <button
-                    type="button"
-                    onClick={() => setBudget('no')}
-                    className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'no' ? 'border-primary text-white bg-primary/15' : 'border-white/55 text-white hover:border-primary/65'}`}
-                  >
+                    <button
+                      type="button"
+                      onClick={() => setBudget('no')}
+                      className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'no' ? 'border-primary text-white bg-primary/15' : 'border-white/55 text-white hover:border-primary/65'}`}
+                    >
                       {labels.no}
                     </button>
                   </div>
@@ -319,36 +319,36 @@ const ContactPageContent = () => {
                     value={projectDetails}
                     onChange={(event) => setProjectDetails(event.target.value)}
                     rows={3}
-                  placeholder={labels.projectPlaceholder}
-                  required
-                  className="w-full bg-transparent border-b border-primary/45 pb-3 text-[24px] placeholder:text-primary placeholder:opacity-80 focus:outline-none focus:border-primary resize-none"
-                />
-              </div>
+                    placeholder={labels.projectPlaceholder}
+                    required
+                    className="w-full bg-transparent border-b border-primary/45 pb-3 text-[24px] placeholder:text-primary placeholder:opacity-80 focus:outline-none focus:border-primary resize-none"
+                  />
+                </div>
 
-              <div className="mt-14 flex items-center justify-between gap-6">
-                <p className={`text-[16px] md:text-[18px] ${submitStatus === 'success' ? 'text-primary' : submitStatus === 'error' ? 'text-red-400' : 'text-white/75'}`}>
-                  {submitStatus === 'success'
-                    ? labels.submitSuccess
-                    : submitStatus === 'validation'
-                      ? labels.submitValidation
-                      : submitStatus === 'spam'
-                        ? labels.submitSpam
-                        : submitStatus === 'error'
-                          ? (!web3FormsAccessKey ? labels.setupRequired : labels.submitError)
-                          : labels.required}
-                </p>
-                <button
-                  type="submit"
-                  disabled={isSubmitting || !web3FormsAccessKey}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 text-[22px] font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? labels.sending : labels.next}
-                  <ChevronRight size={20} className={isRTL ? 'rotate-180' : ''} />
-                </button>
-              </div>
-            </form>
+                <div className="mt-14 flex items-center justify-between gap-6">
+                  <p className={`text-[16px] md:text-[18px] ${submitStatus === 'success' ? 'text-primary' : submitStatus === 'error' ? 'text-red-400' : 'text-white/75'}`}>
+                    {submitStatus === 'success'
+                      ? labels.submitSuccess
+                      : submitStatus === 'validation'
+                        ? labels.submitValidation
+                        : submitStatus === 'spam'
+                          ? labels.submitSpam
+                          : submitStatus === 'error'
+                            ? (!web3FormsAccessKey ? labels.setupRequired : labels.submitError)
+                            : labels.required}
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !web3FormsAccessKey}
+                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 text-[22px] font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? labels.sending : labels.next}
+                    <ChevronRight size={20} className={isRTL ? 'rotate-180' : ''} />
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
         </section>
 
         <section className="pt-4 pb-16">
