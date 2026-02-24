@@ -56,31 +56,30 @@ const About = () => {
 
     gsap.set(allWords, { opacity: 0.08 });
 
-    const titleTrigger = ScrollTrigger.create({
+    const pinTrigger = ScrollTrigger.create({
       trigger: sectionEl,
-      start: 'top 82%',
-      end: 'top 38%',
+      start: 'top top',
+      end: '+=140%',
       scrub: true,
-      onUpdate: (self) => revealWordsByProgress(titleWordEls, self.progress),
-    });
+      pin: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const titleProgress = gsap.utils.clamp(0, 1, self.progress / 0.45);
+        const descProgress = gsap.utils.clamp(0, 1, (self.progress - 0.3) / 0.7);
 
-    const descTrigger = ScrollTrigger.create({
-      trigger: sectionEl,
-      start: 'top 70%',
-      end: 'bottom 45%',
-      scrub: true,
-      onUpdate: (self) => revealWordsByProgress(descWordEls, self.progress),
+        revealWordsByProgress(titleWordEls, titleProgress);
+        revealWordsByProgress(descWordEls, descProgress);
+      },
     });
 
     return () => {
-      titleTrigger.kill();
-      descTrigger.kill();
+      pinTrigger.kill();
     };
   }, [lang, ref]);
 
   return (
-    <section id="about" ref={ref} className="bg-white text-black h-screen pt-20 sm:pt-24 pb-6 sm:pb-10 relative z-20 overflow-visible">
-      <div className="container-main relative z-20">
+    <section id="about" ref={ref} className="bg-white text-black h-screen relative z-20 overflow-visible flex items-center">
+      <div className="container-main w-full relative z-20">
         <div className="flex flex-col gap-8 sm:gap-12" data-gsap="reveal">
           <div>
             <span className="text-primary font-medium tracking-wide text-[16px]">
