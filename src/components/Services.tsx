@@ -33,10 +33,39 @@ const Services = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4 md:gap-5 lg:gap-6 relative max-w-[1160px] mx-auto" data-gsap="reveal">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
+                        <div className="relative w-[86vw] h-[86vw] min-w-[520px] min-h-[520px] max-w-[980px] max-h-[980px]">
+                            <div
+                                className="absolute inset-[8%] rounded-full blur-[74px] opacity-85 mix-blend-screen"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.74) 0%, hsl(var(--primary) / 0.22) 58%, transparent 86%)',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-[22%] rounded-full blur-[58px] opacity-96 mix-blend-screen"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.84) 0%, hsl(var(--primary) / 0.3) 58%, transparent 88%)',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-[18%] blur-[92px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-100 mix-blend-screen"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.88) 0%, hsl(var(--primary) / 0.34) 58%, transparent 86%)',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-[35%] blur-[62px] animate-[pulse_4.4s_ease-in-out_infinite] opacity-88 mix-blend-screen"
+                                style={{
+                                    background: 'radial-gradient(circle at center, hsl(194 100% 88% / 0.9) 0%, hsl(var(--primary) / 0.34) 58%, transparent 88%)',
+                                }}
+                            />
+                        </div>
+                    </div>
+
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="group relative overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-4 sm:px-6 py-5 sm:py-6 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
+                            className="group relative z-10 overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[276px] lg:h-[300px] px-4 sm:px-6 py-5 sm:py-6 flex flex-col justify-between bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
                         >
                             <div className={`absolute top-1/2 -translate-y-1/2 w-[58%] h-[70%] min-w-[184px] opacity-95 group-hover:scale-[1.03] transition-all duration-300 ${isRTL ? 'left-[-11%]' : 'right-[-11%]'}`}>
                                 <img

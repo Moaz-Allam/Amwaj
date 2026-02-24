@@ -11,7 +11,7 @@ const translations: Translations = {
   'nav.home': { en: 'Home', ar: 'الرئيسية' },
   'nav.about': { en: 'About Us', ar: 'من نحن' },
   'nav.services': { en: 'Services', ar: 'خدماتنا' },
-  'nav.projects': { en: 'Our Process', ar: 'آلية العمل' },
+  'nav.projects': { en: 'Our Projects', ar: 'مشاريعنا' },
   'nav.contact': { en: 'Contact', ar: 'تواصل معنا' },
 
   // Hero
@@ -42,12 +42,12 @@ const translations: Translations = {
   'service.4.desc': { en: 'Visibility without ranking is missed opportunity. We implement structured SEO strategies that improve search rankings and increase organic traffic.', ar: 'ظهور أقوى في نتائج البحث. نضع استراتيجية تحسين محركات بحث متكاملة لرفع ترتيب الموقع وزيادة الزيارات العضوية.' },
 
   // Projects / Our Process
-  'projects.label': { en: 'Our Process', ar: 'آلية العمل' },
-  'projects.title': { en: 'How we work', ar: 'كيف نعمل' },
-  'projects.desc': { en: 'A structured methodology that ensures clarity and continuous results.', ar: 'هذه المنهجية تضمن وضوح الرؤية واستمرارية النتائج.' },
+  'projects.label': { en: 'Our Projects', ar: 'مشاريعنا' },
+  'projects.title': { en: 'Selected case studies', ar: 'نماذج من أعمالنا' },
+  'projects.desc': { en: 'Real collaborations where strategy, creativity, and performance move together.', ar: 'تجارب حقيقية تتكامل فيها الاستراتيجية والإبداع والأداء لتحقيق نتائج ملموسة.' },
   'projects.cta.title': { en: 'Start your growth journey with Amwaj Alraeda', ar: 'ابدأ رحلة نمو علامتك التجارية اليوم' },
   'projects.cta.button': { en: 'Request a Strategy Session', ar: 'اطلب استشارة استراتيجية' },
-  'projects.link': { en: 'Learn more about our process', ar: 'اعرف المزيد عن آلية العمل' },
+  'projects.link': { en: 'See our case studies', ar: 'شاهد دراسات الحالة' },
 
   'projects.card.1.title': { en: 'Market Analysis', ar: 'تحليل وفهم السوق' },
   'projects.card.1.desc': { en: 'We begin with deep market research and competitive analysis to understand your position and opportunities.', ar: 'نبدأ بتحليل عميق للسوق والمنافسين لفهم موقعك والفرص المتاحة.' },
