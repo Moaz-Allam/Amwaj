@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <>
       {/* Main Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+      <header className="absolute top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
         <div className="container-main">
           <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
