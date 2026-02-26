@@ -141,6 +141,21 @@
     pointer-events: none;
     z-index: 1;
   }
+
+  .about-text-split {
+    --about-hole-radius: clamp(96px, 7.6vw, 124px);
+  }
+
+  @media (min-width: 1024px) {
+    .about-text-split {
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 0 calc(var(--about-hole-radius) - 2px), #000 calc(var(--about-hole-radius) + 10px));
+      mask-image: radial-gradient(circle at 50% 50%, transparent 0 calc(var(--about-hole-radius) - 2px), #000 calc(var(--about-hole-radius) + 10px));
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+  }
 }
 
 @layer utilities {

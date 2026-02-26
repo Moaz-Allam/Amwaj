@@ -29,17 +29,17 @@ const translations: Translations = {
 
   // Services
   'services.label': { en: 'Integrated Growth Services', ar: 'الخدمات' },
-  'services.title': { en: 'Strategic, creative, and technical solutions for every stage of growth.', ar: 'حلول نمو متكاملة' },
-  'services.desc': { en: 'Our services are not isolated tasks — they are interconnected systems built to strengthen brand positioning, enhance digital presence, and drive measurable business performance.', ar: 'نحن لا نقدم خدمات منفصلة، بل نصمم منظومة متكاملة تعمل بتناغم لتعزيز مكانة العلامة التجارية، وتحسين الأداء الرقمي، وتحقيق نتائج فعلية في السوق السعودي.' },
+  'services.title': { en: 'Simple services for growth.', ar: 'خدمات بسيطة للنمو.' },
+  'services.desc': { en: 'Brand, ads, web, and SEO in one team.', ar: 'هوية، إعلانات، موقع، وسيو في فريق واحد.' },
   'services.link': { en: 'View all services', ar: 'عرض جميع الخدمات' },
   'service.1.title': { en: 'Visual Identity Design', ar: 'تصميم الهوية البصرية' },
-  'service.1.desc': { en: 'A powerful brand begins with a strong visual foundation. We design visual identities that communicate clarity, professionalism, and market authority.', ar: 'هوية تصنع الانطباع الأول وتبني الثقة. نطوّر هويات بصرية متكاملة تعكس احترافية العلامة، وتمنحها حضورًا مميزًا وثابتًا عبر جميع القنوات.' },
+  'service.1.desc': { en: 'A clear visual identity that elevates your brand.', ar: 'هوية بصرية واضحة ترتقي بعلامتك التجارية.' },
   'service.2.title': { en: 'Social Media Management', ar: 'إدارة وسائل التواصل الاجتماعي' },
-  'service.2.desc': { en: 'Social media is not just about posting — it is about building influence, engagement, and brand trust.', ar: 'حضور رقمي منظم ومؤثر. نضع خطة محتوى واضحة، وندير الحسابات وفق استراتيجية مدروسة ترتكز على تحليل الجمهور وتحقيق أهداف العمل.' },
-  'service.3.title': { en: 'Website & E-Commerce', ar: 'المواقع والمتاجر الإلكترونية' },
-  'service.3.desc': { en: 'Your website is your digital headquarters. We design and manage professional websites and e-commerce stores built for performance and scalability.', ar: 'منصات رقمية تدعم النمو والمبيعات. نصمم ونطوّر مواقع احترافية ومتاجر إلكترونية تركز على تجربة المستخدم ورفع معدلات التحويل.' },
-  'service.4.title': { en: 'Search Engine Optimization', ar: 'تحسين محركات البحث' },
-  'service.4.desc': { en: 'Visibility without ranking is missed opportunity. We implement structured SEO strategies that improve search rankings and increase organic traffic.', ar: 'ظهور أقوى في نتائج البحث. نضع استراتيجية تحسين محركات بحث متكاملة لرفع ترتيب الموقع وزيادة الزيارات العضوية.' },
+  'service.2.desc': { en: 'Professional content, publishing, and audience growth.', ar: 'محتوى احترافي، نشر منتظم، ونمو للجمهور.' },
+  'service.3.title': { en: 'Website & E-commerce Development', ar: 'تطوير المواقع والمتاجر الإلكترونية' },
+  'service.3.desc': { en: 'Fast, modern platforms built for conversion and scale.', ar: 'منصات سريعة وحديثة مصممة للتحويل والتوسع.' },
+  'service.4.title': { en: 'Search Engine Optimization (SEO)', ar: 'تحسين محركات البحث (SEO)' },
+  'service.4.desc': { en: 'Better rankings, stronger visibility, and qualified traffic.', ar: 'ترتيب أعلى، ظهور أقوى، وزيارات مؤهلة.' },
 
   // Projects / Our Process
   'projects.label': { en: 'Our Projects', ar: 'مشاريعنا' },
