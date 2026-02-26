@@ -7,6 +7,7 @@ import serviceOneImage from '@/assets/service-one.png';
 import serviceTwoImage from '@/assets/service-two.png';
 import serviceThreeImage from '@/assets/service-three.png';
 import serviceFourImage from '@/assets/service-four.png';
+import PerlinBlob from '@/components/PerlinBlob';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,8 +54,6 @@ const revealCardsByProgress = (cards: HTMLElement[], progress: number) => {
 
     gsap.set(card, {
       opacity: localProgress,
-      y: 72 * (1 - localProgress),
-      scale: 0.94 + localProgress * 0.06,
     });
   });
 };
@@ -68,8 +67,6 @@ const About = () => {
   const servicesContentRef = useRef<HTMLDivElement>(null);
   const servicesCardsRef = useRef<HTMLDivElement>(null);
   const ballRef = useRef<HTMLDivElement>(null);
-  const ballGlowRef = useRef<HTMLDivElement>(null);
-  const servicesGlowRef = useRef<HTMLDivElement>(null);
 
   const aboutTitle = t('about.title');
   const aboutDesc = t('about.desc');
@@ -87,10 +84,8 @@ const About = () => {
     const servicesContentEl = servicesContentRef.current;
     const servicesCardsEl = servicesCardsRef.current;
     const ballEl = ballRef.current;
-    const ballGlowEl = ballGlowRef.current;
-    const servicesGlowEl = servicesGlowRef.current;
 
-    if (!sectionEl || !titleEl || !descEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl || !ballEl || !ballGlowEl || !servicesGlowEl) return;
+    if (!sectionEl || !titleEl || !descEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl || !ballEl) return;
 
     const titleWordEls = Array.from(titleEl.querySelectorAll<HTMLElement>('[data-about-word="title"]'));
     const descWordEls = Array.from(descEl.querySelectorAll<HTMLElement>('[data-about-word="desc"]'));
@@ -103,11 +98,9 @@ const About = () => {
     gsap.set(aboutContentEl, { opacity: 1, pointerEvents: 'auto' });
     gsap.set(sectionEl, { backgroundColor: '#ffffff' });
     gsap.set(ballEl, { scale: 0.08, y: 0, transformOrigin: '50% 50%' });
-    gsap.set(ballGlowEl, { opacity: 0, scale: 0.72, transformOrigin: '50% 50%' });
-    gsap.set(servicesGlowEl, { opacity: 0, scale: 0.68, transformOrigin: '50% 50%' });
 
     gsap.set(servicesContentEl, { opacity: 0, pointerEvents: 'none' });
-    gsap.set(serviceCardEls, { opacity: 0, y: 72, scale: 0.94, transformOrigin: '50% 50%' });
+    gsap.set(serviceCardEls, { opacity: 0 });
 
     let ballTargetY = 0;
     const updateBallTargetY = () => {
@@ -135,13 +128,11 @@ const About = () => {
         const descProgress = gsap.utils.clamp(0, 1, (aboutRevealProgress - 0.2) / 0.8);
         const aboutFadeProgress = gsap.utils.clamp(0, 1, (progress - 0.36) / 0.12);
         const backgroundProgress = gsap.utils.clamp(0, 1, (progress - 0.34) / 0.18);
-        const glowProgress = gsap.utils.clamp(0, 1, (progress - 0.46) / 0.18);
         const ballAlignProgress = gsap.utils.clamp(0, 1, (progress - 0.6) / 0.22);
 
         const servicesVisibility = progress >= 0.58 ? 1 : 0;
         const servicesProgress = gsap.utils.clamp(0, 1, (progress - 0.66) / 0.34);
         const servicesCardsProgress = gsap.utils.clamp(0, 1, (servicesProgress - 0.34) / 0.56);
-        const servicesLightProgress = gsap.utils.clamp(0, 1, (progress - 0.56) / 0.2);
 
         const colorChannel = Math.round((1 - backgroundProgress) * 255);
         const ballScale = 0.08 + 0.92 * aboutRevealProgress;
@@ -157,14 +148,6 @@ const About = () => {
         gsap.set(ballEl, {
           scale: ballScale,
           y: ballTargetY * ballAlignProgress,
-        });
-        gsap.set(ballGlowEl, {
-          opacity: 0.4 + 0.6 * glowProgress,
-          scale: 0.72 + 0.28 * glowProgress,
-        });
-        gsap.set(servicesGlowEl, {
-          opacity: servicesLightProgress,
-          scale: 0.68 + 0.34 * servicesLightProgress,
         });
 
         gsap.set(servicesContentEl, {
@@ -183,8 +166,6 @@ const About = () => {
       gsap.set(aboutContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(sectionEl, { clearProps: 'backgroundColor' });
       gsap.set(ballEl, { clearProps: 'transform' });
-      gsap.set(ballGlowEl, { clearProps: 'opacity,transform' });
-      gsap.set(servicesGlowEl, { clearProps: 'opacity,transform' });
       gsap.set(servicesContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(serviceCardEls, { clearProps: 'opacity,transform' });
     };
@@ -193,30 +174,8 @@ const About = () => {
   return (
     <section id="about" ref={sectionRef} className="bg-white text-black h-screen relative z-20 overflow-hidden flex items-center">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-        <div ref={ballRef} className="relative h-[clamp(84px,14vw,250px)] w-[clamp(84px,14vw,250px)] will-change-transform">
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background:
-                'radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.98) 0%, hsl(var(--primary) / 0.82) 36%, hsl(var(--secondary) / 0.82) 70%, hsl(var(--secondary) / 0.56) 100%)',
-            }}
-          />
-          <div
-            ref={ballGlowRef}
-            className="absolute -inset-[18%] rounded-full opacity-0 blur-[52px] will-change-[opacity,transform]"
-            style={{
-              background:
-                'radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.98) 16%, hsl(var(--primary) / 0.9) 30%, hsl(var(--secondary) / 0.56) 52%, transparent 72%)',
-            }}
-          />
-          <div
-            ref={servicesGlowRef}
-            className="absolute -inset-[36%] rounded-full opacity-0 blur-[84px] mix-blend-screen will-change-[opacity,transform]"
-            style={{
-              background:
-                'radial-gradient(circle at center, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / 0.98) 18%, hsl(var(--primary) / 0.92) 34%, hsl(var(--secondary) / 0.62) 50%, transparent 72%)',
-            }}
-          />
+        <div ref={ballRef} className="relative h-[clamp(130px,19vw,320px)] w-[clamp(130px,19vw,320px)] will-change-transform">
+          <PerlinBlob className="h-full w-full" />
         </div>
       </div>
 

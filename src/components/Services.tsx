@@ -41,7 +41,7 @@ const Services = () => {
 
     gsap.set(headingEl, { opacity: 0, y: 30 });
     gsap.set(linkEl, { opacity: 0, y: 26 });
-    gsap.set(cardEls, { opacity: 0, y: 72, scale: 0.94 });
+    gsap.set(cardEls, { opacity: 0 });
     gsap.set(glowEl, { opacity: 0.74, scale: 0.9, transformOrigin: '50% 50%' });
 
     const mm = gsap.matchMedia();
@@ -62,7 +62,7 @@ const Services = () => {
       tl.to(glowEl, { opacity: 1, scale: 1, duration: 0.9, ease: 'none' }, 0.02);
 
       cardEls.forEach((cardEl, index) => {
-        tl.to(cardEl, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'none' }, 0.3 + index * 0.2);
+        tl.to(cardEl, { opacity: 1, duration: 0.3, ease: 'none' }, 0.3 + index * 0.2);
       });
 
       tl.to(linkEl, { opacity: 1, y: 0, duration: 0.24, ease: 'none' }, 1.2);
@@ -85,7 +85,7 @@ const Services = () => {
 
       tl.to(headingEl, { opacity: 1, y: 0, duration: 0.35, ease: 'none' }, 0);
       tl.to(glowEl, { opacity: 1, scale: 1, duration: 0.55, ease: 'none' }, 0.02);
-      tl.to(cardEls, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.2, ease: 'none' }, 0.16);
+      tl.to(cardEls, { opacity: 1, duration: 0.7, stagger: 0.2, ease: 'none' }, 0.16);
       tl.to(linkEl, { opacity: 1, y: 0, duration: 0.25, ease: 'none' }, 0.94);
 
       return () => {

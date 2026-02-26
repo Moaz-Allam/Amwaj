@@ -1,0 +1,38 @@
+.image-trail-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.image-trail-img {
+  width: 190px;
+  aspect-ratio: 1.08;
+  border-radius: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  will-change: transform, filter, opacity;
+  border: 1px solid hsl(var(--card-border-hover));
+  box-shadow: 0 14px 38px rgb(0 0 0 / 0.38);
+}
+
+.image-trail-img-inner {
+  background-position: 50% 50%;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  background-size: cover;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+@media (max-width: 640px) {
+  .image-trail-img {
+    width: 138px;
+    border-radius: 12px;
+  }
+}

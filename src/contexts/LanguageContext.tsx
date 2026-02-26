@@ -79,9 +79,9 @@ const translations: Translations = {
   'projects.card.5.tag.3': { en: 'ROI', ar: 'عائد الاستثمار' },
 
   // Testimonials / What We Deliver
-  'testimonials.label': { en: 'What We Actually Deliver', ar: 'ماذا نقدم فعليًا' },
-  'testimonials.title': { en: 'Growth without structure fades.', ar: 'النمو بدون هيكلة يختفي بسرعة.' },
-  'testimonials.subtitle': { en: 'We build structured marketing systems designed to generate consistent, trackable progress.', ar: 'نحن نبني أنظمة تسويقية منظمة تضمن تقدمًا مستمرًا يمكن قياسه وتتبع نتائجه.' },
+  'testimonials.label': { en: 'What We Deliver', ar: 'ما الذي نقدمه' },
+  'testimonials.title': { en: 'End-to-end digital growth services.', ar: 'خدمات نمو رقمية متكاملة.' },
+  'testimonials.subtitle': { en: 'Simple, focused execution across brand, content, media, and performance.', ar: 'تنفيذ واضح ومركز عبر الهوية، المحتوى، الإعلام، والأداء.' },
 
   // FAQ
   'faq.label': { en: 'FAQ', ar: 'الأسئلة الشائعة' },
