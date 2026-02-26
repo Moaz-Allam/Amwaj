@@ -67,6 +67,7 @@ const About = () => {
   const servicesContentRef = useRef<HTMLDivElement>(null);
   const servicesCardsRef = useRef<HTMLDivElement>(null);
   const ballRef = useRef<HTMLDivElement>(null);
+  const servicesGlowRef = useRef<HTMLDivElement>(null);
 
   const aboutTitle = t('about.title');
   const aboutDesc = t('about.desc');
@@ -84,8 +85,9 @@ const About = () => {
     const servicesContentEl = servicesContentRef.current;
     const servicesCardsEl = servicesCardsRef.current;
     const ballEl = ballRef.current;
+    const servicesGlowEl = servicesGlowRef.current;
 
-    if (!sectionEl || !titleEl || !descEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl || !ballEl) return;
+    if (!sectionEl || !titleEl || !descEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl || !ballEl || !servicesGlowEl) return;
 
     const titleWordEls = Array.from(titleEl.querySelectorAll<HTMLElement>('[data-about-word="title"]'));
     const descWordEls = Array.from(descEl.querySelectorAll<HTMLElement>('[data-about-word="desc"]'));
@@ -98,6 +100,7 @@ const About = () => {
     gsap.set(aboutContentEl, { opacity: 1, pointerEvents: 'auto' });
     gsap.set(sectionEl, { backgroundColor: '#ffffff' });
     gsap.set(ballEl, { scale: 0.08, y: 0, transformOrigin: '50% 50%' });
+    gsap.set(servicesGlowEl, { opacity: 0, scale: 0.68, transformOrigin: '50% 50%' });
 
     gsap.set(servicesContentEl, { opacity: 0, pointerEvents: 'none' });
     gsap.set(serviceCardEls, { opacity: 0 });
@@ -133,6 +136,7 @@ const About = () => {
         const servicesVisibility = progress >= 0.58 ? 1 : 0;
         const servicesProgress = gsap.utils.clamp(0, 1, (progress - 0.66) / 0.34);
         const servicesCardsProgress = gsap.utils.clamp(0, 1, (servicesProgress - 0.34) / 0.56);
+        const servicesLightProgress = gsap.utils.clamp(0, 1, (progress - 0.56) / 0.2);
 
         const colorChannel = Math.round((1 - backgroundProgress) * 255);
         const ballScale = 0.08 + 0.92 * aboutRevealProgress;
@@ -148,6 +152,10 @@ const About = () => {
         gsap.set(ballEl, {
           scale: ballScale,
           y: ballTargetY * ballAlignProgress,
+        });
+        gsap.set(servicesGlowEl, {
+          opacity: servicesLightProgress,
+          scale: 0.68 + 0.34 * servicesLightProgress,
         });
 
         gsap.set(servicesContentEl, {
@@ -166,6 +174,7 @@ const About = () => {
       gsap.set(aboutContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(sectionEl, { clearProps: 'backgroundColor' });
       gsap.set(ballEl, { clearProps: 'transform' });
+      gsap.set(servicesGlowEl, { clearProps: 'opacity,transform' });
       gsap.set(servicesContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(serviceCardEls, { clearProps: 'opacity,transform' });
     };
@@ -175,6 +184,14 @@ const About = () => {
     <section id="about" ref={sectionRef} className="bg-white text-black h-screen relative z-20 overflow-hidden flex items-center">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
         <div ref={ballRef} className="relative h-[clamp(130px,19vw,320px)] w-[clamp(130px,19vw,320px)] will-change-transform">
+          <div
+            ref={servicesGlowRef}
+            className="absolute -inset-[44%] rounded-full opacity-0 blur-[92px] mix-blend-screen will-change-[opacity,transform]"
+            style={{
+              background:
+                'radial-gradient(circle at center, rgb(255 255 255 / 0.95) 0%, hsl(var(--primary) / 0.82) 34%, hsl(var(--secondary) / 0.5) 54%, transparent 72%)',
+            }}
+          />
           <PerlinBlob className="h-full w-full" />
         </div>
       </div>

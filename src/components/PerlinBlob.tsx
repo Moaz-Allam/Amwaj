@@ -1,9 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 const vertexShader = `
 uniform float u_time;
@@ -128,7 +124,7 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       return;
     }
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0x000000, 0);
@@ -151,29 +147,63 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       vertexShader,
       fragmentShader,
       wireframe: true,
-      transparent: true,
     });
 
-    const geometry = new THREE.IcosahedronGeometry(4, 5);
+    const geometry = new THREE.IcosahedronGeometry(4, 6);
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
-
-    const renderPass = new RenderPass(scene, camera);
-    const bloomPass = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.5, 0.8, 0.45);
-    bloomPass.threshold = 0.5;
-    bloomPass.strength = 0.55;
-    bloomPass.radius = 0.8;
-
-    const composer = new EffectComposer(renderer);
-    composer.addPass(renderPass);
-    composer.addPass(bloomPass);
-    composer.addPass(new OutputPass());
 
     const canvas = renderer.domElement;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
     container.appendChild(canvas);
+
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+    const sound = new THREE.Audio(listener);
+    const analyser = new THREE.AudioAnalyser(sound, 32);
+    const loader = new THREE.AudioLoader();
+
+    let isAudioBufferReady = false;
+    let shouldPlayAudio = false;
+
+    const tryPlay = async () => {
+      shouldPlayAudio = true;
+      if (!isAudioBufferReady) {
+        return;
+      }
+
+      if (listener.context.state === 'suspended') {
+        await listener.context.resume();
+      }
+
+      if (!sound.isPlaying) {
+        sound.play();
+      }
+    };
+
+    const onUserGesture = () => {
+      void tryPlay();
+    };
+
+    loader.load(
+      '/track.wav',
+      (buffer) => {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(0.9);
+        isAudioBufferReady = true;
+
+        if (shouldPlayAudio || (navigator as any).userActivation?.hasBeenActive) {
+          void tryPlay();
+        }
+      },
+      undefined,
+      () => {
+        console.warn('track.wav was not found. Add /public/track.wav for blob audio.');
+      },
+    );
 
     let mouseX = 0;
     let mouseY = 0;
@@ -182,11 +212,9 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       const rect = container.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      mouseX = (event.clientX - centerX) / 120;
-      mouseY = (event.clientY - centerY) / 120;
+      mouseX = (event.clientX - centerX) / 100;
+      mouseY = (event.clientY - centerY) / 100;
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
 
     const resize = () => {
       const rect = container.getBoundingClientRect();
@@ -195,31 +223,36 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
 
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-
       renderer.setSize(width, height, false);
-      composer.setSize(width, height);
     };
 
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
     resize();
 
-    const resizeObserver = new ResizeObserver(() => resize());
-    resizeObserver.observe(container);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('pointerdown', onUserGesture);
+    window.addEventListener('touchstart', onUserGesture, { passive: true });
+    window.addEventListener('keydown', onUserGesture);
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
     let frameId = 0;
 
-    const animate = () => {
+    const animate = (timestamp?: number) => {
       frameId = window.requestAnimationFrame(animate);
+      timer.update(timestamp);
 
       camera.position.x += (mouseX - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY - camera.position.y) * 0.2;
+      camera.position.y += (-mouseY - camera.position.y) * 0.5;
       camera.lookAt(scene.position);
 
-      const elapsed = clock.getElapsedTime();
-      uniforms.u_time.value = elapsed;
-      uniforms.u_frequency.value = 10 + Math.sin(elapsed * 2.1) * 8;
+      uniforms.u_time.value = timer.getElapsed();
+      const averageFrequency = sound.isPlaying ? analyser.getAverageFrequency() : 0;
+      const clampedFrequency = THREE.MathUtils.clamp(averageFrequency, 0, 85);
+      uniforms.u_frequency.value = THREE.MathUtils.lerp(uniforms.u_frequency.value, clampedFrequency, 0.18);
 
-      composer.render();
+      renderer.render(scene, camera);
     };
 
     animate();
@@ -227,11 +260,20 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
     return () => {
       window.cancelAnimationFrame(frameId);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('pointerdown', onUserGesture);
+      window.removeEventListener('touchstart', onUserGesture);
+      window.removeEventListener('keydown', onUserGesture);
       resizeObserver.disconnect();
 
+      if (sound.isPlaying) {
+        sound.stop();
+      }
+
+      timer.dispose();
+
+      camera.remove(listener);
       geometry.dispose();
       material.dispose();
-      composer.dispose();
       renderer.dispose();
 
       if (canvas.parentElement === container) {
