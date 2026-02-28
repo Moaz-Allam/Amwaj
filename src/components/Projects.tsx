@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -105,10 +105,31 @@ const cardsData: ProjectCard[] = [
 const Projects = () => {
   const { t, lang, isRTL } = useLanguage();
   const stickyRef = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia('(min-width: 1024px)').matches;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches);
+    };
+
+    setIsDesktop(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
 
   useEffect(() => {
     const stickyEl = stickyRef.current;
-    if (!stickyEl) return;
+    if (!stickyEl || !isDesktop) return;
 
     const cards = Array.from(stickyEl.querySelectorAll<HTMLElement>('[data-project-card]'));
     if (!cards.length) return;
@@ -129,7 +150,7 @@ const Projects = () => {
     const trigger = ScrollTrigger.create({
       trigger: stickyEl,
       start: 'top top',
-      end: () => `+=${window.innerHeight * 8}px`,
+      end: () => `+=${window.innerHeight * 5.4}px`,
       pin: true,
       pinSpacing: true,
       scrub: 1,
@@ -165,63 +186,68 @@ const Projects = () => {
     return () => {
       trigger.kill();
     };
-  }, [lang]);
+  }, [isDesktop, lang]);
 
   return (
-    <section id="projects" className="relative z-20 bg-black pt-14 sm:pt-20 pb-20 sm:pb-24">
+    <section id="projects" className="relative z-20 bg-transparent pt-14 sm:pt-20 pb-4 sm:pb-8">
       <div className="container-main mb-10 sm:mb-14">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 sm:gap-6">
           <div>
             <span className="text-primary font-medium tracking-wide text-[16px]">{t('projects.label')}</span>
-            <h2 className="mt-4 text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground">
+            <h2 className="mt-4 text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground">
               {t('projects.title')}
             </h2>
           </div>
 
-          <p className={`text-white/78 text-[16px] leading-[1.45] max-w-[470px] ${isRTL ? 'md:text-left' : 'md:text-right'}`}>
+          <p className={`text-white/78 text-[15px] sm:text-[16px] leading-[1.45] max-w-[470px] ${isRTL ? 'md:text-left' : 'md:text-right'}`}>
             {t('projects.desc')}
           </p>
         </div>
       </div>
 
       <div className="container-main">
-        <section ref={stickyRef} className="relative w-full h-[100svh] overflow-hidden bg-black [perspective:850px]">
+        <section
+          ref={stickyRef}
+          className={isDesktop ? 'relative w-full h-[100svh] overflow-hidden bg-black [perspective:850px]' : 'relative w-full flex flex-col gap-4 bg-black'}
+        >
           {cardsData.map((card, index) => (
             <article
               key={card.id}
               id={card.id}
               data-project-card
-              className="absolute top-1/2 left-1/2 w-full h-[88%] rounded-2xl border border-white/15 text-white [transform-origin:center_bottom] will-change-transform overflow-hidden"
-              style={{ backgroundColor: card.color, zIndex: cardsData.length + 1 - index }}
+              className={`rounded-2xl border border-white/15 text-white [transform-origin:center_bottom] overflow-hidden ${
+                isDesktop ? 'absolute top-1/2 left-1/2 w-full h-[88%] will-change-transform' : 'relative w-full min-h-[500px]'
+              }`}
+              style={{ backgroundColor: card.color, zIndex: isDesktop ? cardsData.length + 1 - index : undefined }}
             >
               <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 lg:px-10 pt-4 sm:pt-6 pb-4 sm:pb-6">
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 items-start">
                   <div className="max-w-[980px]">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 rounded-xl bg-white text-black px-3 sm:px-4 py-2 text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.08em] hover:bg-white/90 transition-colors"
+                      className="inline-flex items-center gap-2 rounded-xl bg-white text-black px-3 sm:px-4 py-2 text-[12px] sm:text-[13px] font-medium tracking-[0.03em] hover:bg-white/90 transition-colors"
                     >
                       {t('projects.link')}
                       <span className={isRTL ? 'rotate-180' : ''}>{'->'}</span>
                     </a>
 
-                    <h3 className="mt-4 text-white text-[clamp(2.1rem,6vw,5.7rem)] font-semibold leading-[0.93] tracking-[-0.025em]">
+                    <h3 className="mt-4 text-white text-[32px] sm:text-[46px] lg:text-[82px] font-semibold leading-[0.93] tracking-[-0.025em]">
                       {t(card.titleKey)}
                     </h3>
 
-                    <p className="mt-4 max-w-[940px] text-white/76 text-[16px] sm:text-[20px] lg:text-[32px] leading-[1.2]">
+                    <p className="mt-4 max-w-[940px] text-white/76 text-[15px] sm:text-[20px] lg:text-[30px] leading-[1.25] sm:leading-[1.2]">
                       {t(card.descKey)}
                     </p>
                   </div>
 
-                  <span className="text-white/45 text-[30px] sm:text-[48px] lg:text-[54px] leading-none tracking-tight font-medium">
+                  <span className="text-white/45 text-[24px] sm:text-[48px] lg:text-[54px] leading-none tracking-tight font-medium">
                     ({card.index})
                   </span>
                 </div>
 
-                <div className="mt-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)] gap-6 lg:gap-8 items-end">
+                <div className="mt-6 sm:mt-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)] gap-5 lg:gap-8 items-end">
                   <div className="max-w-[450px]">
-                    <p className="text-white text-[20px] sm:text-[28px] leading-[1.1] font-semibold tracking-[-0.01em]">
+                    <p className="text-white text-[16px] sm:text-[28px] leading-[1.15] sm:leading-[1.1] font-semibold tracking-[-0.01em] line-clamp-4 sm:line-clamp-none">
                       {card.quote[lang]}
                     </p>
 
@@ -231,15 +257,18 @@ const Projects = () => {
                       </div>
 
                       <div>
-                        <p className="text-white text-[17px] sm:text-[20px] font-semibold leading-none">{card.person[lang]}</p>
+                        <p className="text-white text-[16px] sm:text-[20px] font-semibold leading-none">{card.person[lang]}</p>
                         <p className="text-white/70 text-[12px] sm:text-[14px] mt-1">{card.role[lang]}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4">
                     {card.gallery.map((image, imageIndex) => (
-                      <div key={`${card.id}-gallery-${imageIndex}`} className="relative h-[120px] sm:h-[170px] rounded-2xl overflow-hidden border border-white/20 bg-black/20">
+                      <div
+                        key={`${card.id}-gallery-${imageIndex}`}
+                        className={`${imageIndex > 0 ? 'hidden sm:block ' : ''}relative h-[180px] sm:h-[170px] rounded-2xl overflow-hidden border border-white/20 bg-black/20`}
+                      >
                         <img src={image} alt={t(card.tagKey)} className="w-full h-full object-cover" loading="lazy" />
                       </div>
                     ))}

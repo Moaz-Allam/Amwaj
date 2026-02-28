@@ -143,12 +143,12 @@ const Testimonials = () => {
   });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-transparent py-20 sm:py-24">
+    <section ref={ref} className="relative overflow-hidden bg-transparent pt-2 sm:pt-6 pb-16 sm:pb-24">
       <div className="container-main relative z-10">
         <div className="text-center mb-12 sm:mb-14" data-gsap="reveal">
           <span className="text-primary font-medium tracking-wide text-[16px]">{t('testimonials.label')}</span>
-          <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('testimonials.title')}</h2>
-          <p className="text-white/78 text-[16px] leading-[1.45] mt-3">{t('testimonials.subtitle')}</p>
+          <h2 className="text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('testimonials.title')}</h2>
+          <p className="text-white/78 text-[15px] sm:text-[16px] leading-[1.45] mt-3">{t('testimonials.subtitle')}</p>
         </div>
 
         <div className="mb-12 sm:mb-16" data-gsap="reveal">

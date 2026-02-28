@@ -47,7 +47,7 @@ const translations: Translations = {
   'projects.desc': { en: 'Real collaborations where strategy, creativity, and performance move together.', ar: 'تجارب حقيقية تتكامل فيها الاستراتيجية والإبداع والأداء لتحقيق نتائج ملموسة.' },
   'projects.cta.title': { en: 'Start your growth journey with Amwaj Alraeda', ar: 'ابدأ رحلة نمو علامتك التجارية اليوم' },
   'projects.cta.button': { en: 'Request a Strategy Session', ar: 'اطلب استشارة استراتيجية' },
-  'projects.link': { en: 'See our case studies', ar: 'شاهد دراسات الحالة' },
+  'projects.link': { en: 'See case study', ar: 'شاهد دراسة الحالة' },
 
   'projects.card.1.title': { en: 'Market Analysis', ar: 'تحليل وفهم السوق' },
   'projects.card.1.desc': { en: 'We begin with deep market research and competitive analysis to understand your position and opportunities.', ar: 'نبدأ بتحليل عميق للسوق والمنافسين لفهم موقعك والفرص المتاحة.' },

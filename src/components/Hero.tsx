@@ -100,7 +100,9 @@ const Hero = () => {
     const canvasEl = transitionCanvasRef.current;
     const aboutEl = document.querySelector<HTMLElement>('#about');
 
-    if (!heroEl || !canvasEl || !aboutEl) return;
+    if (!heroEl || !canvasEl) return;
+
+    const heroTransitionTargets = Array.from(heroEl.querySelectorAll<HTMLElement>('[data-hero-layer="content"]'));
 
     const renderer = new Renderer({
       canvas: canvasEl,
@@ -150,11 +152,20 @@ const Hero = () => {
     const trigger = ScrollTrigger.create({
       trigger: heroEl,
       start: 'top top',
-      endTrigger: aboutEl,
-      end: 'top top',
+      endTrigger: aboutEl ?? undefined,
+      end: aboutEl ? 'top top' : 'bottom top',
       scrub: true,
       onUpdate: (self) => {
-        const normalized = gsap.utils.clamp(0, 1, (self.progress - 0.08) / 0.92);
+        const normalized = gsap.utils.clamp(0, 1, (self.progress - 0.04) / 0.96);
+        const heroFade = gsap.utils.clamp(0, 1, normalized * 1.08);
+
+        if (heroTransitionTargets.length) {
+          gsap.set(heroTransitionTargets, {
+            opacity: 1 - heroFade,
+            y: normalized * 48,
+          });
+        }
+
         uniforms.uProgress.value = normalized * 1.1;
         render();
       },
@@ -163,6 +174,11 @@ const Hero = () => {
     return () => {
       trigger.kill();
       observer.disconnect();
+      if (heroTransitionTargets.length) {
+        gsap.set(heroTransitionTargets, {
+          clearProps: 'opacity,transform',
+        });
+      }
       canvasEl.width = 0;
       canvasEl.height = 0;
     };
@@ -189,10 +205,10 @@ const Hero = () => {
       <canvas
         ref={transitionCanvasRef}
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full pointer-events-none z-20"
+        className="absolute inset-0 h-full w-full pointer-events-none z-[70]"
       />
 
-      <div className="container-main relative z-40 pt-20 h-screen flex flex-col justify-center pointer-events-none">
+      <div data-hero-layer="content" className="container-main relative z-30 pt-20 h-screen flex flex-col justify-center pointer-events-none">
         <div
           dir={isRTL ? 'rtl' : 'ltr'}
           className="flex flex-col items-center text-center gap-5 w-full max-w-4xl mx-auto"
@@ -221,7 +237,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div data-gsap="hero" className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-30">
+      <div data-gsap="hero" data-hero-layer="content" className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-30">
         <span className="text-xs tracking-widest uppercase">{t('hero.scroll')}</span>
         <ChevronDown size={16} className="animate-bounce" />
       </div>

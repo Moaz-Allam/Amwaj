@@ -20,13 +20,13 @@ const FAQSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative bg-transparent py-20 sm:py-24">
+    <section ref={ref} className="relative bg-transparent py-16 sm:py-24">
       <div className="container-main">
         <div className="grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
           <div data-gsap="reveal">
             <span className="text-primary font-medium tracking-wide text-[16px]">{t('faq.label')}</span>
-            <h2 className="text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('faq.title')}</h2>
-            <p className="text-[16px] text-white/78 leading-[1.45] mt-3">{t('faq.desc')}</p>
+            <h2 className="text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('faq.title')}</h2>
+            <p className="text-[15px] sm:text-[16px] text-white/78 leading-[1.45] mt-3">{t('faq.desc')}</p>
           </div>
 
           <div className="space-y-2">
@@ -39,12 +39,12 @@ const FAQSection = () => {
                   className={`border-b border-white/20 transition-colors duration-200 ${isOpen ? 'border-primary/60' : 'hover:border-white/35'}`}
                 >
                   <button onClick={() => setOpenIndex(isOpen ? null : i)} className="w-full flex items-center justify-between py-4 text-left gap-5">
-                    <span className="text-[16px] font-normal text-foreground pr-4">{faq.q}</span>
+                    <span className="text-[15px] sm:text-[16px] font-normal text-foreground pr-4">{faq.q}</span>
                     {isOpen ? <Minus size={16} className="text-primary shrink-0" /> : <Plus size={16} className="text-white/60 shrink-0" />}
                   </button>
                   {isOpen && (
                     <div className="pb-4 animate-fade-in">
-                      <p className="text-white/75 text-[16px] leading-[1.5]">{faq.a}</p>
+                      <p className="text-white/75 text-[15px] sm:text-[16px] leading-[1.5]">{faq.a}</p>
                     </div>
                   )}
                 </div>

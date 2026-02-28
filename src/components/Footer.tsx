@@ -14,16 +14,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer ref={ref} className="relative bg-black border-t border-white/10 pt-14 sm:pt-16 pb-8 sm:pb-10 overflow-x-clip">
+    <footer ref={ref} className="relative bg-black border-t border-white/10 pt-12 sm:pt-16 pb-8 sm:pb-10 overflow-x-clip">
       <div className="container-main">
         <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-10 sm:gap-12 mb-10 sm:mb-12">
           <div data-gsap="reveal" className="max-w-[560px]">
-            <p className="text-foreground text-[36px] leading-[1.02] font-semibold tracking-[-0.02em] max-w-[560px]">
+            <p className="text-foreground text-[30px] sm:text-[36px] leading-[1.05] sm:leading-[1.02] font-semibold tracking-[-0.02em] max-w-[560px]">
               {t('footer.tagline')}
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 mt-7 bg-white text-black px-5 py-2.5 text-[16px] font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="inline-flex items-center gap-2 mt-7 bg-white text-black px-5 py-2.5 text-[15px] sm:text-[16px] font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               {t('cta.button')} <ChevronRight size={14} className={isRTL ? 'rotate-180' : ''} />
             </a>
@@ -34,21 +34,21 @@ const Footer = () => {
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.pages')}</h4>
               <ul className="space-y-2.5">
                 {pageLinks.map((link) => (
-                  <li key={link.label}><a href={link.href} className="text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">{link.label}</a></li>
+                  <li key={link.label}><a href={link.href} className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">{link.label}</a></li>
                 ))}
               </ul>
             </div>
 
             <div data-gsap="reveal">
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.email')}</h4>
-              <a href="mailto:info@amwajalraeda.com" className="text-[16px] leading-[1.25] text-white hover:text-primary transition-colors break-words">
+              <a href="mailto:info@amwajalraeda.com" className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors break-words">
                 info@amwajalraeda.com
               </a>
             </div>
 
             <div data-gsap="reveal">
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.address')}</h4>
-              <p className="text-[16px] leading-[1.25] text-white">
+              <p className="text-[15px] sm:text-[16px] leading-[1.25] text-white">
                 Riyadh
                 <br />
                 Saudi Arabia

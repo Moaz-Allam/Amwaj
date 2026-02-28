@@ -1,13 +1,127 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
 import AkisLogo from './AkisLogo';
 import { useLanguage } from '@/contexts/LanguageContext';
 import './StaggeredMenuWrapper.css';
 
-const Header = () => {
+interface HeaderProps {
+  fixedOnTop?: boolean;
+  transitionTarget?: boolean;
+}
+
+const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) => {
   const { lang, setLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isAboutSection, setIsAboutSection] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const isVisibleRef = useRef(true);
+  const isAboutSectionRef = useRef(false);
+  const tickingRef = useRef(false);
+
+  useEffect(() => {
+    if (!fixedOnTop) {
+      isVisibleRef.current = true;
+      isAboutSectionRef.current = false;
+      setIsVisible(true);
+      setIsAboutSection(false);
+      return;
+    }
+
+    let rafId = 0;
+
+    const getScrollY = () => Math.max(window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0, 0);
+
+    const getHeaderAnchorY = () => (window.innerWidth >= 768 ? 92 : 74);
+
+    const updateHeaderState = () => {
+      const currentY = getScrollY();
+      const delta = currentY - lastScrollYRef.current;
+      const scrollingUp = delta < -1;
+      const scrollingDown = delta > 1;
+      const nearTop = currentY < 16;
+
+      let shouldShow = isVisibleRef.current;
+      if (nearTop || menuOpen || scrollingUp) {
+        shouldShow = true;
+      } else if (scrollingDown && currentY > 90) {
+        shouldShow = false;
+      }
+
+      if (shouldShow !== isVisibleRef.current) {
+        isVisibleRef.current = shouldShow;
+        setIsVisible(shouldShow);
+      }
+
+      let nextIsAboutSection = false;
+      if (transitionTarget) {
+        const forcedTheme = document.documentElement.dataset.headerTheme;
+        if (forcedTheme === 'light' || forcedTheme === 'dark') {
+          nextIsAboutSection = forcedTheme === 'light';
+        } else {
+          const aboutEl = document.getElementById('about');
+          if (aboutEl) {
+            const rect = aboutEl.getBoundingClientRect();
+            const anchorY = getHeaderAnchorY();
+            nextIsAboutSection = rect.top <= anchorY && rect.bottom > anchorY;
+          }
+        }
+      }
+
+      if (nextIsAboutSection !== isAboutSectionRef.current) {
+        isAboutSectionRef.current = nextIsAboutSection;
+        setIsAboutSection(nextIsAboutSection);
+      }
+
+      lastScrollYRef.current = currentY;
+      tickingRef.current = false;
+    };
+
+    const requestUpdate = () => {
+      if (tickingRef.current) {
+        return;
+      }
+
+      tickingRef.current = true;
+      rafId = window.requestAnimationFrame(updateHeaderState);
+    };
+
+    lastScrollYRef.current = getScrollY();
+    updateHeaderState();
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      tickingRef.current = false;
+    };
+  }, [fixedOnTop, menuOpen, transitionTarget]);
+
+  const isLightTheme = transitionTarget && isAboutSection;
+  const headerAppearanceClass = isLightTheme
+    ? 'bg-white border-black/10'
+    : 'bg-black border-white/10';
+  const headerVisibilityClass = fixedOnTop
+    ? isVisible || menuOpen
+      ? 'translate-y-0'
+      : '-translate-y-full pointer-events-none'
+    : 'translate-y-0';
+  const controlTextClass = isLightTheme ? 'text-black hover:text-black/65' : 'text-white hover:text-white/70';
+  const menuLineClass = isLightTheme ? 'bg-black' : 'bg-white';
+  const languageDropdownClass = isLightTheme
+    ? 'min-w-[72px] bg-white border border-black/15 shadow-[0_8px_28px_rgba(15,23,42,0.14)]'
+    : 'min-w-[72px] bg-black border border-white/15 shadow-[0_8px_28px_rgba(0,0,0,0.5)]';
+  const languageActiveClass = isLightTheme ? 'text-primary bg-black/5' : 'text-primary bg-white/5';
+  const languageInactiveClass = isLightTheme ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/10';
+  const contactButtonClass = isLightTheme
+    ? 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-white bg-black rounded-none hover:bg-black/90 transition-colors whitespace-nowrap'
+    : 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors whitespace-nowrap';
 
   const menuItems = [
     { label: t('nav.home') || 'Home', ariaLabel: 'Go to home page', link: '/#hero' },
@@ -30,12 +144,17 @@ const Header = () => {
   return (
     <>
       {/* Main Navigation Bar */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+      <header
+        data-hero-header={transitionTarget ? 'true' : undefined}
+        className={`${fixedOnTop ? 'fixed' : 'absolute'} top-0 left-0 right-0 z-50 border-b transition-transform duration-500 ease-out ${headerAppearanceClass} ${headerVisibilityClass} ${
+          transitionTarget ? 'will-change-transform' : ''
+        }`}
+      >
         <div className="container-main">
           <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
             <Link to="/" aria-label="Go to homepage" className="flex-shrink-0">
-              <AkisLogo iconOnly={false} className="scale-[1.05] md:scale-[1.58] origin-left" />
+              <AkisLogo logoVariant={isLightTheme ? 'black' : 'white'} iconOnly={false} className="scale-[1.05] md:scale-[1.58] origin-left" />
             </Link>
 
             {/* Right Side: Menu Button, Language, Contact */}
@@ -47,16 +166,16 @@ const Header = () => {
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={menuOpen}
               >
-                <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-                <span className={`w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                <span className={`w-6 h-0.5 ${menuLineClass} rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`w-6 h-0.5 ${menuLineClass} rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+                <span className={`w-6 h-0.5 ${menuLineClass} rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
               </button>
 
               {/* Language Selector */}
               <div className="relative group">
                 <button
                   type="button"
-                  className="flex items-center gap-1.5 text-sm font-medium text-white hover:text-white/70 transition-colors"
+                  className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${controlTextClass}`}
                   aria-label="Change language"
                 >
                   <span>{lang === 'en' ? 'EN' : 'AR'}</span>
@@ -66,18 +185,18 @@ const Header = () => {
                 </button>
 
                 <div className="pointer-events-none absolute top-full right-0 pt-2 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
-                  <div className="min-w-[72px] bg-black border border-white/15 shadow-[0_8px_28px_rgba(0,0,0,0.5)]">
+                  <div className={languageDropdownClass}>
                     <button
                       type="button"
                       onClick={() => setLanguage('en')}
-                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'en' ? 'text-primary bg-white/5' : 'text-white hover:bg-white/10'}`}
+                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'en' ? languageActiveClass : languageInactiveClass}`}
                     >
                       EN
                     </button>
                     <button
                       type="button"
                       onClick={() => setLanguage('ar')}
-                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'ar' ? 'text-primary bg-white/5' : 'text-white hover:bg-white/10'}`}
+                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'ar' ? languageActiveClass : languageInactiveClass}`}
                     >
                       AR
                     </button>
@@ -88,7 +207,7 @@ const Header = () => {
               {/* Contact Button */}
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors whitespace-nowrap"
+                className={contactButtonClass}
               >
                 {t('nav.contact')}
               </a>

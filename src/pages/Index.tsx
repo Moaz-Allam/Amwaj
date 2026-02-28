@@ -13,22 +13,17 @@ const PageContent = () => {
 
     return (
         <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} overflow-x-hidden [&_.container-main]:px-4 sm:[&_.container-main]:px-0`}>
-            <Header />
-            <main>
+            <Header fixedOnTop transitionTarget />
+            <main className="relative bg-black overflow-visible">
                 <Hero />
-                <section className="relative bg-black overflow-visible">
-                    <div className="relative z-10">
-                        <About />
-                    </div>
-                </section>
-                <section className="relative bg-black overflow-visible">
-                    <div className="relative z-10">
-                        <Projects />
-                        <Testimonials />
-                        <FAQSection />
-                        <CTASection />
-                    </div>
-                </section>
+                <div className="relative z-10">
+                    <About />
+                    <div aria-hidden="true" className="h-24 sm:h-32 bg-black" />
+                    <Projects />
+                    <Testimonials />
+                    <FAQSection />
+                    <CTASection />
+                </div>
             </main>
             <Footer />
         </div>

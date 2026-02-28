@@ -160,15 +160,15 @@ const ContactPageContent = () => {
 
       <main>
         <section className="relative pt-[112px] md:pt-[132px] overflow-hidden">
-          <div className="container-main relative z-10 min-h-[520px] flex items-center">
-            <h1 className="text-[56px] md:text-[82px] leading-[0.95] tracking-[-0.03em] font-semibold max-w-[760px]">{labels.title}</h1>
+          <div className="container-main relative z-10 min-h-[380px] sm:min-h-[520px] flex items-center">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[82px] leading-[0.98] md:leading-[0.95] tracking-[-0.03em] font-semibold max-w-[760px]">{labels.title}</h1>
           </div>
         </section>
 
         <section id="contact-form" className="py-16 md:py-20 border-t border-white/10">
           <div className="container-main">
             <div className="grid lg:grid-cols-[340px,minmax(0,1fr)] gap-14 lg:gap-20">
-              <aside className="space-y-10 text-[24px] md:text-[28px] leading-[1.35]">
+              <aside className="space-y-10 text-[20px] sm:text-[24px] md:text-[28px] leading-[1.35]">
                 <div>
                   <p className="text-primary text-[14px] mb-1">Email</p>
                   <a href={`mailto:${labels.email}`} className="hover:text-primary transition-colors">{labels.email}</a>
@@ -186,8 +186,8 @@ const ContactPageContent = () => {
               </aside>
 
               <form onSubmit={handleSubmit} className="max-w-[880px]">
-                <h2 className="text-[72px] md:text-[84px] tracking-[-0.03em] leading-none font-semibold">{labels.sectionTitle}</h2>
-                <p className="text-white/65 text-[20px] md:text-[24px] leading-[1.4] mt-6 max-w-[820px]">{labels.sectionBody}</p>
+                <h2 className="text-[42px] sm:text-[62px] md:text-[84px] tracking-[-0.03em] leading-none font-semibold">{labels.sectionTitle}</h2>
+                <p className="text-white/65 text-[16px] sm:text-[20px] md:text-[24px] leading-[1.4] mt-5 sm:mt-6 max-w-[820px]">{labels.sectionBody}</p>
 
                 <input
                   type="text"
@@ -208,7 +208,7 @@ const ContactPageContent = () => {
                       onChange={(event) => setFullName(event.target.value)}
                       placeholder={labels.yourNamePlaceholder}
                       required
-                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
@@ -220,7 +220,7 @@ const ContactPageContent = () => {
                       onChange={(event) => setEmail(event.target.value)}
                       placeholder={labels.yourEmailPlaceholder}
                       required
-                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
@@ -232,7 +232,7 @@ const ContactPageContent = () => {
                       onChange={(event) => setClientPhone(event.target.value)}
                       placeholder={labels.yourPhonePlaceholder}
                       required
-                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
@@ -243,7 +243,7 @@ const ContactPageContent = () => {
                       value={company}
                       onChange={(event) => setCompany(event.target.value)}
                       placeholder={labels.yourCompanyPlaceholder}
-                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
                 </div>
@@ -252,14 +252,14 @@ const ContactPageContent = () => {
                   <button
                     type="button"
                     onClick={() => setProjectType('new')}
-                    className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'new' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
+                    className={`px-6 sm:px-10 py-3 sm:py-4 text-[16px] sm:text-[22px] leading-none transition-colors ${projectType === 'new' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
                   >
                     {labels.newProject}
                   </button>
                   <button
                     type="button"
                     onClick={() => setProjectType('other')}
-                    className={`px-10 py-4 text-[22px] leading-none transition-colors ${projectType === 'other' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
+                    className={`px-6 sm:px-10 py-3 sm:py-4 text-[16px] sm:text-[22px] leading-none transition-colors ${projectType === 'other' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-white/70 hover:text-white'}`}
                   >
                     {labels.other}
                   </button>
@@ -274,7 +274,7 @@ const ContactPageContent = () => {
                 </div>
 
                 <div className="mt-12">
-                  <p className="text-[30px] mb-4">{labels.iNeed}</p>
+                  <p className="text-[24px] sm:text-[30px] mb-4">{labels.iNeed}</p>
                   <div className="flex flex-wrap gap-3">
                     {needOptionKeys.map((option) => {
                       const active = selectedNeeds.includes(option);
@@ -283,7 +283,7 @@ const ContactPageContent = () => {
                           type="button"
                           key={option}
                           onClick={() => toggleNeed(option)}
-                          className={`px-5 py-3 border text-[20px] md:text-[24px] leading-none transition-colors ${active ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
+                          className={`px-4 sm:px-5 py-2.5 sm:py-3 border text-[16px] sm:text-[20px] md:text-[24px] leading-none transition-colors ${active ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
                         >
                           {labels.needsOptions[option]}
                         </button>
@@ -293,19 +293,19 @@ const ContactPageContent = () => {
                 </div>
 
                 <div className="mt-10">
-                  <p className="text-[30px] mb-4">{labels.budget}</p>
+                  <p className="text-[24px] sm:text-[30px] mb-4">{labels.budget}</p>
                   <div className="flex gap-3">
                     <button
                       type="button"
                       onClick={() => setBudget('yes')}
-                      className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'yes' ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
+                      className={`px-5 sm:px-6 py-2.5 sm:py-3 border text-[18px] sm:text-[24px] leading-none transition-colors ${budget === 'yes' ? 'border-primary text-white bg-primary/15' : 'border-white/30 text-white/55 hover:text-white hover:border-primary/65'}`}
                     >
                       {labels.yes}
                     </button>
                     <button
                       type="button"
                       onClick={() => setBudget('no')}
-                      className={`px-6 py-3 border text-[24px] leading-none transition-colors ${budget === 'no' ? 'border-primary text-white bg-primary/15' : 'border-white/55 text-white hover:border-primary/65'}`}
+                      className={`px-5 sm:px-6 py-2.5 sm:py-3 border text-[18px] sm:text-[24px] leading-none transition-colors ${budget === 'no' ? 'border-primary text-white bg-primary/15' : 'border-white/55 text-white hover:border-primary/65'}`}
                     >
                       {labels.no}
                     </button>
@@ -313,19 +313,19 @@ const ContactPageContent = () => {
                 </div>
 
                 <div className="mt-10">
-                  <label className="block text-primary text-[30px] mb-1">{labels.projectPrompt}</label>
-                  <p className="text-[24px] text-white/45 mb-6">{labels.projectHint}</p>
+                  <label className="block text-primary text-[24px] sm:text-[30px] mb-1">{labels.projectPrompt}</label>
+                  <p className="text-[16px] sm:text-[24px] text-white/45 mb-5 sm:mb-6">{labels.projectHint}</p>
                   <textarea
                     value={projectDetails}
                     onChange={(event) => setProjectDetails(event.target.value)}
                     rows={3}
                     placeholder={labels.projectPlaceholder}
                     required
-                    className="w-full bg-transparent border-b border-primary/45 pb-3 text-[24px] placeholder:text-primary placeholder:opacity-80 focus:outline-none focus:border-primary resize-none"
+                    className="w-full bg-transparent border-b border-primary/45 pb-3 text-[18px] sm:text-[24px] placeholder:text-primary placeholder:opacity-80 focus:outline-none focus:border-primary resize-none"
                   />
                 </div>
 
-                <div className="mt-14 flex items-center justify-between gap-6">
+                <div className="mt-14 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
                   <p className={`text-[16px] md:text-[18px] ${submitStatus === 'success' ? 'text-primary' : submitStatus === 'error' ? 'text-red-400' : 'text-white/75'}`}>
                     {submitStatus === 'success'
                       ? labels.submitSuccess
@@ -340,7 +340,7 @@ const ContactPageContent = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || !web3FormsAccessKey}
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 text-[22px] font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 sm:px-8 py-3 text-[16px] sm:text-[22px] font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? labels.sending : labels.next}
                     <ChevronRight size={20} className={isRTL ? 'rotate-180' : ''} />
