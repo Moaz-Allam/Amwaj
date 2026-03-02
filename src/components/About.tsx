@@ -58,6 +58,7 @@ const revealCardsByProgress = (cards: HTMLElement[], progress: number) => {
 
 const About = () => {
   const { t, isRTL, lang } = useLanguage();
+  const aboutModelPath = typeof import.meta.env.VITE_ABOUT_MODEL_PATH === 'string' ? import.meta.env.VITE_ABOUT_MODEL_PATH.trim() : '';
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const aboutContentRef = useRef<HTMLDivElement>(null);
@@ -215,7 +216,7 @@ const About = () => {
                 'radial-gradient(circle at center, rgb(255 255 255 / 0.95) 0%, hsl(var(--primary) / 0.82) 34%, hsl(var(--secondary) / 0.5) 54%, transparent 72%)',
             }}
           />
-          <PerlinBlob className="h-full w-full" />
+          <PerlinBlob className="h-full w-full" modelPath={aboutModelPath || undefined} />
         </div>
       </div>
 

@@ -1,11 +1,33 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 type PerlinBlobProps = {
   className?: string;
+  modelPath?: string;
 };
 
-const PerlinBlob = ({ className }: PerlinBlobProps) => {
+const disposeMaterial = (material: THREE.Material | THREE.Material[]) => {
+  if (Array.isArray(material)) {
+    material.forEach((entry) => entry.dispose());
+    return;
+  }
+
+  material.dispose();
+};
+
+const disposeObjectResources = (object: THREE.Object3D) => {
+  object.traverse((child) => {
+    if (!(child instanceof THREE.Mesh)) {
+      return;
+    }
+
+    child.geometry.dispose();
+    disposeMaterial(child.material);
+  });
+};
+
+const PerlinBlob = ({ className, modelPath }: PerlinBlobProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,8 +59,14 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
     const spinGroup = new THREE.Group();
     scrollGroup.add(spinGroup);
 
+    const generatedObject = new THREE.Group();
+    spinGroup.add(generatedObject);
+
     const geometries: THREE.BufferGeometry[] = [];
     const materials: THREE.Material[] = [];
+
+    let loadedModel: THREE.Object3D | null = null;
+    let modelMixer: THREE.AnimationMixer | null = null;
 
     const coreMaterial = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color('#6ccfff'),
@@ -71,46 +99,46 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
     const coreGeometry = new THREE.OctahedronGeometry(1.06, 2);
     geometries.push(coreGeometry);
     const core = new THREE.Mesh(coreGeometry, coreMaterial);
-    spinGroup.add(core);
+    generatedObject.add(core);
 
     const innerCoreGeometry = new THREE.OctahedronGeometry(0.5, 1);
     geometries.push(innerCoreGeometry);
     const innerCore = new THREE.Mesh(innerCoreGeometry, accentMaterial);
     innerCore.rotation.set(0.34, 0.28, 0.1);
-    spinGroup.add(innerCore);
+    generatedObject.add(innerCore);
 
     const ringOneGeometry = new THREE.TorusGeometry(2.2, 0.08, 18, 120);
     geometries.push(ringOneGeometry);
     const ringOne = new THREE.Mesh(ringOneGeometry, ringMaterial);
     ringOne.rotation.set(1.06, 0.42, 0.1);
-    spinGroup.add(ringOne);
+    generatedObject.add(ringOne);
 
     const ringTwoGeometry = new THREE.TorusGeometry(1.72, 0.065, 18, 120);
     geometries.push(ringTwoGeometry);
     const ringTwo = new THREE.Mesh(ringTwoGeometry, ringMaterial);
     ringTwo.rotation.set(0.3, 0.88, 0.64);
-    spinGroup.add(ringTwo);
+    generatedObject.add(ringTwo);
 
     const ringThreeGeometry = new THREE.TorusGeometry(1.35, 0.045, 16, 100);
     geometries.push(ringThreeGeometry);
     const ringThree = new THREE.Mesh(ringThreeGeometry, accentMaterial);
     ringThree.rotation.set(-0.56, 0.14, 0.42);
-    spinGroup.add(ringThree);
+    generatedObject.add(ringThree);
 
     const beaconBaseGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.72, 20);
     geometries.push(beaconBaseGeometry);
     const beaconBase = new THREE.Mesh(beaconBaseGeometry, ringMaterial);
     beaconBase.position.set(0, 1.5, 0);
-    spinGroup.add(beaconBase);
+    generatedObject.add(beaconBase);
 
     const beaconTipGeometry = new THREE.ConeGeometry(0.22, 0.62, 24);
     geometries.push(beaconTipGeometry);
     const beaconTip = new THREE.Mesh(beaconTipGeometry, accentMaterial);
     beaconTip.position.set(0, 2.2, 0);
-    spinGroup.add(beaconTip);
+    generatedObject.add(beaconTip);
 
     const satellitesGroup = new THREE.Group();
-    spinGroup.add(satellitesGroup);
+    generatedObject.add(satellitesGroup);
 
     const satelliteGeometry = new THREE.SphereGeometry(0.15, 20, 20);
     geometries.push(satelliteGeometry);
@@ -119,6 +147,59 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       satellitesGroup.add(satellite);
       return satellite;
     });
+
+    if (modelPath) {
+      const loader = new GLTFLoader();
+
+      loader.load(
+        modelPath,
+        (gltf) => {
+          const model = gltf.scene;
+          model.updateMatrixWorld(true);
+
+          const box = new THREE.Box3().setFromObject(model);
+          if (!box.isEmpty()) {
+            const center = box.getCenter(new THREE.Vector3());
+            model.position.sub(center);
+
+            const size = box.getSize(new THREE.Vector3());
+            const maxDimension = Math.max(size.x, size.y, size.z);
+            if (maxDimension > 0) {
+              const targetSize = 3.4;
+              const scale = targetSize / maxDimension;
+              model.scale.setScalar(scale);
+            }
+          }
+
+          model.traverse((child) => {
+            if (!(child instanceof THREE.Mesh)) {
+              return;
+            }
+
+            child.castShadow = false;
+            child.receiveShadow = false;
+          });
+
+          generatedObject.visible = false;
+          loadedModel = model;
+          spinGroup.add(model);
+
+          if (gltf.animations.length) {
+            modelMixer = new THREE.AnimationMixer(model);
+
+            gltf.animations.forEach((clip) => {
+              const action = modelMixer?.clipAction(clip);
+              action?.reset();
+              action?.play();
+            });
+          }
+        },
+        undefined,
+        () => {
+          generatedObject.visible = true;
+        }
+      );
+    }
 
     const ambientLight = new THREE.AmbientLight(0x8cd2ff, 0.65);
     scene.add(ambientLight);
@@ -186,11 +267,13 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     let frameId = 0;
+    const clock = new THREE.Clock();
 
     const animate = (timestamp: number) => {
       frameId = window.requestAnimationFrame(animate);
 
       const elapsed = timestamp * 0.001;
+      const delta = clock.getDelta();
 
       currentTiltX += (targetTiltX - currentTiltX) * 0.08;
       currentTiltY += (targetTiltY - currentTiltY) * 0.08;
@@ -208,6 +291,10 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       spinGroup.rotation.x = Math.sin(elapsed * 0.92) * 0.08;
       spinGroup.rotation.z = Math.cos(elapsed * 0.76) * 0.06;
 
+      if (loadedModel) {
+        loadedModel.rotation.y += 0.004;
+      }
+
       satellites.forEach((satellite, index) => {
         const angle = elapsed * 0.95 + index * ((Math.PI * 2) / satellites.length);
         const radius = 2.26;
@@ -218,10 +305,14 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
         );
       });
 
-      innerCore.rotation.y += 0.018;
-      ringOne.rotation.z += 0.004;
-      ringTwo.rotation.y -= 0.0035;
-      ringThree.rotation.x += 0.0032;
+      if (generatedObject.visible) {
+        innerCore.rotation.y += 0.018;
+        ringOne.rotation.z += 0.004;
+        ringTwo.rotation.y -= 0.0035;
+        ringThree.rotation.x += 0.0032;
+      }
+
+      modelMixer?.update(delta);
 
       renderer.render(scene, camera);
     };
@@ -235,6 +326,15 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
       window.removeEventListener('scroll', handleScroll);
       resizeObserver.disconnect();
 
+      if (loadedModel) {
+        spinGroup.remove(loadedModel);
+        disposeObjectResources(loadedModel);
+      }
+
+      if (modelMixer) {
+        modelMixer.stopAllAction();
+      }
+
       geometries.forEach((geometry) => geometry.dispose());
       materials.forEach((material) => material.dispose());
       renderer.dispose();
@@ -243,7 +343,7 @@ const PerlinBlob = ({ className }: PerlinBlobProps) => {
         container.removeChild(canvas);
       }
     };
-  }, []);
+  }, [modelPath]);
 
   return <div ref={containerRef} className={className} />;
 };

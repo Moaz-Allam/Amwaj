@@ -38,7 +38,7 @@ type ProjectCard = {
 const cardsData: ProjectCard[] = [
   {
     id: 'card-1',
-    color: '#3d2fa9',
+    color: '#1579A8',
     index: '01',
     titleKey: 'projects.card.1.title',
     descKey: 'projects.card.1.desc',
@@ -54,7 +54,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-2',
-    color: '#ff7722',
+    color: '#7D438F',
     index: '02',
     titleKey: 'projects.card.2.title',
     descKey: 'projects.card.2.desc',
@@ -70,7 +70,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-3',
-    color: '#ff3d33',
+    color: '#A55A2B',
     index: '03',
     titleKey: 'projects.card.3.title',
     descKey: 'projects.card.3.desc',
@@ -86,7 +86,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-4',
-    color: '#785f47',
+    color: '#3F7A4A',
     index: '04',
     titleKey: 'projects.card.4.title',
     descKey: 'projects.card.4.desc',
