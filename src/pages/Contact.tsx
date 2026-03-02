@@ -68,7 +68,7 @@ const ContactPageContent = () => {
       submitValidation: lang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح بصيغة دولية.' : 'Please enter a valid phone number in international format.',
       submitSpam: lang === 'ar' ? 'تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.' : 'Could not submit this request. Please try again.',
       email: 'info@amwajalraeda.com',
-      phone: '+966 55 000 0000',
+      phone: '+966 53 580 0559',
       address: ['Amwaj Al-Raeda', 'Riyadh', 'Saudi Arabia'],
       needsOptions: {
         branding: lang === 'ar' ? 'الهوية البصرية' : 'Visual Identity',
@@ -187,7 +187,7 @@ const ContactPageContent = () => {
                 </div>
                 <div>
                   <p className="text-primary text-[14px] mb-1">Phone</p>
-                  <a href="tel:+966550000000" className="hover:text-primary transition-colors">{labels.phone}</a>
+                  <a href="tel:+966535800559" className="hover:text-primary transition-colors">{labels.phone}</a>
                 </div>
                 <div>
                   <p className="text-primary text-[14px] mb-1">Address</p>

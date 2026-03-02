@@ -13,7 +13,7 @@ const Footer = () => {
     { label: t('nav.contact'), href: '/#contact' },
   ];
 
-  const footerPhone = '+966 55 000 0000';
+  const footerPhone = '+966 53 580 0559';
 
   return (
     <footer ref={ref} className="relative bg-black border-t border-white/10 pt-12 sm:pt-16 pb-8 sm:pb-10 overflow-x-clip">
@@ -50,7 +50,7 @@ const Footer = () => {
 
             <div data-gsap="reveal">
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.phone')}</h4>
-              <a href="tel:+966550000000" className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">
+              <a href="tel:+966535800559" className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">
                 {footerPhone}
               </a>
             </div>
@@ -74,13 +74,13 @@ const Footer = () => {
 
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <span className="text-white/70">{t('footer.followUs')}</span>
-              <a href="https://www.instagram.com/amwajraeda.ksa?igsh=MXBlaml1Y3oxcGFxaw==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/amwaj_alraeda?igsh=bnZ0ZWhoOHg5emN2" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 Instagram
               </a>
               <a href="https://x.com/AmwajRaeda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 X
               </a>
-              <a href="https://www.tiktok.com/@amwaj.raeda.digit?_r=1&_t=ZS-944xDmnFVTu" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              <a href="https://www.tiktok.com/@amwaj_alraeda?_r=1&_t=ZS-94M2fDFnEO4" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 TikTok
               </a>
             </div>

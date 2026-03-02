@@ -14,17 +14,21 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
   const { lang, setLanguage, t, isRTL } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isHeroSection, setIsHeroSection] = useState(false);
   const [isAboutSection, setIsAboutSection] = useState(false);
   const lastScrollYRef = useRef(0);
   const isVisibleRef = useRef(true);
+  const isHeroSectionRef = useRef(false);
   const isAboutSectionRef = useRef(false);
   const tickingRef = useRef(false);
 
   useEffect(() => {
     if (!fixedOnTop) {
       isVisibleRef.current = true;
+      isHeroSectionRef.current = false;
       isAboutSectionRef.current = false;
       setIsVisible(true);
+      setIsHeroSection(false);
       setIsAboutSection(false);
       return;
     }
@@ -54,19 +58,38 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
         setIsVisible(shouldShow);
       }
 
+      let nextIsHeroSection = false;
       let nextIsAboutSection = false;
       if (transitionTarget) {
-        const forcedTheme = document.documentElement.dataset.headerTheme;
-        if (forcedTheme === 'light' || forcedTheme === 'dark') {
-          nextIsAboutSection = forcedTheme === 'light';
-        } else {
-          const aboutEl = document.getElementById('about');
-          if (aboutEl) {
-            const rect = aboutEl.getBoundingClientRect();
-            const anchorY = getHeaderAnchorY();
-            nextIsAboutSection = rect.top <= anchorY && rect.bottom > anchorY;
+        const heroEl = document.getElementById('hero');
+        if (heroEl) {
+          const rect = heroEl.getBoundingClientRect();
+          const anchorY = getHeaderAnchorY();
+          nextIsHeroSection = rect.top <= anchorY && rect.bottom > anchorY;
+        }
+
+        const aboutEl = document.getElementById('about');
+        let isAboutInView = false;
+
+        if (aboutEl) {
+          const rect = aboutEl.getBoundingClientRect();
+          const anchorY = getHeaderAnchorY();
+          isAboutInView = rect.top <= anchorY && rect.bottom > anchorY;
+        }
+
+        if (isAboutInView) {
+          const forcedTheme = document.documentElement.dataset.headerTheme;
+          if (forcedTheme === 'light' || forcedTheme === 'dark') {
+            nextIsAboutSection = forcedTheme === 'light';
+          } else {
+            nextIsAboutSection = true;
           }
         }
+      }
+
+      if (nextIsHeroSection !== isHeroSectionRef.current) {
+        isHeroSectionRef.current = nextIsHeroSection;
+        setIsHeroSection(nextIsHeroSection);
       }
 
       if (nextIsAboutSection !== isAboutSectionRef.current) {
@@ -104,7 +127,10 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
   }, [fixedOnTop, menuOpen, transitionTarget]);
 
   const isLightTheme = transitionTarget && isAboutSection;
-  const headerAppearanceClass = isLightTheme
+  const isTransparentHero = transitionTarget && isHeroSection && !menuOpen;
+  const headerAppearanceClass = isTransparentHero
+    ? 'bg-transparent border-white/20'
+    : isLightTheme
     ? 'bg-white border-black/10'
     : 'bg-black border-white/10';
   const headerVisibilityClass = fixedOnTop
@@ -132,9 +158,9 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
   ];
 
   const socialItems = [
-    { label: 'Instagram', link: 'https://www.instagram.com/amwajraeda.ksa?igsh=MXBlaml1Y3oxcGFxaw==' },
+    { label: 'Instagram', link: 'https://www.instagram.com/amwaj_alraeda?igsh=bnZ0ZWhoOHg5emN2' },
     { label: 'X', link: 'https://x.com/AmwajRaeda' },
-    { label: 'TikTok', link: 'https://www.tiktok.com/@amwaj.raeda.digit?_r=1&_t=ZS-944xDmnFVTu' }
+    { label: 'TikTok', link: 'https://www.tiktok.com/@amwaj_alraeda?_r=1&_t=ZS-94M2fDFnEO4' }
   ];
 
   const handleMenuClose = () => {
