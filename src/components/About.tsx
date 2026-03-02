@@ -7,7 +7,6 @@ import serviceOneImage from '@/assets/service-one.png';
 import serviceTwoImage from '@/assets/service-two.png';
 import serviceThreeImage from '@/assets/service-three.png';
 import serviceFourImage from '@/assets/service-four.png';
-import PerlinBlob from '@/components/PerlinBlob';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,14 +57,11 @@ const revealCardsByProgress = (cards: HTMLElement[], progress: number) => {
 
 const About = () => {
   const { t, isRTL, lang } = useLanguage();
-  const aboutModelPath = typeof import.meta.env.VITE_ABOUT_MODEL_PATH === 'string' ? import.meta.env.VITE_ABOUT_MODEL_PATH.trim() : '';
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const aboutContentRef = useRef<HTMLDivElement>(null);
   const servicesContentRef = useRef<HTMLDivElement>(null);
   const servicesCardsRef = useRef<HTMLDivElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
-  const servicesGlowRef = useRef<HTMLDivElement>(null);
 
   const aboutHeading =
     lang === 'ar'
@@ -85,10 +81,8 @@ const About = () => {
     const aboutContentEl = aboutContentRef.current;
     const servicesContentEl = servicesContentRef.current;
     const servicesCardsEl = servicesCardsRef.current;
-    const blobEl = blobRef.current;
-    const servicesGlowEl = servicesGlowRef.current;
 
-    if (!sectionEl || !titleEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl || !blobEl || !servicesGlowEl) return;
+    if (!sectionEl || !titleEl || !aboutContentEl || !servicesContentEl || !servicesCardsEl) return;
 
     const titleWordEls = Array.from(titleEl.querySelectorAll<HTMLElement>('[data-about-word]'));
     const serviceCardEls = Array.from(servicesCardsEl.querySelectorAll<HTMLElement>('[data-service-card]'));
@@ -99,21 +93,8 @@ const About = () => {
     gsap.set(titleWordEls, { opacity: 0.12 });
     gsap.set(aboutContentEl, { opacity: 1, pointerEvents: 'auto' });
     gsap.set(sectionEl, { backgroundColor: '#ffffff' });
-    gsap.set(blobEl, { scale: 1, y: 0, transformOrigin: '50% 50%' });
-    gsap.set(servicesGlowEl, { opacity: 0, scale: 0.72, transformOrigin: '50% 50%' });
     gsap.set(servicesContentEl, { opacity: 0, pointerEvents: 'none' });
     gsap.set(serviceCardEls, { opacity: 0 });
-
-    let blobTargetY = 0;
-    const updateBlobTargetY = () => {
-      const sectionRect = sectionEl.getBoundingClientRect();
-      const cardsRect = servicesCardsEl.getBoundingClientRect();
-      blobTargetY = cardsRect.top + cardsRect.height / 2 - (sectionRect.top + sectionRect.height / 2);
-    };
-
-    updateBlobTargetY();
-    window.addEventListener('resize', updateBlobTargetY);
-    ScrollTrigger.addEventListener('refresh', updateBlobTargetY);
 
     const trigger = ScrollTrigger.create({
       trigger: sectionEl,
@@ -127,11 +108,9 @@ const About = () => {
         const headingProgress = gsap.utils.clamp(0, 1, progress / 0.3);
         const aboutFadeProgress = gsap.utils.clamp(0, 1, (progress - 0.36) / 0.14);
         const backgroundProgress = gsap.utils.clamp(0, 1, (progress - 0.34) / 0.2);
-        const blobAlignProgress = gsap.utils.clamp(0, 1, (progress - 0.6) / 0.22);
 
         const servicesVisibility = progress >= 0.58 ? 1 : 0;
         const servicesCardsProgress = gsap.utils.clamp(0, 1, (progress - 0.66) / 0.34);
-        const servicesLightProgress = gsap.utils.clamp(0, 1, (progress - 0.56) / 0.22);
 
         const colorChannel = Math.round((1 - backgroundProgress) * 255);
         const lightHeader = progress < 0.42;
@@ -145,14 +124,6 @@ const About = () => {
         });
 
         gsap.set(sectionEl, { backgroundColor: `rgb(${colorChannel}, ${colorChannel}, ${colorChannel})` });
-        gsap.set(blobEl, {
-          scale: 1,
-          y: blobTargetY * blobAlignProgress,
-        });
-        gsap.set(servicesGlowEl, {
-          opacity: servicesLightProgress,
-          scale: 0.72 + 0.34 * servicesLightProgress,
-        });
         gsap.set(servicesContentEl, {
           opacity: servicesVisibility,
           pointerEvents: servicesVisibility > 0.95 ? 'auto' : 'none',
@@ -163,15 +134,11 @@ const About = () => {
     });
 
     return () => {
-      window.removeEventListener('resize', updateBlobTargetY);
-      ScrollTrigger.removeEventListener('refresh', updateBlobTargetY);
       trigger.kill();
       setHeaderTheme('dark');
       gsap.set(titleWordEls, { clearProps: 'opacity' });
       gsap.set(aboutContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(sectionEl, { clearProps: 'backgroundColor' });
-      gsap.set(blobEl, { clearProps: 'transform' });
-      gsap.set(servicesGlowEl, { clearProps: 'opacity,transform' });
       gsap.set(servicesContentEl, { clearProps: 'opacity,pointerEvents' });
       gsap.set(serviceCardEls, { clearProps: 'opacity,transform' });
     };
@@ -206,20 +173,6 @@ const About = () => {
 
   return (
     <section id="about" ref={sectionRef} className="bg-white text-black min-h-screen lg:h-screen relative z-20 overflow-visible lg:overflow-hidden">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-        <div ref={blobRef} className="relative h-[clamp(130px,19vw,320px)] w-[clamp(130px,19vw,320px)] will-change-transform">
-          <div
-            ref={servicesGlowRef}
-            className="absolute -inset-[44%] rounded-full opacity-0 blur-[92px] mix-blend-screen will-change-[opacity,transform]"
-            style={{
-              background:
-                'radial-gradient(circle at center, rgb(255 255 255 / 0.95) 0%, hsl(var(--primary) / 0.82) 34%, hsl(var(--secondary) / 0.5) 54%, transparent 72%)',
-            }}
-          />
-          <PerlinBlob className="h-full w-full" modelPath={aboutModelPath || undefined} />
-        </div>
-      </div>
-
       <div ref={aboutContentRef} className="container-main relative z-20 h-screen flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-6 max-w-5xl">
           <img
@@ -236,7 +189,7 @@ const About = () => {
           <h2
             ref={titleRef}
             dir={isRTL ? 'rtl' : 'ltr'}
-            className={`text-[clamp(2.6rem,7.2vw,6.2rem)] font-black ${isRTL ? 'leading-[1.24] sm:leading-[1.18] tracking-[-0.02em]' : 'uppercase leading-[0.9] tracking-[-0.045em]'}`}
+            className={`text-[clamp(2.6rem,7.2vw,6.2rem)] font-black ${isRTL ? 'leading-[1.5] sm:leading-[1.42] md:leading-[1.34] tracking-[-0.02em]' : 'uppercase leading-[0.9] tracking-[-0.045em]'}`}
           >
             {titleWords.map((word, index) => (
               <span key={`about-title-${lang}-${index}`} data-about-word className="inline-block will-change-[opacity]">

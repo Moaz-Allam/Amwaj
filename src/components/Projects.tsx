@@ -2,10 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import project1 from '@/assets/project-1.jpg';
-import project2 from '@/assets/project-2.jpg';
-import project3 from '@/assets/project-3.jpg';
-import project4 from '@/assets/project-4.jpg';
+import card1Main from '@/assets/project-card-1-main.png';
+import card1Alt1 from '@/assets/project-card-1-alt-1.png';
+import card1Alt2 from '@/assets/project-card-1-alt-2.png';
+import card2Main from '@/assets/project-card-2-main.png';
+import card2Alt1 from '@/assets/project-card-2-alt-1.png';
+import card2Alt2 from '@/assets/project-card-2-alt-2.png';
+import card3Main from '@/assets/project-card-3-main.png';
+import card3Alt1 from '@/assets/project-card-3-alt-1.png';
+import card3Alt2 from '@/assets/project-card-3-alt-2.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,12 +43,12 @@ type ProjectCard = {
 const cardsData: ProjectCard[] = [
   {
     id: 'card-1',
-    color: '#0B6A98',
+    color: '#0f573f',
     index: '01',
     titleKey: 'projects.card.2.title',
     descKey: 'projects.card.2.desc',
     tagKey: 'projects.card.2.tag.1',
-    gallery: [project2, project3, project4, project1],
+    gallery: [card1Main, card1Alt1, card1Alt2],
     quote: {
       en: 'The process was clear from day one. Every deliverable was tied to measurable growth goals and real business outcomes.',
       ar: 'المنهجية كانت واضحة منذ البداية، وكل مخرج كان مرتبطًا بأهداف نمو قابلة للقياس ونتائج حقيقية.',
@@ -54,12 +59,12 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-2',
-    color: '#1788BF',
+    color: '#d4af37',
     index: '02',
     titleKey: 'projects.card.3.title',
     descKey: 'projects.card.3.desc',
     tagKey: 'projects.card.3.tag.1',
-    gallery: [project3, project4, project1, project2],
+    gallery: [card2Main, card2Alt1, card2Alt2],
     quote: {
       en: 'Execution moved fast without sacrificing quality. Creative and technical teams worked as one synchronized unit.',
       ar: 'التنفيذ كان سريعًا دون المساس بالجودة، وتكامل الفريق الإبداعي والتقني بشكل متناغم.',
@@ -70,12 +75,12 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-3',
-    color: '#0A5B82',
+    color: '#2563eb',
     index: '03',
     titleKey: 'projects.card.4.title',
     descKey: 'projects.card.4.desc',
     tagKey: 'projects.card.4.tag.1',
-    gallery: [project4, project1, project2, project3],
+    gallery: [card3Main, card3Alt1, card3Alt2],
     quote: {
       en: 'Reporting was consistently transparent and useful. We always knew what to improve next and why it mattered.',
       ar: 'التقارير كانت شفافة ومفيدة باستمرار، وكنا نعرف دائمًا ما الذي يجب تحسينه ولماذا.',
@@ -247,7 +252,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     {card.gallery.map((image, imageIndex) => (
                       <div
                         key={`${card.id}-gallery-${imageIndex}`}
