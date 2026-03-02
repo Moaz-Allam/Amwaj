@@ -89,11 +89,11 @@ const deliverables = [
   },
   {
     icon: 'web' as const,
-    label: { en: 'Web & SEO', ar: 'الويب والسيو' },
-    title: { en: 'Websites, E-Commerce + SEO', ar: 'المواقع والمتاجر + SEO' },
+    label: { en: 'Web & SEO', ar: 'الويب وتحسين محركات البحث' },
+    title: { en: 'Websites, E-Commerce + SEO', ar: 'المواقع والمتاجر + تحسين محركات البحث' },
     description: {
       en: 'Corporate websites and e-commerce stores with UX optimization, technical SEO, keyword strategy, and performance tracking.',
-      ar: 'مواقع تعريفية ومتاجر إلكترونية مع تحسين تجربة المستخدم، وسيو تقني، واستراتيجية كلمات مفتاحية، وتتبع الأداء.',
+      ar: 'مواقع تعريفية ومتاجر إلكترونية مع تحسين تجربة المستخدم، وتحسين محركات البحث تقنيًا، واستراتيجية كلمات مفتاحية، وتتبع الأداء.',
     },
   },
   {
@@ -126,7 +126,7 @@ const deliverables = [
 ];
 
 const Testimonials = () => {
-  const { t, lang } = useLanguage();
+  const { t, lang, isRTL } = useLanguage();
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { stagger: 0.12 });
   const bentoCards = deliverables.map((item) => ({
     label: item.label[lang],
@@ -137,18 +137,24 @@ const Testimonials = () => {
   const clientLogos = deliverables.map((item) => {
     const label = item.label[lang];
     return {
-      node: <span className="text-white/70 text-[14px] sm:text-[15px] tracking-[0.08em] font-medium hover:text-primary transition-colors">{label}</span>,
+      node: <span dir={lang === 'ar' ? 'rtl' : 'ltr'} className="text-white/70 text-[14px] sm:text-[15px] tracking-[0.08em] font-medium hover:text-primary transition-colors">{label}</span>,
       title: label,
+      href: '/contact#contact-form',
+      ariaLabel: lang === 'ar' ? 'انتقل إلى نموذج التواصل' : 'Go to contact form',
     };
   });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-transparent pt-2 sm:pt-6 pb-16 sm:pb-24">
+    <section ref={ref} className="relative overflow-hidden bg-transparent pt-10 sm:pt-6 pb-16 sm:pb-24">
       <div className="container-main relative z-10">
-        <div className="text-center mb-12 sm:mb-14" data-gsap="reveal">
-          <span className="text-primary font-medium tracking-wide text-[16px]">{t('testimonials.label')}</span>
-          <h2 className="text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('testimonials.title')}</h2>
-          <p className="text-white/78 text-[15px] sm:text-[16px] leading-[1.45] mt-3">{t('testimonials.subtitle')}</p>
+        <div dir={isRTL ? 'rtl' : 'ltr'} className={`mb-12 sm:mb-14 ${isRTL ? 'text-right sm:text-center' : 'text-center'}`} data-gsap="reveal">
+          <span className={`text-primary font-medium tracking-wide text-[16px] block ${isRTL ? '!leading-[1.3]' : ''}`}>{t('testimonials.label')}</span>
+          <h2 className={`mt-3 text-[27px] sm:text-[30px] md:text-[36px] font-semibold text-foreground text-balance mx-auto ${isRTL ? 'max-w-[19ch] sm:max-w-3xl !leading-[1.35] sm:!leading-[1.12] tracking-normal sm:tracking-[-0.02em]' : 'max-w-3xl leading-[1.08] tracking-[-0.02em]'}`}>
+            {t('testimonials.title')}
+          </h2>
+          <p className={`text-white/78 text-[15px] sm:text-[16px] mt-3 text-balance mx-auto ${isRTL ? 'max-w-[31ch] sm:max-w-[58ch] !leading-[1.7] sm:!leading-[1.5]' : 'max-w-[58ch] leading-[1.45]'}`}>
+            {t('testimonials.subtitle')}
+          </p>
         </div>
 
         <div className="mb-12 sm:mb-16" data-gsap="reveal">

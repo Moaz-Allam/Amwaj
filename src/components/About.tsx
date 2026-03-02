@@ -222,6 +222,13 @@ const About = () => {
 
       <div ref={aboutContentRef} className="container-main relative z-20 h-screen flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-6 max-w-5xl">
+          <img
+            src="/brand/amwaj-logo-primary.png"
+            alt={lang === 'ar' ? 'شعار أمواج الرائدة' : 'Amwaj Alraeda logo'}
+            className="w-[132px] sm:w-[156px] md:w-[176px] h-auto"
+            loading="eager"
+          />
+
           <span className="text-primary font-semibold tracking-[0.3em] text-[12px] sm:text-[13px] uppercase">
             {lang === 'ar' ? 'من نحن' : 'WHO WE ARE'}
           </span>
@@ -229,7 +236,7 @@ const About = () => {
           <h2
             ref={titleRef}
             dir={isRTL ? 'rtl' : 'ltr'}
-            className="text-[clamp(2.6rem,7.2vw,6.2rem)] font-black uppercase leading-[0.9] tracking-[-0.045em]"
+            className={`text-[clamp(2.6rem,7.2vw,6.2rem)] font-black ${isRTL ? 'leading-[1.24] sm:leading-[1.18] tracking-[-0.02em]' : 'uppercase leading-[0.9] tracking-[-0.045em]'}`}
           >
             {titleWords.map((word, index) => (
               <span key={`about-title-${lang}-${index}`} data-about-word className="inline-block will-change-[opacity]">

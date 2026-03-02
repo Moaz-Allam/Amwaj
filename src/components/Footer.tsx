@@ -7,11 +7,13 @@ const Footer = () => {
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { y: 30, stagger: 0.08 });
 
   const pageLinks = [
-    { label: t('nav.about'), href: '#about' },
-    { label: t('nav.services'), href: '#services' },
-    { label: t('nav.projects'), href: '#projects' },
-    { label: t('nav.contact'), href: '#contact' },
+    { label: t('nav.about'), href: '/#about' },
+    { label: t('nav.services'), href: '/#services' },
+    { label: t('nav.projects'), href: '/#projects' },
+    { label: t('nav.contact'), href: '/#contact' },
   ];
+
+  const footerPhone = '+966 55 000 0000';
 
   return (
     <footer ref={ref} className="relative bg-black border-t border-white/10 pt-12 sm:pt-16 pb-8 sm:pb-10 overflow-x-clip">
@@ -29,7 +31,7 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 xl:gap-12 xl:min-w-[640px]">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 xl:gap-12 xl:min-w-[720px]">
             <div data-gsap="reveal">
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.pages')}</h4>
               <ul className="space-y-2.5">
@@ -43,6 +45,13 @@ const Footer = () => {
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.email')}</h4>
               <a href="mailto:info@amwajalraeda.com" className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors break-words">
                 info@amwajalraeda.com
+              </a>
+            </div>
+
+            <div data-gsap="reveal">
+              <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.phone')}</h4>
+              <a href="tel:+966550000000" className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">
+                {footerPhone}
               </a>
             </div>
 

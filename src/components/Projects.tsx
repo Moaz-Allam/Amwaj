@@ -38,7 +38,7 @@ type ProjectCard = {
 const cardsData: ProjectCard[] = [
   {
     id: 'card-1',
-    color: '#1579A8',
+    color: '#0E79AD',
     index: '01',
     titleKey: 'projects.card.1.title',
     descKey: 'projects.card.1.desc',
@@ -54,7 +54,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-2',
-    color: '#7D438F',
+    color: '#0B6A98',
     index: '02',
     titleKey: 'projects.card.2.title',
     descKey: 'projects.card.2.desc',
@@ -70,7 +70,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-3',
-    color: '#A55A2B',
+    color: '#1788BF',
     index: '03',
     titleKey: 'projects.card.3.title',
     descKey: 'projects.card.3.desc',
@@ -86,7 +86,7 @@ const cardsData: ProjectCard[] = [
   },
   {
     id: 'card-4',
-    color: '#3F7A4A',
+    color: '#0A5B82',
     index: '04',
     titleKey: 'projects.card.4.title',
     descKey: 'projects.card.4.desc',
@@ -189,7 +189,7 @@ const Projects = () => {
   }, [isDesktop, lang]);
 
   return (
-    <section id="projects" className="relative z-20 bg-transparent pt-14 sm:pt-20 pb-4 sm:pb-8">
+    <section id="projects" dir={isRTL ? 'rtl' : 'ltr'} className="relative z-20 bg-transparent pt-14 sm:pt-20 pb-10 sm:pb-8">
       <div className="container-main mb-10 sm:mb-14">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 sm:gap-6">
           <div>
@@ -199,7 +199,7 @@ const Projects = () => {
             </h2>
           </div>
 
-          <p className={`text-white/78 text-[15px] sm:text-[16px] leading-[1.45] max-w-[470px] ${isRTL ? 'md:text-left' : 'md:text-right'}`}>
+          <p className={`text-white/78 text-[15px] sm:text-[16px] max-w-[470px] ${isRTL ? 'md:text-right !leading-[1.85] sm:!leading-[1.7]' : 'md:text-right leading-[1.45]'}`}>
             {t('projects.desc')}
           </p>
         </div>
@@ -231,11 +231,11 @@ const Projects = () => {
                       <span className={isRTL ? 'rotate-180' : ''}>{'->'}</span>
                     </a>
 
-                    <h3 className="mt-4 text-white text-[32px] sm:text-[46px] lg:text-[82px] font-semibold leading-[0.93] tracking-[-0.025em]">
+                    <h3 className={`mt-4 text-white text-[32px] sm:text-[46px] lg:text-[82px] font-semibold ${isRTL ? 'leading-[1.2] sm:leading-[1.14] lg:leading-[1.08] tracking-[-0.01em]' : 'leading-[0.93] tracking-[-0.025em]'}`}>
                       {t(card.titleKey)}
                     </h3>
 
-                    <p className="mt-4 max-w-[940px] text-white/76 text-[15px] sm:text-[20px] lg:text-[30px] leading-[1.25] sm:leading-[1.2]">
+                    <p className={`mt-4 max-w-[940px] text-white/76 text-[15px] sm:text-[20px] lg:text-[30px] ${isRTL ? '!leading-[1.75] sm:!leading-[1.55]' : 'leading-[1.25] sm:leading-[1.2]'}`}>
                       {t(card.descKey)}
                     </p>
                   </div>
@@ -247,7 +247,7 @@ const Projects = () => {
 
                 <div className="mt-6 sm:mt-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)] gap-5 lg:gap-8 items-end">
                   <div className="max-w-[450px]">
-                    <p className="text-white text-[16px] sm:text-[28px] leading-[1.15] sm:leading-[1.1] font-semibold tracking-[-0.01em] line-clamp-4 sm:line-clamp-none">
+                    <p className={`text-white text-[16px] sm:text-[28px] font-semibold tracking-[-0.01em] line-clamp-4 sm:line-clamp-none ${isRTL ? '!leading-[1.7] sm:!leading-[1.4]' : 'leading-[1.15] sm:leading-[1.1]'}`}>
                       {card.quote[lang]}
                     </p>
 

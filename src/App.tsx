@@ -36,13 +36,30 @@ const ScrollManager = () => {
   }, []);
 
   useEffect(() => {
-    if (!locomotiveRef.current) {
+    const locomotive = locomotiveRef.current;
+    if (!locomotive) {
       return;
     }
 
-    locomotiveRef.current.scrollTo(0, { immediate: true, force: true });
-    locomotiveRef.current.resize();
-  }, [location.pathname]);
+    const rafId = window.requestAnimationFrame(() => {
+      const hash = location.hash.replace('#', '').trim();
+      if (hash) {
+        const targetEl = document.getElementById(decodeURIComponent(hash));
+        if (targetEl) {
+          locomotive.scrollTo(targetEl, { offset: -96, duration: 0, immediate: true, force: true });
+          locomotive.resize();
+          return;
+        }
+      }
+
+      locomotive.scrollTo(0, { immediate: true, force: true });
+      locomotive.resize();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+    };
+  }, [location.pathname, location.hash]);
 
   return null;
 };

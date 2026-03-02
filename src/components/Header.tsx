@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) => {
-  const { lang, setLanguage, t } = useLanguage();
+  const { lang, setLanguage, t, isRTL } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isAboutSection, setIsAboutSection] = useState(false);
@@ -128,7 +128,7 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
     { label: t('nav.about') || 'About', ariaLabel: 'Learn about us', link: '/#about' },
     { label: t('nav.services') || 'Services', ariaLabel: 'View our services', link: '/#services' },
     { label: t('nav.projects') || 'Projects', ariaLabel: 'See our work', link: '/#projects' },
-    { label: t('nav.contact') || 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
+    { label: t('nav.contact') || 'Contact', ariaLabel: 'Get in touch', link: '/#contact' }
   ];
 
   const socialItems = [
@@ -153,8 +153,12 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
         <div className="container-main">
           <nav className="flex items-center justify-between h-[74px] md:h-[92px]">
             {/* Logo */}
-            <Link to="/" aria-label="Go to homepage" className="flex-shrink-0">
-              <AkisLogo logoVariant={isLightTheme ? 'black' : 'white'} iconOnly={false} className="scale-[1.05] md:scale-[1.58] origin-left" />
+            <Link to="/" aria-label="Go to homepage" className="flex-shrink-0 overflow-visible">
+              <AkisLogo
+                logoVariant={isLightTheme ? 'black' : 'white'}
+                iconOnly={false}
+                className={`scale-[1.02] md:scale-[1.34] ${isRTL ? 'origin-right' : 'origin-left'}`}
+              />
             </Link>
 
             {/* Right Side: Menu Button, Language, Contact */}
@@ -206,9 +210,9 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
 
               {/* Contact Button */}
               <a
-                href="/contact"
-                className={contactButtonClass}
-              >
+                  href="/#contact"
+                  className={contactButtonClass}
+                >
                 {t('nav.contact')}
               </a>
             </div>

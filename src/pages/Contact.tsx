@@ -5,7 +5,16 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const needOptionKeys = ['branding', 'socialMedia', 'seo', 'webDevelopment', 'other'] as const;
+const needOptionKeys = [
+  'branding',
+  'socialMedia',
+  'seo',
+  'webDevelopment',
+  'strategicConsulting',
+  'mediaProduction',
+  'appDevelopment',
+  'other',
+] as const;
 type NeedOption = (typeof needOptionKeys)[number];
 
 const ContactPageContent = () => {
@@ -64,8 +73,11 @@ const ContactPageContent = () => {
       needsOptions: {
         branding: lang === 'ar' ? 'الهوية البصرية' : 'Visual Identity',
         socialMedia: lang === 'ar' ? 'إدارة السوشيال ميديا' : 'Social Media Management',
-        seo: lang === 'ar' ? 'تهيئة محركات البحث' : 'Search Engine Optimization',
+        seo: lang === 'ar' ? 'تحسين محركات البحث' : 'Search Engine Optimization',
         webDevelopment: lang === 'ar' ? 'تطوير موقع / متجر' : 'Website & E-commerce Development',
+        strategicConsulting: lang === 'ar' ? 'الاستشارات التسويقية الاستراتيجية' : 'Strategic Marketing Consulting',
+        mediaProduction: lang === 'ar' ? 'الإنتاج الإعلامي والتصوير' : 'Media Production & Photography',
+        appDevelopment: lang === 'ar' ? 'تطوير التطبيقات' : 'Application Development',
         other: lang === 'ar' ? 'خدمة أخرى' : 'Other Service',
       },
     }),
@@ -155,7 +167,7 @@ const ContactPageContent = () => {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white [&_.container-main]:px-4 sm:[&_.container-main]:px-0`}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white`}>
       <Header />
 
       <main>
