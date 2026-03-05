@@ -152,7 +152,7 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
   const menuItems = [
     { label: t('nav.home') || 'Home', ariaLabel: 'Go to home page', link: '/#hero' },
     { label: t('nav.about') || 'About', ariaLabel: 'Learn about us', link: '/#about' },
-    { label: t('nav.services') || 'Services', ariaLabel: 'View our services', link: '/#services' },
+    { label: t('nav.services') || 'Services', ariaLabel: 'View our services', link: '/services' },
     { label: t('nav.projects') || 'Projects', ariaLabel: 'See our work', link: '/#projects' },
     { label: t('nav.contact') || 'Contact', ariaLabel: 'Get in touch', link: '/#contact' }
   ];

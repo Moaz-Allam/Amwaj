@@ -227,9 +227,9 @@ const About = () => {
                 className="group relative z-10 overflow-hidden rounded-xl border border-white/10 h-[248px] sm:h-[255px] lg:h-[300px] px-4 sm:px-6 py-5 sm:py-6 flex flex-col bg-[linear-gradient(135deg,rgba(5,18,34,0.86)_0%,rgba(10,36,62,0.62)_65%,rgba(17,60,96,0.46)_100%)] backdrop-blur-[2px] transition-all duration-300 hover:border-white/20"
               >
                 <div
-                  className={`absolute inset-y-0 w-[40%] min-w-[132px] sm:w-[43%] sm:min-w-[170px] flex items-center justify-center opacity-95 group-hover:scale-[1.02] transition-all duration-300 pointer-events-none ${isRTL ? 'left-[1%]' : 'right-[1%]'}`}
+                  className={`absolute inset-y-0 w-[44%] min-w-[164px] sm:w-[46%] sm:min-w-[210px] flex items-center justify-center opacity-95 group-hover:scale-[1.02] transition-all duration-300 pointer-events-none ${isRTL ? 'left-[1%]' : 'right-[1%]'}`}
                 >
-                  <img src={serviceImages[index]} alt={t(service.titleKey)} className="w-full h-[72%] sm:h-[78%] object-contain" loading="lazy" />
+                  <img src={serviceImages[index]} alt={t(service.titleKey)} className="w-full h-[84%] sm:h-[90%] object-contain scale-[2.2] sm:scale-[2.35] origin-center" loading="lazy" />
                 </div>
 
                 <div className="relative z-10">
@@ -237,15 +237,25 @@ const About = () => {
                 </div>
 
                 <div className={`relative z-10 mt-auto ${isRTL ? 'text-right pl-[42%] sm:pl-[44%]' : 'text-left pr-[42%] sm:pr-[44%]'}`}>
-                  <h3 className="text-[20px] sm:text-[30px] leading-[1.02] sm:leading-[0.98] font-semibold mb-2 tracking-[-0.02em] text-white">
+                  <h3 className={`text-[20px] sm:text-[30px] font-semibold mb-2 tracking-[-0.02em] text-white ${isRTL ? 'leading-[1.36] sm:leading-[1.3]' : 'leading-[1.02] sm:leading-[0.98]'}`}>
                     {t(service.titleKey)}
                   </h3>
-                  <p className="max-w-[34ch] text-white/85 text-[14px] sm:text-[15px] leading-[1.3] line-clamp-3">
+                  <p className={`max-w-[34ch] text-white/85 text-[14px] sm:text-[15px] line-clamp-3 ${isRTL ? 'leading-[1.62]' : 'leading-[1.3]'}`}>
                     {t(service.descKey)}
                   </p>
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 sm:mt-10 text-center">
+            <a
+              href="/services"
+              className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-[15px] sm:text-[16px] font-medium text-white hover:border-primary hover:text-primary transition-colors"
+            >
+              {t('services.link')}
+              <ChevronRight size={18} className={isRTL ? 'rotate-180' : ''} />
+            </a>
           </div>
         </div>
       </div>

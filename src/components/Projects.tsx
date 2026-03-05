@@ -18,23 +18,12 @@ type ProjectCard = {
   id: string;
   color: string;
   index: string;
+  websiteUrl: string;
   titleKey: string;
   descKey: string;
   tagKey: string;
   gallery: string[];
   quote: {
-    en: string;
-    ar: string;
-  };
-  person: {
-    en: string;
-    ar: string;
-  };
-  role: {
-    en: string;
-    ar: string;
-  };
-  avatar: {
     en: string;
     ar: string;
   };
@@ -45,6 +34,7 @@ const cardsData: ProjectCard[] = [
     id: 'card-1',
     color: '#0f573f',
     index: '01',
+    websiteUrl: 'https://investorksa.com/',
     titleKey: 'projects.card.2.title',
     descKey: 'projects.card.2.desc',
     tagKey: 'projects.card.2.tag.1',
@@ -53,14 +43,12 @@ const cardsData: ProjectCard[] = [
       en: 'The process was clear from day one. Every deliverable was tied to measurable growth goals and real business outcomes.',
       ar: 'المنهجية كانت واضحة منذ البداية، وكل مخرج كان مرتبطًا بأهداف نمو قابلة للقياس ونتائج حقيقية.',
     },
-    person: { en: 'Fahad Almalki', ar: 'فهد المالكي' },
-    role: { en: 'Founder', ar: 'المؤسس' },
-    avatar: { en: 'FA', ar: 'فم' },
   },
   {
     id: 'card-2',
     color: '#d4af37',
     index: '02',
+    websiteUrl: 'https://ananalbena.com/',
     titleKey: 'projects.card.3.title',
     descKey: 'projects.card.3.desc',
     tagKey: 'projects.card.3.tag.1',
@@ -69,14 +57,12 @@ const cardsData: ProjectCard[] = [
       en: 'Execution moved fast without sacrificing quality. Creative and technical teams worked as one synchronized unit.',
       ar: 'التنفيذ كان سريعًا دون المساس بالجودة، وتكامل الفريق الإبداعي والتقني بشكل متناغم.',
     },
-    person: { en: 'Rayan Alshehri', ar: 'ريان الشهري' },
-    role: { en: 'Brand Lead', ar: 'قائد العلامة' },
-    avatar: { en: 'RA', ar: 'رش' },
   },
   {
     id: 'card-3',
     color: '#2563eb',
     index: '03',
+    websiteUrl: 'https://mokhatatalshamal.com/',
     titleKey: 'projects.card.4.title',
     descKey: 'projects.card.4.desc',
     tagKey: 'projects.card.4.tag.1',
@@ -85,9 +71,6 @@ const cardsData: ProjectCard[] = [
       en: 'Reporting was consistently transparent and useful. We always knew what to improve next and why it mattered.',
       ar: 'التقارير كانت شفافة ومفيدة باستمرار، وكنا نعرف دائمًا ما الذي يجب تحسينه ولماذا.',
     },
-    person: { en: 'Maha Alharbi', ar: 'مها الحربي' },
-    role: { en: 'Growth Manager', ar: 'مديرة النمو' },
-    avatar: { en: 'MA', ar: 'مح' },
   },
 ];
 
@@ -210,17 +193,19 @@ const Projects = () => {
               style={{ backgroundColor: card.color, zIndex: isDesktop ? cardsData.length + 1 - index : undefined }}
             >
               <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 lg:px-10 pt-4 sm:pt-6 pb-4 sm:pb-6">
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 items-start">
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 sm:gap-4 items-start">
                   <div className="max-w-[980px]">
                     <a
-                      href="/contact"
+                      href={card.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl bg-white text-black px-3 sm:px-4 py-2 text-[12px] sm:text-[13px] font-medium tracking-[0.03em] hover:bg-white/90 transition-colors"
                     >
                       {t('projects.link')}
                       <span className={isRTL ? 'rotate-180' : ''}>{'->'}</span>
                     </a>
 
-                    <h3 className={`mt-4 text-white text-[32px] sm:text-[46px] lg:text-[82px] font-semibold ${isRTL ? 'leading-[1.2] sm:leading-[1.14] lg:leading-[1.08] tracking-[-0.01em]' : 'leading-[0.93] tracking-[-0.025em]'}`}>
+                    <h3 className={`mt-2 sm:mt-4 text-white text-[32px] sm:text-[46px] lg:text-[82px] font-semibold ${isRTL ? 'leading-[1.2] sm:leading-[1.14] lg:leading-[1.08] tracking-[-0.01em]' : 'leading-[0.93] tracking-[-0.025em]'}`}>
                       {t(card.titleKey)}
                     </h3>
 
@@ -234,22 +219,11 @@ const Projects = () => {
                   </span>
                 </div>
 
-                <div className="mt-6 sm:mt-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)] gap-5 lg:gap-8 items-end">
+                <div className="mt-8 sm:mt-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)] gap-5 lg:gap-8 items-end">
                   <div className="max-w-[450px]">
                     <p className={`text-white text-[16px] sm:text-[28px] font-semibold tracking-[-0.01em] line-clamp-4 sm:line-clamp-none ${isRTL ? '!leading-[1.7] sm:!leading-[1.4]' : 'leading-[1.15] sm:leading-[1.1]'}`}>
                       {card.quote[lang]}
                     </p>
-
-                    <div className="mt-5 flex items-center gap-3">
-                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-white/40 bg-white/18 flex items-center justify-center text-white text-[11px] sm:text-[13px] font-bold tracking-wide">
-                        {card.avatar[lang]}
-                      </div>
-
-                      <div>
-                        <p className="text-white text-[16px] sm:text-[20px] font-semibold leading-none">{card.person[lang]}</p>
-                        <p className="text-white/70 text-[12px] sm:text-[14px] mt-1">{card.role[lang]}</p>
-                      </div>
-                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">

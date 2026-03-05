@@ -168,7 +168,7 @@ const Services = () => {
                 <img
                   src={serviceImages[i]}
                   alt={t(service.titleKey)}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain scale-[2.1] sm:scale-[2.25] origin-center"
                   loading="lazy"
                 />
               </div>
@@ -178,15 +178,19 @@ const Services = () => {
               </div>
 
               <div className="relative z-10 mt-auto max-w-[74%] sm:max-w-[60%]">
-                <h3 className="text-[32px] sm:text-[40px] leading-[0.98] font-semibold mb-3 tracking-[-0.02em] text-white">{t(service.titleKey)}</h3>
-                <p className="text-white/85 text-[16px] leading-[1.25] line-clamp-3">{t(service.descKey)}</p>
+                <h3 className={`text-[32px] sm:text-[40px] font-semibold mb-3 tracking-[-0.02em] text-white ${isRTL ? 'leading-[1.24] sm:leading-[1.18]' : 'leading-[0.98]'}`}>
+                  {t(service.titleKey)}
+                </h3>
+                <p className={`text-white/85 text-[16px] line-clamp-3 ${isRTL ? 'leading-[1.58]' : 'leading-[1.25]'}`}>
+                  {t(service.descKey)}
+                </p>
               </div>
             </article>
           ))}
         </div>
 
         <div ref={linkRef} className="mt-10 sm:mt-14 text-center">
-          <a href="#" className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-primary transition-colors">
+          <a href="/services" className="inline-flex items-center gap-2 text-[16px] font-medium hover:text-primary transition-colors">
             {t('services.link')} <ChevronRight size={18} className={isRTL ? 'rotate-180' : ''} />
           </a>
         </div>
