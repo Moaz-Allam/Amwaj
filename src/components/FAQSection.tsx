@@ -24,7 +24,7 @@ const FAQSection = () => {
       <div className="container-main">
         <div className="grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
           <div data-gsap="reveal" className={isRTL ? 'text-right' : 'text-left'}>
-            <span className="text-primary font-medium tracking-wide text-[16px]">{t('faq.label')}</span>
+            <span className="text-primary font-medium tracking-wide text-[32px] leading-none">{t('faq.label')}</span>
             <h2 className="text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] mt-4 text-foreground">{t('faq.title')}</h2>
             <p className={`text-[15px] sm:text-[16px] text-white/78 mt-3 ${isRTL ? '!leading-[1.8] sm:!leading-[1.7]' : 'leading-[1.45]'}`}>{t('faq.desc')}</p>
           </div>

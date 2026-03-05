@@ -165,7 +165,7 @@ const Projects = () => {
       <div className="container-main mb-10 sm:mb-14">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 sm:gap-6">
           <div>
-            <span className="text-primary font-medium tracking-wide text-[16px]">{t('projects.label')}</span>
+            <span className="text-primary font-medium tracking-wide text-[32px] leading-none">{t('projects.label')}</span>
             <h2 className="mt-4 text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground">
               {t('projects.title')}
             </h2>

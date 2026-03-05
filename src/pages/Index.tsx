@@ -18,9 +18,8 @@ const PageContent = () => {
                 <Hero />
                 <div className="relative z-10">
                     <About />
-                    <div aria-hidden="true" className="h-44 sm:h-32 bg-black" />
+                    <div aria-hidden="true" className="h-44 sm:h-32 lg:h-[45vh] bg-black" />
                     <Projects />
-                    <div aria-hidden="true" className="h-32 sm:h-0 bg-black" />
                     <FAQSection />
                     <div aria-hidden="true" className="h-32 sm:h-0 bg-black" />
                     <ServicesMarquee />

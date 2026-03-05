@@ -7,10 +7,10 @@ const Footer = () => {
   const ref = useGsapReveal<HTMLElement>('[data-gsap="reveal"]', { y: 30, stagger: 0.08 });
 
   const pageLinks = [
-    { label: t('nav.about'), href: '/#about' },
+    { label: t('nav.about'), href: '/#about-intro' },
     { label: t('nav.services'), href: '/services' },
     { label: t('nav.projects'), href: '/#projects' },
-    { label: t('nav.contact'), href: '/#contact' },
+    { label: t('nav.contact'), href: 'https://wa.me/966535800559' },
   ];
 
   const footerPhone = '+966 53 580 0559';
@@ -36,7 +36,16 @@ const Footer = () => {
               <h4 className="text-[14px] leading-none font-medium text-primary mb-4">{t('footer.pages')}</h4>
               <ul className="space-y-2.5">
                 {pageLinks.map((link) => (
-                  <li key={link.label}><a href={link.href} className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors">{link.label}</a></li>
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="text-[15px] sm:text-[16px] leading-[1.25] text-white hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>

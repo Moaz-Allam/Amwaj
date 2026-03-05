@@ -46,10 +46,32 @@ const ServicesPageContent = () => {
               {serviceCatalog.map((service) => (
                 <article
                   key={service.id}
-                  className="overflow-hidden border border-white/10 bg-[linear-gradient(160deg,rgba(7,19,36,0.88)_0%,rgba(8,28,49,0.66)_60%,rgba(16,56,87,0.45)_100%)] transition-colors hover:border-white/20"
+                  className="group relative overflow-hidden border border-white/10 bg-[linear-gradient(160deg,rgba(7,19,36,0.88)_0%,rgba(8,28,49,0.66)_60%,rgba(16,56,87,0.45)_100%)] transition-colors hover:border-white/20"
                 >
                   <div className="relative h-[240px] sm:h-[290px] border-b border-white/10 bg-[radial-gradient(circle_at_65%_36%,rgba(13,127,184,0.2)_0%,rgba(0,0,0,0)_70%)]">
-                    <img src={service.image} alt={service.title[lang]} className="w-full h-full object-contain scale-[1.9] sm:scale-[2.12]" loading="lazy" />
+                    <div className="pointer-events-none absolute inset-0">
+                      <div
+                        className="absolute left-1/2 top-[52%] h-[66%] w-[66%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-45 blur-[54px] transition-all duration-500 group-hover:opacity-90 group-hover:scale-[1.15]"
+                        style={{
+                          background:
+                            'radial-gradient(circle at center, rgba(104,229,255,0.62) 0%, rgba(17,116,156,0.48) 42%, rgba(5,13,24,0) 78%)',
+                        }}
+                      />
+                      <div
+                        className="absolute left-1/2 top-[50%] h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 blur-[20px] transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.22]"
+                        style={{
+                          background:
+                            'radial-gradient(circle at center, rgba(210,247,255,0.92) 0%, rgba(74,206,244,0.58) 38%, rgba(0,0,0,0) 72%)',
+                        }}
+                      />
+                    </div>
+
+                    <img
+                      src={service.image}
+                      alt={service.title[lang]}
+                      className="relative z-10 w-full h-full object-contain scale-[1.9] sm:scale-[2.12] transition-[transform,filter] duration-500 drop-shadow-[0_18px_28px_rgba(0,0,0,0.5)] group-hover:scale-[2.02] sm:group-hover:scale-[2.26] group-hover:drop-shadow-[0_22px_36px_rgba(94,215,255,0.36)]"
+                      loading="lazy"
+                    />
                   </div>
 
                   <div className="p-5 sm:p-6">

@@ -29,7 +29,7 @@ const translations: Translations = {
 
   // Services
   'services.label': { en: 'Integrated Growth Services', ar: 'الخدمات' },
-  'services.title': { en: 'Simple services for growth.', ar: 'خدمات بسيطة للنمو.' },
+  'services.title': { en: 'Simple services for growth.', ar: 'خدماتنا' },
   'services.desc': { en: 'Brand, ads, web, and SEO in one team.', ar: 'هوية، إعلانات، موقع، وتحسين محركات البحث في فريق واحد.' },
   'services.link': { en: 'View all services', ar: 'عرض جميع الخدمات' },
   'service.1.title': { en: 'Visual Identity Design', ar: 'تصميم الهوية البصرية' },
@@ -54,21 +54,21 @@ const translations: Translations = {
   'projects.card.1.tag.1': { en: 'Research', ar: 'بحث' },
   'projects.card.1.tag.2': { en: 'Analysis', ar: 'تحليل' },
 
-  'projects.card.2.title': { en: 'Saudi Investment Platform', ar: 'منصة الاستثمار السعودي' },
+  'projects.card.2.title': { en: 'Saudi Investment Platform', ar: 'خدمات المستثمر' },
   'projects.card.2.desc': { en: 'An Arabic-first business website offering company setup services, partner logos, service highlights, and a lead contact form.', ar: 'موقع أعمال عربي بالدرجة الأولى يقدّم خدمات تأسيس الشركات، وشعارات الشركاء، وإبراز الخدمات، ونموذج تواصل لاستقبال العملاء المحتملين.' },
-  'projects.card.2.tag.1': { en: 'Saudi Investment Platform', ar: 'منصة الاستثمار السعودي' },
+  'projects.card.2.tag.1': { en: 'Saudi Investment Platform', ar: 'خدمات المستثمر' },
   'projects.card.2.tag.2': { en: 'Planning', ar: 'تخطيط' },
   'projects.card.2.tag.3': { en: 'Data-Driven', ar: 'قائم على البيانات' },
 
-  'projects.card.3.title': { en: 'Anan Al-Bena', ar: 'عنان البناء' },
+  'projects.card.3.title': { en: 'Anan Al-Bena', ar: 'عنان البناء المحدودة' },
   'projects.card.3.desc': { en: 'A corporate contracting website presenting services, company strengths, core values, and a featured project portfolio.', ar: 'موقع شركة مقاولات يعرض الخدمات ونقاط القوة والقيم الأساسية، مع إبراز مشاريع مختارة ضمن معرض أعمال واضح.' },
-  'projects.card.3.tag.1': { en: 'Anan Al-Bena', ar: 'عنان البناء' },
+  'projects.card.3.tag.1': { en: 'Anan Al-Bena', ar: 'عنان البناء المحدودة' },
   'projects.card.3.tag.2': { en: 'Technical', ar: 'تقنية' },
   'projects.card.3.tag.3': { en: 'Quality', ar: 'جودة' },
 
-  'projects.card.4.title': { en: 'Alshمال Store', ar: 'متجر الشمال' },
+  'projects.card.4.title': { en: 'Alshمال Store', ar: 'مخططات الشمال' },
   'projects.card.4.desc': { en: 'An e-commerce website for home supplies with clear categories, featured products, FAQs, and location/contact sections.', ar: 'متجر إلكتروني للمستلزمات المنزلية يضم تصنيفات واضحة، ومنتجات مميزة، وقسم أسئلة شائعة، ومعلومات الموقع والتواصل.' },
-  'projects.card.4.tag.1': { en: 'Alshمال Store', ar: 'متجر الشمال' },
+  'projects.card.4.tag.1': { en: 'Alshمال Store', ar: 'مخططات الشمال' },
   'projects.card.4.tag.2': { en: 'Reporting', ar: 'تقارير' },
   'projects.card.4.tag.3': { en: 'Transparency', ar: 'شفافية' },
 

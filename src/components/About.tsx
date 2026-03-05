@@ -172,8 +172,8 @@ const About = () => {
   }, [lang]);
 
   return (
-    <section id="about" ref={sectionRef} className="bg-white text-black min-h-screen lg:h-screen relative z-20 overflow-visible lg:overflow-hidden">
-      <div ref={aboutContentRef} className="container-main relative z-20 h-screen flex items-center justify-center">
+    <section id="about" ref={sectionRef} className="bg-white text-black min-h-screen lg:h-screen relative z-20 overflow-visible">
+      <div id="about-intro" ref={aboutContentRef} className="container-main relative z-20 h-screen flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-6 max-w-5xl">
           <img
             src="/brand/amwaj-logo-primary.png"
@@ -182,7 +182,7 @@ const About = () => {
             loading="eager"
           />
 
-          <span className="text-primary font-semibold tracking-[0.3em] text-[12px] sm:text-[13px] uppercase">
+          <span className="text-primary font-semibold tracking-[0.3em] text-[24px] sm:text-[26px] uppercase">
             {lang === 'ar' ? 'من نحن' : 'WHO WE ARE'}
           </span>
 
@@ -212,7 +212,7 @@ const About = () => {
       <div id="services" ref={servicesContentRef} className="relative z-40 w-full mt-14 sm:mt-16 mb-10 sm:mb-12 py-12 sm:py-14 bg-black lg:bg-transparent lg:py-0 lg:mt-0 lg:mb-0 lg:absolute lg:inset-0 flex items-start lg:items-center">
         <div className="container-main w-full">
           <div className="flex flex-col items-center text-center gap-3 mb-8 sm:mb-10">
-            <span className="text-primary font-medium tracking-wide text-[16px]">{t('services.label')}</span>
+            <span className="text-primary font-medium tracking-wide text-[32px] leading-none">{t('services.label')}</span>
             <h2 className="text-white text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] max-w-4xl">
               {t('services.title')}
             </h2>
