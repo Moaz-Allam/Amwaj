@@ -38,12 +38,19 @@ const FAQSection = () => {
                   data-gsap="reveal"
                   className={`border-b border-white/20 transition-colors duration-200 ${isOpen ? 'border-primary/60' : 'hover:border-white/35'}`}
                 >
-                  <button onClick={() => setOpenIndex(isOpen ? null : i)} className={`w-full flex items-center justify-between py-4 gap-5 ${isRTL ? 'text-right' : 'text-left'}`}>
+                  <button
+                    type="button"
+                    id={`faq-question-${i}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${i}`}
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className={`w-full flex items-center justify-between py-4 gap-5 ${isRTL ? 'text-right' : 'text-left'}`}
+                  >
                     <span className={`text-[15px] sm:text-[16px] font-normal text-foreground ${isRTL ? 'pl-4 !leading-[1.75] sm:!leading-[1.65]' : 'pr-4 leading-[1.45]'}`}>{faq.q}</span>
                     {isOpen ? <Minus size={16} className="text-primary shrink-0" /> : <Plus size={16} className="text-white/60 shrink-0" />}
                   </button>
                   {isOpen && (
-                    <div className="pb-4 animate-fade-in">
+                    <div id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-question-${i}`} className="pb-4 animate-fade-in">
                       <p className={`text-white/75 text-[15px] sm:text-[16px] ${isRTL ? '!leading-[1.85] sm:!leading-[1.7]' : 'leading-[1.5]'}`}>{faq.a}</p>
                     </div>
                   )}

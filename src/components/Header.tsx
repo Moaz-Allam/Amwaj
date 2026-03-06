@@ -138,7 +138,7 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
       ? 'translate-y-0'
       : '-translate-y-full pointer-events-none'
     : 'translate-y-0';
-  const controlTextClass = isLightTheme ? 'text-black hover:text-black/65' : 'text-white hover:text-white/70';
+  const controlTextClass = isLightTheme ? 'text-black hover:text-black/65 !leading-[1.2]' : 'text-white hover:text-white/70 !leading-[1.2]';
   const menuLineClass = isLightTheme ? 'bg-black' : 'bg-white';
   const languageDropdownClass = isLightTheme
     ? 'min-w-[72px] bg-white border border-black/15 shadow-[0_8px_28px_rgba(15,23,42,0.14)]'
@@ -146,8 +146,8 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
   const languageActiveClass = isLightTheme ? 'text-primary bg-black/5' : 'text-primary bg-white/5';
   const languageInactiveClass = isLightTheme ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/10';
   const contactButtonClass = isLightTheme
-    ? 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-white bg-black rounded-none hover:bg-black/90 transition-colors whitespace-nowrap'
-    : 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium text-background bg-white rounded-none hover:bg-white/90 transition-colors whitespace-nowrap';
+    ? 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium !leading-[1.2] text-white bg-black rounded-none hover:bg-black/90 transition-colors whitespace-nowrap'
+    : 'inline-flex items-center justify-center px-3 py-1.5 sm:px-5 sm:py-2 text-[12px] sm:text-sm font-medium !leading-[1.2] text-background bg-white rounded-none hover:bg-white/90 transition-colors whitespace-nowrap';
 
   const menuItems = [
     { label: t('nav.home') || 'Home', ariaLabel: 'Go to home page', link: '/#hero' },
@@ -191,6 +191,7 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
             <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
               {/* Hamburger Menu Button */}
               <button
+                type="button"
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="hidden md:flex flex-col items-center justify-center w-10 h-10 gap-1.5 hover:opacity-70 transition-opacity relative z-[100]"
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -207,6 +208,7 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
                   type="button"
                   className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${controlTextClass}`}
                   aria-label="Change language"
+                  aria-haspopup="menu"
                 >
                   <span>{lang === 'en' ? 'EN' : 'AR'}</span>
                   <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -219,14 +221,16 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
                     <button
                       type="button"
                       onClick={() => setLanguage('en')}
-                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'en' ? languageActiveClass : languageInactiveClass}`}
+                      lang="en"
+                      className={`w-full px-3 py-2 text-left text-sm !leading-[1.2] transition-colors ${lang === 'en' ? languageActiveClass : languageInactiveClass}`}
                     >
                       EN
                     </button>
                     <button
                       type="button"
                       onClick={() => setLanguage('ar')}
-                      className={`w-full px-3 py-2 text-left text-sm transition-colors ${lang === 'ar' ? languageActiveClass : languageInactiveClass}`}
+                      lang="ar"
+                      className={`w-full px-3 py-2 text-left text-sm !leading-[1.2] transition-colors ${lang === 'ar' ? languageActiveClass : languageInactiveClass}`}
                     >
                       AR
                     </button>
@@ -235,12 +239,9 @@ const Header = ({ fixedOnTop = false, transitionTarget = false }: HeaderProps) =
               </div>
 
               {/* Contact Button */}
-              <a
-                  href="/#contact"
-                  className={contactButtonClass}
-                >
+              <Link to="/#contact" className={contactButtonClass} aria-label={isRTL ? 'الانتقال إلى قسم التواصل' : 'Go to contact section'}>
                 {t('nav.contact')}
-              </a>
+              </Link>
             </div>
           </nav>
         </div>

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useSeo } from '@/hooks/useSeo';
 
 const ContactThankYouContent = () => {
   const { isRTL, lang } = useLanguage();
@@ -15,6 +16,19 @@ const ContactThankYouContent = () => {
     home: lang === 'ar' ? 'العودة للرئيسية' : 'Back to Home',
     contact: lang === 'ar' ? 'إرسال طلب آخر' : 'Send another request',
   };
+
+  useSeo({
+    lang,
+    path: '/contact/thank-you',
+    title: lang === 'ar' ? 'تم استلام طلبك | أمواج الرائدة' : 'Request Received | Amwaj Al-Raeda',
+    description:
+      lang === 'ar'
+        ? 'تم استلام طلبك بنجاح، وسيقوم فريق أمواج الرائدة بالتواصل معك خلال وقت قصير.'
+        : 'Your request was received successfully. The Amwaj Al-Raeda team will contact you shortly.',
+    noindex: true,
+    image: '/brand/amwaj-logo-primary.png',
+    imageAlt: lang === 'ar' ? 'تأكيد استلام الطلب' : 'Request confirmation',
+  });
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white`}>
@@ -42,10 +56,6 @@ const ContactThankYouContent = () => {
   );
 };
 
-const ContactThankYou = () => (
-  <LanguageProvider>
-    <ContactThankYouContent />
-  </LanguageProvider>
-);
+const ContactThankYou = () => <ContactThankYouContent />;
 
 export default ContactThankYou;

@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import Header from '@/components/Header';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 import ServicesMarquee from '@/components/ServicesMarquee';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSeo } from '@/hooks/useSeo';
 import { serviceCatalog } from '@/lib/servicesCatalog';
 
 const ServicesPageContent = () => {
@@ -22,6 +24,45 @@ const ServicesPageContent = () => {
           description:
             'From identity and content to advertising, SEO, and app development, one team handles the full execution cycle.',
         };
+
+  const servicesStructuredData = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      itemListElement: serviceCatalog.map((service, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Service',
+          name: service.title[lang],
+          description: service.description[lang],
+          serviceType: service.label[lang],
+          areaServed: 'Saudi Arabia',
+        },
+      })),
+    }),
+    [lang]
+  );
+
+  useSeo({
+    lang,
+    path: '/services',
+    title:
+      lang === 'ar'
+        ? 'خدمات أمواج الرائدة | تسويق رقمي، SEO، تطوير مواقع وتطبيقات'
+        : 'Amwaj Al-Raeda Services | SEO, Digital Marketing, Web & App Development',
+    description:
+      lang === 'ar'
+        ? 'استكشف خدمات أمواج الرائدة: الهوية البصرية، إدارة الحملات، إدارة المحتوى، تحسين محركات البحث، تطوير المواقع والمتاجر والتطبيقات.'
+        : 'Explore Amwaj Al-Raeda services: branding, campaign management, content, SEO, website and e-commerce development, and app development.',
+    keywords:
+      lang === 'ar'
+        ? 'خدمات تسويق رقمي, تحسين محركات البحث, إدارة الحملات الإعلانية, تصميم هوية بصرية, تطوير متجر إلكتروني, تطوير تطبيقات'
+        : 'digital marketing services, SEO services Saudi Arabia, social media management, branding services, ecommerce development, app development',
+    image: '/brand/amwaj-logo-primary.png',
+    imageAlt: lang === 'ar' ? 'خدمات أمواج الرائدة للنمو الرقمي' : 'Amwaj Al-Raeda digital growth services',
+    structuredData: servicesStructuredData,
+  });
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className={`${isRTL ? 'font-cairo' : 'font-sans'} min-h-screen overflow-x-hidden bg-black text-white`}>

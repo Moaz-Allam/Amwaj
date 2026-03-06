@@ -311,6 +311,13 @@
     transform-origin: 50% 100%;
 }
 
+body[dir='rtl'] .staggered-menu-panel .sm-panel-item,
+body[dir='rtl'] .staggered-menu-panel .sm-panel-itemLabel,
+body[dir='rtl'] .staggered-menu-panel .sm-socials-title,
+body[dir='rtl'] .staggered-menu-panel .sm-socials-link {
+    line-height: 1.2;
+}
+
 .sm-panel-item:hover {
     color: var(--sm-accent, #0d7fb8);
 }

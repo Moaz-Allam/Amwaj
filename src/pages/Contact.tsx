@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSeo } from '@/hooks/useSeo';
 
 const needOptionKeys = [
   'branding',
@@ -83,6 +84,34 @@ const ContactPageContent = () => {
     }),
     [lang]
   );
+
+  useSeo({
+    lang,
+    path: '/contact',
+    title: lang === 'ar' ? 'تواصل مع أمواج الرائدة | ابدأ مشروعك' : 'Contact Amwaj Al-Raeda | Start Your Project',
+    description:
+      lang === 'ar'
+        ? 'تواصل مع فريق أمواج الرائدة في الرياض لبدء مشروع التسويق الرقمي، إدارة الحملات، تحسين محركات البحث، أو تطوير الموقع والمتجر.'
+        : 'Contact Amwaj Al-Raeda in Riyadh to start your digital marketing project, SEO plan, campaign management, or website development.',
+    keywords:
+      lang === 'ar'
+        ? 'تواصل معنا, وكالة تسويق رقمي الرياض, استشارة تسويقية, طلب عرض سعر تسويق'
+        : 'contact digital marketing agency, Riyadh marketing consultation, request SEO proposal, contact Amwaj Al-Raeda',
+    image: '/brand/amwaj-logo-primary.png',
+    imageAlt: lang === 'ar' ? 'تواصل مع أمواج الرائدة' : 'Contact Amwaj Al-Raeda',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: lang === 'ar' ? 'صفحة التواصل - أمواج الرائدة' : 'Contact Page - Amwaj Al-Raeda',
+      url: 'https://amwajalraeda.com/contact',
+      about: {
+        '@type': 'MarketingAgency',
+        name: 'Amwaj Al-Raeda',
+        telephone: '+966535800559',
+        email: 'info@amwajalraeda.com',
+      },
+    },
+  });
 
   const toggleNeed = (option: NeedOption) => {
     setSelectedNeeds((prev) => (prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]));
@@ -202,6 +231,8 @@ const ContactPageContent = () => {
                 <p className="text-white/65 text-[16px] sm:text-[20px] md:text-[24px] leading-[1.4] mt-5 sm:mt-6 max-w-[820px]">{labels.sectionBody}</p>
 
                 <input
+                  id="website-honeypot"
+                  name="website"
                   type="text"
                   tabIndex={-1}
                   autoComplete="off"
@@ -213,49 +244,61 @@ const ContactPageContent = () => {
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-10">
                   <div className="space-y-2">
-                    <label className="text-[16px] text-primary">{labels.fullName}</label>
+                    <label htmlFor="full-name" className="text-[16px] text-primary">{labels.fullName}</label>
                     <input
+                      id="full-name"
+                      name="fullName"
                       type="text"
                       value={fullName}
                       onChange={(event) => setFullName(event.target.value)}
                       placeholder={labels.yourNamePlaceholder}
+                      autoComplete="name"
                       required
-                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[16px] text-primary">{labels.emailAddress}</label>
+                    <label htmlFor="email-address" className="text-[16px] text-primary">{labels.emailAddress}</label>
                     <input
+                      id="email-address"
+                      name="email"
                       type="email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       placeholder={labels.yourEmailPlaceholder}
+                      autoComplete="email"
                       required
-                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[16px] text-primary">{labels.phoneNumber}</label>
+                    <label htmlFor="phone-number" className="text-[16px] text-primary">{labels.phoneNumber}</label>
                     <input
+                      id="phone-number"
+                      name="phone"
                       type="tel"
                       value={clientPhone}
                       onChange={(event) => setClientPhone(event.target.value)}
                       placeholder={labels.yourPhonePlaceholder}
+                      autoComplete="tel"
                       required
-                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
 
                   <div className="space-y-2 sm:col-span-2 lg:col-span-1">
-                    <label className="text-[16px] text-primary">{labels.companyName}</label>
+                    <label htmlFor="company-name" className="text-[16px] text-primary">{labels.companyName}</label>
                     <input
+                      id="company-name"
+                      name="company"
                       type="text"
                       value={company}
                       onChange={(event) => setCompany(event.target.value)}
                       placeholder={labels.yourCompanyPlaceholder}
-                        className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
+                      autoComplete="organization"
+                      className="w-full bg-transparent border border-white/30 px-4 py-3 text-[16px] sm:text-[18px] placeholder:text-white/45 focus:outline-none focus:border-primary"
                     />
                   </div>
                 </div>
@@ -325,9 +368,11 @@ const ContactPageContent = () => {
                 </div>
 
                 <div className="mt-10">
-                  <label className="block text-primary text-[24px] sm:text-[30px] mb-1">{labels.projectPrompt}</label>
+                  <label htmlFor="project-details" className="block text-primary text-[24px] sm:text-[30px] mb-1">{labels.projectPrompt}</label>
                   <p className="text-[16px] sm:text-[24px] text-white/45 mb-5 sm:mb-6">{labels.projectHint}</p>
                   <textarea
+                    id="project-details"
+                    name="projectDetails"
                     value={projectDetails}
                     onChange={(event) => setProjectDetails(event.target.value)}
                     rows={3}
@@ -338,7 +383,11 @@ const ContactPageContent = () => {
                 </div>
 
                 <div className="mt-14 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
-                  <p className={`text-[16px] md:text-[18px] ${submitStatus === 'success' ? 'text-primary' : submitStatus === 'error' ? 'text-red-400' : 'text-white/75'}`}>
+                  <p
+                    role="status"
+                    aria-live="polite"
+                    className={`text-[16px] md:text-[18px] ${submitStatus === 'success' ? 'text-primary' : submitStatus === 'error' ? 'text-red-400' : 'text-white/75'}`}
+                  >
                     {submitStatus === 'success'
                       ? labels.submitSuccess
                       : submitStatus === 'validation'

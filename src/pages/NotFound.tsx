@@ -1,11 +1,28 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useSeo } from "@/hooks/useSeo";
 
 const NotFound = () => {
   const location = useLocation();
+  const { lang } = useLanguage();
+
+  useSeo({
+    lang,
+    path: location.pathname || '/404',
+    title: lang === 'ar' ? 'الصفحة غير موجودة | أمواج الرائدة' : 'Page Not Found | Amwaj Al-Raeda',
+    description:
+      lang === 'ar'
+        ? 'الصفحة التي تبحث عنها غير متاحة حالياً. يمكنك العودة إلى الصفحة الرئيسية.'
+        : 'The page you are looking for is not available. Return to the homepage to continue browsing.',
+    noindex: true,
+    image: '/brand/amwaj-logo-primary.png',
+  });
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    if (import.meta.env.DEV) {
+      console.warn("404 route visited:", location.pathname);
+    }
   }, [location.pathname]);
 
   return (

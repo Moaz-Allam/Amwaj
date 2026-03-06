@@ -23,7 +23,7 @@ const translations: Translations = {
 
   // About
   'about.label': { en: 'Who We Are', ar: 'من نحن' },
-  'about.title': { en: 'Amwaj Alraeda is a Saudi-based marketing and digital growth company built for businesses that aim higher.', ar: 'امواج الرائدة شركة سعودية متخصصة في بناء النمو الرقمي للعلامات التجارية التي تسعى للتميّز والريادة.' },
+  'about.title': { en: 'Amwaj Alraeda is a Saudi-based marketing and digital growth company built for businesses that aim higher.', ar: 'شركة سعودية متخصصة في بناء النمو الرقمي للعلامات التجارية التي تسعى للتميّز والريادة.' },
   'about.desc': { en: 'We don\'t execute campaigns in isolation — we design integrated growth ecosystems where branding, performance, content, and technology work together. Our focus is simple: measurable results, scalable strategies, and sustainable market impact.', ar: 'نحن لا ننفذ حملات منفصلة، بل نصمم منظومات متكاملة تجمع بين الاستراتيجية، والإبداع، والأداء، والتقنية ضمن إطار واحد يخدم أهداف العمل. تركيزنا واضح: نتائج قابلة للقياس، استراتيجيات قابلة للتوسع، وتأثير مستدام في السوق.' },
   'about.link': { en: 'Learn more about us', ar: 'اعرف المزيد عنا' },
 
@@ -44,7 +44,7 @@ const translations: Translations = {
   // Projects / Our Process
   'projects.label': { en: 'Our Projects', ar: 'مشاريعنا' },
   'projects.title': { en: 'Selected case studies', ar: 'نماذج من أعمالنا' },
-  'projects.desc': { en: 'Real collaborations where strategy, creativity, and performance move together.', ar: 'تجارب حقيقية تتكامل فيها الاستراتيجية والإبداع والأداء لتحقيق نتائج ملموسة.' },
+  'projects.desc': { en: 'Real collaborations where strategy, creativity, and performance move together.', ar: 'تجارب حقيقية تتكامل فيها الاستراتيجية والإبداع والأداء لتحقيق نتائج ملموسة ومستدامة.' },
   'projects.cta.title': { en: 'Start your growth journey with Amwaj Alraeda', ar: 'ابدأ رحلة نمو علامتك التجارية اليوم' },
   'projects.cta.button': { en: 'Request a Strategy Session', ar: 'اطلب استشارة استراتيجية' },
   'projects.link': { en: 'View Website', ar: 'عرض الموقع' },
@@ -141,8 +141,17 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return 'en';
     }
 
+    const langFromUrl = new URLSearchParams(window.location.search).get('lang');
+    if (langFromUrl === 'ar' || langFromUrl === 'en') {
+      return langFromUrl;
+    }
+
     const savedLang = window.localStorage.getItem('amwaj_lang');
-    return savedLang === 'ar' ? 'ar' : 'en';
+    if (savedLang === 'ar' || savedLang === 'en') {
+      return savedLang;
+    }
+
+    return window.navigator.language?.toLowerCase().startsWith('ar') ? 'ar' : 'en';
   });
 
   const setLanguage = useCallback((nextLang: Lang) => {
@@ -160,9 +169,39 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const isRTL = lang === 'ar';
 
   useEffect(() => {
+    const handlePopState = () => {
+      const nextLang = new URLSearchParams(window.location.search).get('lang');
+      if ((nextLang === 'en' || nextLang === 'ar') && nextLang !== lang) {
+        setLang(nextLang);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [lang]);
+
+  useEffect(() => {
     window.localStorage.setItem('amwaj_lang', lang);
+
+    const currentUrl = new URL(window.location.href);
+    if (lang === 'ar') {
+      currentUrl.searchParams.set('lang', 'ar');
+    } else {
+      currentUrl.searchParams.delete('lang');
+    }
+
+    const nextUrl = `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`;
+    const activeUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (nextUrl !== activeUrl) {
+      window.history.replaceState(window.history.state, '', nextUrl);
+    }
+
     document.documentElement.lang = lang;
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.body.dir = isRTL ? 'rtl' : 'ltr';
   }, [isRTL, lang]);
 
   return (

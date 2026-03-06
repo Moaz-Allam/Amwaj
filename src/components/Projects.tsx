@@ -163,15 +163,15 @@ const Projects = () => {
   return (
     <section id="projects" dir={isRTL ? 'rtl' : 'ltr'} className="relative z-20 bg-transparent pt-14 sm:pt-20 pb-10 sm:pb-8">
       <div className="container-main mb-10 sm:mb-14">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 sm:gap-6">
-          <div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6 md:gap-8">
+          <div className="md:shrink-0">
             <span className="text-primary font-medium tracking-wide text-[32px] leading-none">{t('projects.label')}</span>
             <h2 className="mt-4 text-[27px] sm:text-[30px] md:text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground">
               {t('projects.title')}
             </h2>
           </div>
 
-          <p className={`text-white/78 text-[15px] sm:text-[16px] max-w-[470px] ${isRTL ? 'md:text-right !leading-[1.85] sm:!leading-[1.7]' : 'md:text-right leading-[1.45]'}`}>
+          <p className={`text-white/78 text-[18px] sm:text-[20px] md:text-[22px] max-w-[470px] md:max-w-none md:flex-1 text-left md:whitespace-nowrap ${isRTL ? '!leading-[1.32]' : 'leading-[1.2]'}`}>
             {t('projects.desc')}
           </p>
         </div>

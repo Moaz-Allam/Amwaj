@@ -63,10 +63,7 @@ const About = () => {
   const servicesContentRef = useRef<HTMLDivElement>(null);
   const servicesCardsRef = useRef<HTMLDivElement>(null);
 
-  const aboutHeading =
-    lang === 'ar'
-      ? 'نبني علامات جريئة تحول الانتباه إلى نمو مستدام.'
-      : 'We build bold brands that convert attention into growth.';
+  const aboutHeading = t('about.title');
   const titleWords = useMemo(() => aboutHeading.trim().split(/\s+/), [aboutHeading]);
   const setHeaderTheme = (theme: 'light' | 'dark') => {
     document.documentElement.dataset.headerTheme = theme;
@@ -189,7 +186,7 @@ const About = () => {
           <h2
             ref={titleRef}
             dir={isRTL ? 'rtl' : 'ltr'}
-            className={`text-[clamp(2.6rem,7.2vw,6.2rem)] font-black ${isRTL ? 'leading-[1.5] sm:leading-[1.42] md:leading-[1.34] tracking-[-0.02em]' : 'uppercase leading-[0.9] tracking-[-0.045em]'}`}
+            className={`font-black text-balance ${isRTL ? 'text-[clamp(1.8rem,4.8vw,3.9rem)] !leading-[1.06] sm:!leading-[1.02] md:!leading-[0.98] tracking-[-0.015em]' : 'text-[clamp(2rem,5.4vw,4.6rem)] leading-[1.02] sm:leading-[0.98] md:leading-[0.94] tracking-[-0.03em]'}`}
           >
             {titleWords.map((word, index) => (
               <span key={`about-title-${lang}-${index}`} data-about-word className="inline-block will-change-[opacity]">
