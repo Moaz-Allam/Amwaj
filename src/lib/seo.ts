@@ -189,7 +189,11 @@ export const applySeo = ({
   document.title = title;
 
   upsertMetaByName('description', description);
-  upsertMetaByName('keywords', keywords || 'Amwaj Al-Raeda, Amwaj, marketing agency Saudi Arabia, digital growth, SEO, branding');
+  upsertMetaByName(
+    'keywords',
+    keywords ||
+      'Amwaj Al-Raeda, marketing agency Saudi Arabia, visual identity design, social media management, content creation, ecommerce website development, paid ads management, mobile app development, seo services, تصميم الهوية البصرية, إدارة وسائل التواصل الاجتماعي, إنشاء المحتوى, تحسين محركات البحث'
+  );
   upsertMetaByName('author', SITE_NAME_EN);
   upsertMetaByName('robots', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);
   upsertMetaByName('googlebot', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);

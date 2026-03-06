@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSeo } from '@/hooks/useSeo';
+import { getSpreadsheetSeoHeadlines, getSpreadsheetSeoKeywords, serviceSeoClusters } from '@/lib/serviceSeoSpreadsheet';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -13,22 +14,23 @@ import Footer from '@/components/Footer';
 const PageContent = () => {
     const { isRTL, lang, t } = useLanguage();
 
+    const spreadsheetKeywords = useMemo(() => getSpreadsheetSeoKeywords(lang).slice(0, 24), [lang]);
+    const spreadsheetHeadlines = useMemo(() => getSpreadsheetSeoHeadlines(lang).slice(0, 5), [lang]);
+
     const seoCopy =
         lang === 'ar'
             ? {
                 title: 'أمواج الرائدة | وكالة نمو وتسويق رقمي في السعودية',
                 description:
-                    'أمواج الرائدة وكالة تسويق رقمي سعودية تقدم إدارة الحملات، تحسين محركات البحث، تطوير المواقع والمتاجر، وبناء الهوية لنتائج نمو قابلة للقياس.',
-                keywords:
-                    'أمواج الرائدة, تسويق رقمي, وكالة تسويق في السعودية, تحسين محركات البحث, إدارة السوشيال ميديا, تطوير المواقع, بناء الهوية البصرية',
+                    'أمواج الرائدة وكالة تسويق رقمي سعودية تقدم تصميم الهوية البصرية، إدارة وسائل التواصل الاجتماعي، إنشاء المحتوى، تطوير المواقع والمتاجر، إدارة الحملات، وتحسين محركات البحث لنتائج نمو قابلة للقياس.',
+                keywords: ['أمواج الرائدة', 'تسويق رقمي', 'وكالة تسويق في السعودية', ...spreadsheetKeywords].join(', '),
                 imageAlt: 'أمواج الرائدة - وكالة تسويق رقمي في الرياض',
             }
             : {
                 title: 'Amwaj Al-Raeda | Saudi Digital Marketing & Growth Agency',
                 description:
-                    'Amwaj Al-Raeda is a Saudi digital marketing agency for SEO, social media, branding, web development, and performance campaigns built for measurable growth.',
-                keywords:
-                    'Amwaj Al-Raeda, Saudi digital marketing agency, SEO Saudi Arabia, social media management, branding, website development, growth marketing',
+                    'Amwaj Al-Raeda is a Saudi digital marketing agency for branding, social media management, content creation, web development, paid campaigns, and SEO built for measurable growth.',
+                keywords: ['Amwaj Al-Raeda', 'Saudi digital marketing agency', 'growth marketing', ...spreadsheetKeywords].join(', '),
                 imageAlt: 'Amwaj Al-Raeda digital marketing agency in Riyadh',
             };
 
@@ -52,15 +54,52 @@ const PageContent = () => {
         [t]
     );
 
+    const servicesStructuredData = useMemo(
+        () => ({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: lang === 'ar' ? 'خدمات أمواج الرائدة حسب نية البحث' : 'Amwaj services by search intent',
+            numberOfItems: serviceSeoClusters.length,
+            itemListElement: serviceSeoClusters.map((cluster, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@type': 'Service',
+                    name: cluster.adGroupName[lang],
+                    description: cluster.description[lang],
+                    slogan: cluster.headlines[lang][0],
+                    areaServed: 'Saudi Arabia',
+                    keywords: cluster.keywords[lang].join(', '),
+                    provider: {
+                        '@type': 'MarketingAgency',
+                        name: 'Amwaj Al-Raeda',
+                        url: 'https://amwajalraeda.com',
+                    },
+                },
+            })),
+        }),
+        [lang]
+    );
+
+    const combinedStructuredData = useMemo(
+        () => [faqStructuredData, servicesStructuredData],
+        [faqStructuredData, servicesStructuredData]
+    );
+
+    const enrichedDescription =
+        lang === 'ar'
+            ? `${seoCopy.description} ${spreadsheetHeadlines.join('، ')}.`
+            : `${seoCopy.description} ${spreadsheetHeadlines.join(', ')}.`;
+
     useSeo({
         lang,
         path: '/',
         title: seoCopy.title,
-        description: seoCopy.description,
+        description: enrichedDescription,
         keywords: seoCopy.keywords,
         image: '/brand/amwaj-logo-primary.png',
         imageAlt: seoCopy.imageAlt,
-        structuredData: faqStructuredData,
+        structuredData: combinedStructuredData,
     });
 
     return (

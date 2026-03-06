@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSeo } from '@/hooks/useSeo';
+import { getSpreadsheetSeoKeywords } from '@/lib/serviceSeoSpreadsheet';
 
 const needOptionKeys = [
   'branding',
@@ -34,6 +35,15 @@ const ContactPageContent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'validation' | 'spam'>('idle');
   const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
+
+  const contactSeoKeywords = useMemo(() => {
+    const baseKeywords =
+      lang === 'ar'
+        ? ['تواصل معنا', 'وكالة تسويق رقمي الرياض', 'طلب عرض سعر تسويق']
+        : ['contact digital marketing agency', 'riyadh marketing consultation', 'request seo proposal'];
+
+    return [...baseKeywords, ...getSpreadsheetSeoKeywords(lang).slice(0, 12)].join(', ');
+  }, [lang]);
 
   const labels = useMemo(
     () => ({
@@ -93,10 +103,7 @@ const ContactPageContent = () => {
       lang === 'ar'
         ? 'تواصل مع فريق أمواج الرائدة في الرياض لبدء مشروع التسويق الرقمي، إدارة الحملات، تحسين محركات البحث، أو تطوير الموقع والمتجر.'
         : 'Contact Amwaj Al-Raeda in Riyadh to start your digital marketing project, SEO plan, campaign management, or website development.',
-    keywords:
-      lang === 'ar'
-        ? 'تواصل معنا, وكالة تسويق رقمي الرياض, استشارة تسويقية, طلب عرض سعر تسويق'
-        : 'contact digital marketing agency, Riyadh marketing consultation, request SEO proposal, contact Amwaj Al-Raeda',
+    keywords: contactSeoKeywords,
     image: '/brand/amwaj-logo-primary.png',
     imageAlt: lang === 'ar' ? 'تواصل مع أمواج الرائدة' : 'Contact Amwaj Al-Raeda',
     structuredData: {
