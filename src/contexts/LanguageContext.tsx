@@ -138,7 +138,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
-      return 'en';
+      return 'ar';
     }
 
     const langFromUrl = new URLSearchParams(window.location.search).get('lang');
@@ -151,7 +151,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return savedLang;
     }
 
-    return window.navigator.language?.toLowerCase().startsWith('ar') ? 'ar' : 'en';
+    return 'ar';
   });
 
   const setLanguage = useCallback((nextLang: Lang) => {
@@ -170,8 +170,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const handlePopState = () => {
-      const nextLang = new URLSearchParams(window.location.search).get('lang');
-      if ((nextLang === 'en' || nextLang === 'ar') && nextLang !== lang) {
+      const nextLangParam = new URLSearchParams(window.location.search).get('lang');
+      const nextLang: Lang = nextLangParam === 'en' ? 'en' : 'ar';
+
+      if (nextLang !== lang) {
         setLang(nextLang);
       }
     };
@@ -187,8 +189,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     window.localStorage.setItem('amwaj_lang', lang);
 
     const currentUrl = new URL(window.location.href);
-    if (lang === 'ar') {
-      currentUrl.searchParams.set('lang', 'ar');
+    if (lang === 'en') {
+      currentUrl.searchParams.set('lang', 'en');
     } else {
       currentUrl.searchParams.delete('lang');
     }

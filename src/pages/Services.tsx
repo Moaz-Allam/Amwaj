@@ -38,7 +38,7 @@ const ServicesPageContent = () => {
   const seoKeywords = useMemo(() => {
     const baseKeywords =
       lang === 'ar'
-        ? ['خدمات تسويق رقمي', 'وكالة تسويق في السعودية', 'شركة تسويق بالرياض']
+        ? ['خدمات تسويق رقمي', 'وكالة تسويق في السعودية', 'شركة تسويق بالرياض', 'بناء مواقع', 'تطوير متاجر إلكترونية']
         : ['digital marketing services saudi arabia', 'riyadh marketing agency', 'growth marketing services'];
 
     return [...baseKeywords, ...spreadsheetKeywords.slice(0, 24)].join(', ');

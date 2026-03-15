@@ -32,6 +32,18 @@ const normalizePath = (path: string) => {
   return path.startsWith('/') ? path : `/${path}`;
 };
 
+const toLocalizedUrl = (path: string, origin: string, lang: SeoLang) => {
+  const url = new URL(path, origin);
+
+  if (lang === 'en') {
+    url.searchParams.set('lang', 'en');
+  } else {
+    url.searchParams.delete('lang');
+  }
+
+  return url.toString();
+};
+
 const getSiteOrigin = () => {
   const configured = import.meta.env.VITE_SITE_URL?.trim();
   if (configured) {
@@ -88,19 +100,21 @@ const upsertCanonical = (href: string) => {
 };
 
 const setAlternates = (enHref: string, arHref: string) => {
-  const oldAlternates = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[data-seo-alternate="true"]'));
+  const oldAlternates = Array.from(
+    document.head.querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang], link[data-seo-alternate="true"]')
+  );
   oldAlternates.forEach((el) => el.remove());
 
   const alternates = [
     { hrefLang: 'en', href: enHref },
     { hrefLang: 'ar', href: arHref },
-    { hrefLang: 'x-default', href: enHref },
+    { hrefLang: 'x-default', href: arHref },
   ];
 
   alternates.forEach(({ hrefLang, href }) => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'alternate');
-    link.setAttribute('hrefLang', hrefLang);
+    link.setAttribute('hreflang', hrefLang);
     link.setAttribute('href', href);
     link.setAttribute('data-seo-alternate', 'true');
     document.head.appendChild(link);
@@ -122,14 +136,16 @@ const setStructuredData = (schemas: JsonLd[]) => {
 
 const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): JsonLd[] => {
   const websiteName = lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN;
+  const organizationName = lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN;
+  const organizationAlternates = lang === 'ar' ? [SITE_NAME_EN, 'امواج الرائدة', 'Amwaj Alraeda'] : [SITE_NAME_AR, 'Amwaj Alraeda', 'امواج الرائدة'];
 
   return [
     {
       '@context': 'https://schema.org',
       '@type': 'MarketingAgency',
       '@id': `${origin}/#organization`,
-      name: SITE_NAME_EN,
-      alternateName: SITE_NAME_AR,
+      name: organizationName,
+      alternateName: organizationAlternates,
       url: origin,
       image: imageUrl,
       logo: imageUrl,
@@ -140,10 +156,17 @@ const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): Js
         addressLocality: 'Riyadh',
         addressCountry: 'SA',
       },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Saudi Arabia',
-      },
+      areaServed: [
+        {
+          '@type': 'Country',
+          name: 'Saudi Arabia',
+        },
+        {
+          '@type': 'Country',
+          name: 'المملكة العربية السعودية',
+        },
+      ],
+      availableLanguage: ['ar-SA', 'en-US'],
       sameAs: SOCIAL_PROFILES,
     },
     {
@@ -152,7 +175,7 @@ const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): Js
       '@id': `${origin}/#website`,
       url: origin,
       name: websiteName,
-      inLanguage: lang === 'ar' ? 'ar' : 'en',
+      inLanguage: lang === 'ar' ? 'ar-SA' : 'en-US',
       publisher: {
         '@id': `${origin}/#organization`,
       },
@@ -178,23 +201,24 @@ export const applySeo = ({
 
   const siteOrigin = getSiteOrigin();
   const pagePath = normalizePath(path);
-  const enUrl = toAbsoluteUrl(pagePath, siteOrigin);
-  const arUrlObject = new URL(pagePath, siteOrigin);
-  arUrlObject.searchParams.set('lang', 'ar');
-  const arUrl = arUrlObject.toString();
+  const arUrl = toLocalizedUrl(pagePath, siteOrigin, 'ar');
+  const enUrl = toLocalizedUrl(pagePath, siteOrigin, 'en');
   const canonicalUrl = lang === 'ar' ? arUrl : enUrl;
   const imageUrl = toAbsoluteUrl(image, siteOrigin);
   const locale = lang === 'ar' ? 'ar_SA' : 'en_US';
 
   document.title = title;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
   upsertMetaByName('description', description);
   upsertMetaByName(
     'keywords',
     keywords ||
-      'Amwaj Al-Raeda, marketing agency Saudi Arabia, visual identity design, social media management, content creation, ecommerce website development, paid ads management, mobile app development, seo services, تصميم الهوية البصرية, إدارة وسائل التواصل الاجتماعي, إنشاء المحتوى, تحسين محركات البحث'
+      'أمواج الرائدة, امواج الرائدة, تسويق رقمي, بناء مواقع, تصميم مواقع, تحسين محركات البحث, إدارة السوشيال ميديا, إنشاء محتوى, Amwaj Al-Raeda, Saudi digital marketing agency, SEO services, web development agency'
   );
-  upsertMetaByName('author', SITE_NAME_EN);
+  upsertMetaByName('author', lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN);
+  upsertMetaByName('language', lang === 'ar' ? 'ar-SA' : 'en-US');
   upsertMetaByName('robots', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);
   upsertMetaByName('googlebot', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);
   upsertMetaByName('referrer', 'strict-origin-when-cross-origin');
@@ -207,7 +231,7 @@ export const applySeo = ({
   upsertMetaByProperty('og:title', title);
   upsertMetaByProperty('og:description', description);
   upsertMetaByProperty('og:url', canonicalUrl);
-  upsertMetaByProperty('og:site_name', SITE_NAME_EN);
+  upsertMetaByProperty('og:site_name', lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN);
   upsertMetaByProperty('og:locale', locale);
   upsertMetaByProperty('og:locale:alternate', lang === 'ar' ? 'en_US' : 'ar_SA');
   upsertMetaByProperty('og:image', imageUrl);

@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://amwajalraeda.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://amwajalraeda.com/" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://amwajalraeda.com/services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/services" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/services?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/services?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/services" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://amwajalraeda.com/services" />
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://amwajalraeda.com/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/contact" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/contact?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://amwajalraeda.com/contact?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://amwajalraeda.com/contact" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://amwajalraeda.com/contact" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
