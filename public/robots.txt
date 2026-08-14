@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amwajalraeda.com/sitemap.xml
-Host: amwajalraeda.com
+Sitemap: https://www.amwajalraeda.com/sitemap.xml
+Host: www.amwajalraeda.com

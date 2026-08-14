@@ -38,11 +38,15 @@ const ServicesPageContent = () => {
   const seoKeywords = useMemo(() => {
     const baseKeywords =
       lang === 'ar'
-        ? ['خدمات تسويق رقمي', 'وكالة تسويق في السعودية', 'شركة تسويق بالرياض', 'بناء مواقع', 'تطوير متاجر إلكترونية']
-        : ['digital marketing services saudi arabia', 'riyadh marketing agency', 'growth marketing services'];
+        ? ['خدمات تسويق رقمي', 'وكالة تسويق في السعودية', 'شركة تسويق بالرياض', 'بناء مواقع', 'تصميم مواقع']
+        : ['digital marketing services saudi arabia', 'riyadh marketing agency', 'growth marketing services', 'website development saudi arabia'];
 
     return [...baseKeywords, ...spreadsheetKeywords.slice(0, 24)].join(', ');
   }, [lang, spreadsheetKeywords]);
+
+  const siteBaseUrl = 'https://www.amwajalraeda.com';
+  const agencyHomeUrl = lang === 'en' ? `${siteBaseUrl}/?lang=en` : `${siteBaseUrl}/`;
+  const servicesPageUrl = lang === 'en' ? `${siteBaseUrl}/services?lang=en` : `${siteBaseUrl}/services`;
 
   const servicesStructuredData = useMemo(
     () => ({
@@ -58,7 +62,7 @@ const ServicesPageContent = () => {
         return {
           '@type': 'ListItem',
           position: index + 1,
-          url: `https://amwajalraeda.com/services#${service.id}`,
+          url: `${servicesPageUrl}#${service.id}`,
           item: {
             '@type': 'Service',
             name: serviceName,
@@ -69,14 +73,14 @@ const ServicesPageContent = () => {
             provider: {
               '@type': 'MarketingAgency',
               name: 'Amwaj Al-Raeda',
-              url: 'https://amwajalraeda.com',
+              url: agencyHomeUrl,
             },
             keywords: cluster?.keywords[lang].join(', '),
           },
         };
       }),
     }),
-    [lang, seoClusterMap]
+    [agencyHomeUrl, lang, seoClusterMap, servicesPageUrl]
   );
 
   useSeo({

@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 type Lang = 'en' | 'ar';
 
@@ -15,8 +16,8 @@ const translations: Translations = {
   'nav.contact': { en: 'Contact', ar: 'تواصل معنا' },
 
   // Hero
-  'hero.title': { en: 'Drive Growth', ar: 'قُد النمو' },
-  'hero.subtitle': { en: 'Strategy, media, and tracking built for real outcomes.', ar: 'استراتيجية، إعلام، وتتبع مبنية على نتائج حقيقية.' },
+  'hero.title': { en: 'Drive Growth', ar: 'تسويق رقمي يقود النمو' },
+  'hero.subtitle': { en: 'Strategy, media, and tracking built for real outcomes.', ar: 'وكالة سعودية متخصصة في التسويق الرقمي وبناء المواقع وإدارة الحملات لتحقيق نتائج حقيقية.' },
   'hero.cta.primary': { en: 'Request Session', ar: 'اطلب جلسة' },
   'hero.cta.secondary': { en: 'Explore Our Services', ar: 'استكشف خدماتنا' },
   'hero.scroll': { en: 'Scroll to explore', ar: 'مرر للاستكشاف' },
@@ -136,6 +137,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') {
       return 'ar';
@@ -169,21 +171,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const isRTL = lang === 'ar';
 
   useEffect(() => {
-    const handlePopState = () => {
-      const nextLangParam = new URLSearchParams(window.location.search).get('lang');
-      const nextLang: Lang = nextLangParam === 'en' ? 'en' : 'ar';
-
-      if (nextLang !== lang) {
-        setLang(nextLang);
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [lang]);
+    const langFromUrl = new URLSearchParams(location.search).get('lang');
+    if ((langFromUrl === 'en' || langFromUrl === 'ar') && langFromUrl !== lang) {
+      setLang(langFromUrl);
+    }
+  }, [lang, location.search]);
 
   useEffect(() => {
     window.localStorage.setItem('amwaj_lang', lang);
@@ -201,10 +193,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       window.history.replaceState(window.history.state, '', nextUrl);
     }
 
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'ar' ? 'ar-SA' : 'en-SA';
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.body.dir = isRTL ? 'rtl' : 'ltr';
-  }, [isRTL, lang]);
+  }, [isRTL, lang, location.hash, location.pathname, location.search]);
 
   return (
     <LanguageContext.Provider value={{ lang, setLanguage, toggleLang, t, isRTL }}>

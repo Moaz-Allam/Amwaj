@@ -15,11 +15,14 @@ export type SeoPayload = {
   structuredData?: JsonLd | JsonLd[];
 };
 
-const DEFAULT_SITE_ORIGIN = 'https://amwajalraeda.com';
+const DEFAULT_SITE_ORIGIN = 'https://www.amwajalraeda.com';
 const DEFAULT_IMAGE_PATH = '/brand/amwaj-logo-primary.png';
+const DEFAULT_LOGO_WIDTH = 662;
+const DEFAULT_LOGO_HEIGHT = 513;
 const SITE_NAME_EN = 'Amwaj Al-Raeda';
 const SITE_NAME_AR = 'أمواج الرائدة';
 const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+const X_HANDLE = '@AmwajRaeda';
 
 const SOCIAL_PROFILES = [
   'https://www.instagram.com/amwaj_alraeda?igsh=bnZ0ZWhoOHg5emN2',
@@ -30,18 +33,6 @@ const SOCIAL_PROFILES = [
 const normalizePath = (path: string) => {
   if (!path) return '/';
   return path.startsWith('/') ? path : `/${path}`;
-};
-
-const toLocalizedUrl = (path: string, origin: string, lang: SeoLang) => {
-  const url = new URL(path, origin);
-
-  if (lang === 'en') {
-    url.searchParams.set('lang', 'en');
-  } else {
-    url.searchParams.delete('lang');
-  }
-
-  return url.toString();
 };
 
 const getSiteOrigin = () => {
@@ -55,7 +46,11 @@ const getSiteOrigin = () => {
   }
 
   if (typeof window !== 'undefined' && window.location.origin) {
-    return window.location.origin;
+    const host = window.location.hostname.toLowerCase();
+    const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+    if (isLocalHost) {
+      return window.location.origin;
+    }
   }
 
   return DEFAULT_SITE_ORIGIN;
@@ -99,15 +94,17 @@ const upsertCanonical = (href: string) => {
   link.setAttribute('href', href);
 };
 
-const setAlternates = (enHref: string, arHref: string) => {
+const setAlternates = (arHref: string, enHref: string) => {
   const oldAlternates = Array.from(
-    document.head.querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang], link[data-seo-alternate="true"]')
+    document.head.querySelectorAll<HTMLLinkElement>(
+      'link[data-seo-alternate="true"], link[rel="alternate"][hreflang], link[rel="alternate"][hrefLang]'
+    )
   );
   oldAlternates.forEach((el) => el.remove());
 
   const alternates = [
-    { hrefLang: 'en', href: enHref },
     { hrefLang: 'ar', href: arHref },
+    { hrefLang: 'en', href: enHref },
     { hrefLang: 'x-default', href: arHref },
   ];
 
@@ -134,21 +131,22 @@ const setStructuredData = (schemas: JsonLd[]) => {
   });
 };
 
-const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): JsonLd[] => {
-  const websiteName = lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN;
-  const organizationName = lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN;
-  const organizationAlternates = lang === 'ar' ? [SITE_NAME_EN, 'امواج الرائدة', 'Amwaj Alraeda'] : [SITE_NAME_AR, 'Amwaj Alraeda', 'امواج الرائدة'];
-
+const buildGlobalSchemas = (origin: string, imageUrl: string): JsonLd[] => {
   return [
     {
       '@context': 'https://schema.org',
       '@type': 'MarketingAgency',
       '@id': `${origin}/#organization`,
-      name: organizationName,
-      alternateName: organizationAlternates,
+      name: SITE_NAME_AR,
+      alternateName: [SITE_NAME_EN, 'Amwaj Alraeda', 'امواج الرائدة', 'امواج الرايدة', 'امواج الرايده'],
       url: origin,
       image: imageUrl,
-      logo: imageUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: imageUrl,
+        width: DEFAULT_LOGO_WIDTH,
+        height: DEFAULT_LOGO_HEIGHT,
+      },
       email: 'info@amwajalraeda.com',
       telephone: '+966535800559',
       address: {
@@ -156,17 +154,20 @@ const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): Js
         addressLocality: 'Riyadh',
         addressCountry: 'SA',
       },
-      areaServed: [
+      areaServed: {
+        '@type': 'Country',
+        name: 'Saudi Arabia',
+      },
+      availableLanguage: ['ar', 'en'],
+      contactPoint: [
         {
-          '@type': 'Country',
-          name: 'Saudi Arabia',
-        },
-        {
-          '@type': 'Country',
-          name: 'المملكة العربية السعودية',
+          '@type': 'ContactPoint',
+          telephone: '+966535800559',
+          contactType: 'customer support',
+          areaServed: 'SA',
+          availableLanguage: ['ar', 'en'],
         },
       ],
-      availableLanguage: ['ar-SA', 'en-US'],
       sameAs: SOCIAL_PROFILES,
     },
     {
@@ -174,8 +175,9 @@ const buildGlobalSchemas = (origin: string, lang: SeoLang, imageUrl: string): Js
       '@type': 'WebSite',
       '@id': `${origin}/#website`,
       url: origin,
-      name: websiteName,
-      inLanguage: lang === 'ar' ? 'ar-SA' : 'en-US',
+      name: SITE_NAME_AR,
+      alternateName: [SITE_NAME_EN, 'Amwaj Alraeda'],
+      inLanguage: ['ar-SA', 'en-SA'],
       publisher: {
         '@id': `${origin}/#organization`,
       },
@@ -201,28 +203,32 @@ export const applySeo = ({
 
   const siteOrigin = getSiteOrigin();
   const pagePath = normalizePath(path);
-  const arUrl = toLocalizedUrl(pagePath, siteOrigin, 'ar');
-  const enUrl = toLocalizedUrl(pagePath, siteOrigin, 'en');
-  const canonicalUrl = lang === 'ar' ? arUrl : enUrl;
+  const arUrl = toAbsoluteUrl(pagePath, siteOrigin);
+  const enUrlObject = new URL(pagePath, siteOrigin);
+  enUrlObject.searchParams.set('lang', 'en');
+  const enUrl = enUrlObject.toString();
+  const canonicalUrl = lang === 'en' ? enUrl : arUrl;
   const imageUrl = toAbsoluteUrl(image, siteOrigin);
   const locale = lang === 'ar' ? 'ar_SA' : 'en_US';
+  const languageTag = lang === 'ar' ? 'ar-SA' : 'en-SA';
 
   document.title = title;
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
   upsertMetaByName('description', description);
   upsertMetaByName(
     'keywords',
     keywords ||
-      'أمواج الرائدة, امواج الرائدة, تسويق رقمي, بناء مواقع, تصميم مواقع, تحسين محركات البحث, إدارة السوشيال ميديا, إنشاء محتوى, Amwaj Al-Raeda, Saudi digital marketing agency, SEO services, web development agency'
+      'Amwaj Al-Raeda, marketing agency Saudi Arabia, digital marketing Riyadh, website development Saudi Arabia, seo services, أمواج الرائدة, امواج الرائدة, امواج الرايدة, امواج الرايده, وكالة تسويق رقمي, تسويق رقمي الرياض, بناء مواقع, تصميم مواقع, تحسين محركات البحث'
   );
   upsertMetaByName('author', lang === 'ar' ? SITE_NAME_AR : SITE_NAME_EN);
-  upsertMetaByName('language', lang === 'ar' ? 'ar-SA' : 'en-US');
+  upsertMetaByName('language', languageTag);
+  upsertMetaByName('geo.region', 'SA');
+  upsertMetaByName('geo.placename', 'Riyadh');
   upsertMetaByName('robots', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);
   upsertMetaByName('googlebot', noindex ? 'noindex, nofollow, noarchive' : DEFAULT_ROBOTS);
   upsertMetaByName('referrer', 'strict-origin-when-cross-origin');
   upsertMetaByName('twitter:card', 'summary_large_image');
+  upsertMetaByName('twitter:site', X_HANDLE);
   upsertMetaByName('twitter:title', title);
   upsertMetaByName('twitter:description', description);
   upsertMetaByName('twitter:image', imageUrl);
@@ -238,9 +244,31 @@ export const applySeo = ({
   upsertMetaByProperty('og:image:alt', imageAlt || title);
 
   upsertCanonical(canonicalUrl);
-  setAlternates(enUrl, arUrl);
+  setAlternates(arUrl, enUrl);
+
+  document.documentElement.lang = languageTag;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  if (document.body) {
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  }
 
   const pageSchemas = !structuredData ? [] : Array.isArray(structuredData) ? structuredData : [structuredData];
-  const allSchemas = noindex ? pageSchemas : [...buildGlobalSchemas(siteOrigin, lang, imageUrl), ...pageSchemas];
+  const pageSchema: JsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: title,
+    description,
+    inLanguage: languageTag,
+    isPartOf: {
+      '@id': `${siteOrigin}/#website`,
+    },
+    about: {
+      '@id': `${siteOrigin}/#organization`,
+    },
+  };
+
+  const allSchemas = noindex ? pageSchemas : [...buildGlobalSchemas(siteOrigin, imageUrl), pageSchema, ...pageSchemas];
   setStructuredData(allSchemas);
 };

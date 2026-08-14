@@ -95,6 +95,9 @@ const ContactPageContent = () => {
     [lang]
   );
 
+  const siteBaseUrl = 'https://www.amwajalraeda.com';
+  const contactPageUrl = lang === 'en' ? `${siteBaseUrl}/contact?lang=en` : `${siteBaseUrl}/contact`;
+
   useSeo({
     lang,
     path: '/contact',
@@ -110,10 +113,11 @@ const ContactPageContent = () => {
       '@context': 'https://schema.org',
       '@type': 'ContactPage',
       name: lang === 'ar' ? 'صفحة التواصل - أمواج الرائدة' : 'Contact Page - Amwaj Al-Raeda',
-      url: 'https://amwajalraeda.com/contact',
+      url: contactPageUrl,
       about: {
         '@type': 'MarketingAgency',
-        name: 'Amwaj Al-Raeda',
+        name: lang === 'ar' ? 'أمواج الرائدة' : 'Amwaj Al-Raeda',
+        url: lang === 'en' ? `${siteBaseUrl}/?lang=en` : `${siteBaseUrl}/`,
         telephone: '+966535800559',
         email: 'info@amwajalraeda.com',
       },

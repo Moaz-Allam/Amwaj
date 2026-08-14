@@ -1,13 +1,14 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
+RewriteEngine On
 
-  # Resolve SPA route conflict with /services static asset directory.
-  RewriteRule ^services/?$ /index.html [L]
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+# Force canonical host to www
+RewriteCond %{HTTP_HOST} ^amwajalraeda\.com$ [NC]
+RewriteRule ^ https://www.amwajalraeda.com%{REQUEST_URI} [L,R=301]
 
-  RewriteRule . /index.html [L]
-</IfModule>
+# SPA fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
